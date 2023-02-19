@@ -437,7 +437,7 @@ Production: npm run build / yarn build -> CSS external
 4. SASS: doc docs
 npm i -D sass
 
-14: Route React
+14: Route React: (coi huong dan tren google)
 import { Routes, Route, Link } from 'react-router-dom'
 
 15. customize-cra??? 

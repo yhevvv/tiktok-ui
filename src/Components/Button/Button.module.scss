@@ -1,0 +1,102 @@
+.wrapper {
+    justify-content: center;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 100px;
+    //min-height: 36px;
+    border-radius: 4px;
+    cursor: pointer; //chi dinh nut bam
+    background-color: var(--white);
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    user-select: none;
+
+
+    + .wrapper {
+        margin-left: 8px;
+    }
+
+    //disable
+
+    &.disable {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.icon  + .title, .title + .icon {
+    margin-left: 4px;
+}
+
+
+//button types
+
+.outline {
+    color: var(--primary);
+    border-color: var(--primary);
+
+    &:hover {
+        border-color: var(--primary);
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+.rounded {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+    min-width: 90px;
+    font-size: 14px;
+    background: none;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 700;
+    border-radius: 52px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    padding: 7px 16px;
+
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+        background-color: rgba(255, 255, 255, 1);
+    }
+}
+
+.primary {
+    color: var(--white);
+    background-color: #fe2c55;
+    border-color: var(--primary);
+
+    &:hover {
+        background-color: linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.06),
+                rgba(0, 0, 0, 0.06)
+            ),
+            #fe2c55;
+    }
+}
+
+.text {
+    border: 1px solid rgba(22, 24, 35, 0.12);
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+        // text-decoration: underline;
+    }
+}
+
+//size small button
+.small {
+    min-width: 88px;
+    padding: 4px 16px;
+}
+
+.Large {
+    padding: 14px 16px;
+    //min-width: 324px;
+}
+
+
+//custom className
+
+.custom-login {
+    
+}
