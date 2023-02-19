@@ -1,0 +1,459 @@
+create-react-app
+
+Hooks
+HOC 
+Render props
+
+1. Tao du an lan dau:
+https://fullstack.edu.vn/blog/phan-1-tao-du-an-reactjs-voi-webpack-va-babel.html
+2. https://git-scm.com/download/win 
+Cai va git bash here
+
+serve: tao thu muc build va push view cho build
+npm i -g serve
+serve -s build
+
+hooks:
+1. useState: hieu don gian la su dung de thay doi du lieu (du lieu thay doi gi, 
+giao dien thay doi do)
+
+array
+reference types
+random prize
+two way binding: rang buoc 2 chieu (form dien)
+one way binding: rang buoc 1 chieu (form dien)
+app lon 2 chieu
+to do list? JSON local store?
+mounted: lap vao
+unmounted: khong lap vao
+
+
+2. useEffect: side effect
+
+
+    //useEffect(callback)
+    -goi callback moi khi component re-render
+    -goi callback sau khi component them element vao DOM
+    
+    //useEffect(callback, [])
+    - chi goi callback 1 lan sau khi component mounted
+    
+    //useEffect(callback, [deps])
+    - deps: bien chua gia tri du lieu
+    - callback se duoc goi lai moi khi deps thay doi
+
+chung: callback luon duoc goi sau khi component mounted
+
+a, update DOM
+- update blog title: done
+b, call API: done
+c, listent DOM Event
+- Scroll 
+
+callback luon duoc goi sau khi component mounted
+cleanup function luon duoc goi truoc khi component unmounted
+
+- Resize
+
+
+d, Cleanup
+- remove listener/ unsubcribe 
+- clear timer
+
+
+useEffect () => {(
+
+)}
+
+useEffect () => {(
+    
+),[]}
+
+useEffect () => {(
+    
+),[prev]}
+
+-countdown? setInterval, clearInterval, setTimeout, clearTimeout
+
+- preview avatar 
+
+- chatApp
+
+file index.js
+
+function emitComment(id) {
+  setInterval(() => {
+    window.dispatchEvent(
+      new CustomEvent(`lesson-${id}`, {
+      detail: `Noi dung comment cua lesson ${id}`,
+    }));
+  }, 2000);
+}
+
+
+3. uselayoutEffect: tuong tu nhu useEffect
+
+su khac nhau qua trinh thuc hien:
+* useEffect
+- cap nhap lai state
+- cap nhap DOM (mutated)
+- render lai UI
+- goi cleanup neu deps thay doi 
+- goi useEffect callback
+
+* useLayoutEffect
+- cap nhap lai state 
+- cap nhap DOM (nutated)
+- goi cleanup neu deps thay doi (sync)
+- goi useLayoutEffect callback (sync)
+- render lai UI
+
+
+4, useRef
+
+- luu cac gia tri qua mot tham chieu ben ngoai (java moi gia tri duoc 
+lam moi thi no se la khac nhau)
+
+- function component
+
+- count time down, stop, reset
+
+
+5. Memo: higher order components (HOC)
+
+- su dung khi can mot trang web cha khong muon reset lai cung voi trang web 
+con (tranh viec re-render khong can thiet)
+
+- truyen props van bi re-render lai
+
+6. useCallback: ung dung voi 5. Memo, su dung useCallback luu lai tai vung nho
+tham chieu khac va return lai, nhu vay component se khong bi re-render
+
+7.useMemo: Khac cach su dung cua 5. memo, tranh component re-render lai khong
+can thiet
+
+- VD: tao cac san pham + gia tien => tong gia tien: su dung memo:
+
+import './App.css';
+// import Content from './Content'
+import { useState, useCallback, useMemo, useRef } from 'react'
+// import Preview from './Preview'
+// import ChatApp from './chatApp'
+// import Course from './Course'
+// import Memo from './Memo'
+// import CallBack from './CallBack'
+
+
+function App() {
+
+
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [product, setProduct] = useState([])
+
+  const nameRef = useRef() 
+
+  const handleSubmit = () => {
+    setProduct([...product, {
+      name,
+      price: +price
+    }])
+    setName ('')
+    setPrice ('')
+    nameRef.current.focus()
+  }
+
+  const total = useMemo(() => {
+    const result = product.reduce((result, item) => {
+
+      console.log('re-math');
+
+      return result + item.price
+
+    }, 0)
+    return result
+  },[product])
+
+  return (
+    <div className="App" style={{ padding: 60 }}>
+      <input
+        ref ={nameRef}
+        value={name}
+        placeholder='enter name'
+        onChange={e => setName(e.target.value)}
+      >
+      </input>
+      <input
+        value={price}
+        placeholder='enter price'
+        onChange={e => setPrice(e.target.value)}
+      >
+      </input>
+      <button onClick={handleSubmit}>Add</button>
+
+      <br />
+      Total: {total} d
+      <ul>
+        {product.map((product, index) => (
+          <li key={index}>{product.name} - {product.price}</li>
+        ))}
+      </ul>
+    </div>
+
+  );
+}
+export default App;
+
+
+8. useReducer (not recommended/kho hoc/nen chia ra tung file js): them lua chon cho useState, useState gan 
+giong voi useReducer nhung chua duoc cac kieu gia tri nhieu lop, 
+nhieu tang hoac su dung don gian hoa hon cho useState
+
+- bai tang giam:
+
+useState: don gian
+1. Init state: 0 
+2. Actions: up (state+1) / down (state - 1)
+
+useReducer: phuc tap
+1. Init state: 0
+2. Actions: up (state + 1) / down (state - 1)
+3. Reducer
+4. Dispatch
+
+- to do list:
+
+import './App.css';
+// import Content from './Content'
+import { useState, useCallback, useMemo, useRef, useReducer, memo, useLayoutEffect } from 'react'
+// import Preview from './Preview'
+// import ChatApp from './chatApp'
+// import Course from './Course'
+// import Memo from './Memo'
+// import CallBack from './CallBack'
+
+const initState = {
+  job: '',
+  jobs: [],
+}
+
+const SET_JOB = 'set_job'
+const ADD_JOB = 'add_job'
+const DELETE_JOB = 'delete_job'
+
+const setJob = payload => {
+  return {
+    type: SET_JOB,
+    payload
+  }
+}
+
+const addJob = payload => {
+  return {
+    type: ADD_JOB,
+    payload
+  }
+}
+
+const deleteJob = payload => {
+  return {
+    type: DELETE_JOB,
+    payload
+  }
+}
+
+const reducer = (state, action) => {
+
+  let newState
+
+  switch (action.type) {
+    case SET_JOB:
+      newState = {
+        ...state,
+        job: action.payload
+      }
+      break
+    default:
+      return new Error('Invalid action.')
+    case ADD_JOB:
+      newState = {
+        ...state,
+        jobs: [...state.jobs, action.payload]
+      }
+      break
+    case DELETE_JOB:
+
+      //cach 2
+      // return {
+      //   ...state,
+      //   jobs: state.jobs.filter((job, index) => index !== action.payload),
+      // };
+
+
+      //cach 1
+      const  newJobs = [...state.jobs]
+
+       newJobs.splice (action.payload, 1)
+       
+       newState= {
+        ...state,
+        jobs: newJobs
+       }
+
+       break
+  }
+  return newState;
+}
+
+function App() {
+
+  const [state, dispatch] = useReducer(reducer, initState)
+
+  const { job, jobs } = state
+
+  const inputRef = useRef()
+
+  const handleSubmit = () => {
+    dispatch(addJob(job))
+    dispatch(setJob(''))
+    inputRef.current.focus()
+  }
+
+  const handleDelete = (index) => {
+    dispatch(deleteJob(index))
+    inputRef.current.focus()
+  }
+
+  return (
+    <div className="App" style={{ padding: 60 }}>
+      <h1>To do</h1>
+      <input
+
+      ref = {inputRef}
+        value={job}
+
+        placeholder='nhap cong viec....'
+
+
+        onChange={(e) => {
+          dispatch(setJob(e.target.value))
+        }}>
+
+
+      </input>
+      <button onClick={handleSubmit}>Add</button>
+
+      <ul>
+
+        {jobs.map((job, index) => (
+          <li key={index}>{job}
+            <span 
+            style={{color: 'red'}}
+            onClick={() => handleDelete(index)}>&times;</span>
+          </li>
+
+
+        ))}
+
+
+        <li>rua bat x</li>
+        <li>quet nha x</li>
+        <li>Lau nha x</li>
+      </ul>
+    </div>
+
+  );
+}
+export default App;
+
+
+file todo:
+ constants.
+ action.
+ reducer.
+ index
+
+
+8. createContext, useContext: su dung de long du lieu khong can qua nhieu buoc
+hoac trung gian (kho hoc)
+
+a, createContext: truyen du lieu 
+b, useContext: nhan du lieu
+
+Props: truyen trung gian
+Components A => Component B => Component C
+
+context:
+Components A => Component bat ki
+
+- example Theme dark mode (context)
+b1: create context
+b2: provider?
+b3: consumer?
+
+9. Global state (using useContext, createContext, useReducer)???
+
+constants
+context
+hooks 
+action
+provider 
+reducer  
+logger
+index 
+
+app 
+
+
+10. Redux vs react-context
+
+1. Debugging capabilities 
+2. Middleware
+3. addons and extensibility 
+4. Cross-platform and cross-framework usage 
+5. depending on your app;s setup much better performance than working with 
+just context
+
+
+
+
+11. useImperativeHandle: tuy chinh useRef cua component (su dung ket hop useRef)
+muon truyen Ref qua component khac (huong doi tuong, bao toan du lieu)
+
+- trinh phat video (tu thiet lap)
+
+11.5 forwardRef: dung de chuyen tiep Ref qua cac component khac nhau
+(high order)
+
+12. CSS 
+
+Development: npm start /yarn start -> CSS internal
+
+Production: npm run build / yarn build -> CSS external
+
+1. CSS module
+2. Styled component
+3. CSS module + CSS global: dung thu vien classnames hoac clsx (recommend)
+4. SASS: doc docs
+npm i -D sass
+
+14: Route React
+import { Routes, Route, Link } from 'react-router-dom'
+
+15. customize-cra??? 
+https://github.com/arackaf/customize-cra
+https://github.com/timarney/react-app-rewired/
+
+16. ../../ thay the thanh ~
+https://github.com/tleunen/babel-plugin-module-resolver
+
+17. Prettier
+
+18. Xay dung web.
+
+b1: Tao Routers cho cac trang web
+b2: Layouts
+
+19. tippy: pop thong bao
+https://github.com/atomiks/tippyjs-react
+https://atomiks.github.io/tippyjs/
