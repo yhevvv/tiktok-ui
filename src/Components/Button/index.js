@@ -11,7 +11,7 @@ function Button({
     to,
     href,
     children,
-    primary = false,
+    primary = false, 
     outline = false,
     onClick,
     small = false,
