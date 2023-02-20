@@ -6,6 +6,7 @@
 .container {
     width: var(--default-layout-header-width, 1150px);
     display: flex;
+    padding: 0px var(--default-layout-horizontal-spacer);
 }
 
 .content {

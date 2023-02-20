@@ -19,7 +19,7 @@ import images from '~/assets/images';
 import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 
 import 'tippy.js/dist/tippy.css';
 import Menu from '~/Components/Popper/Menu/index';
@@ -29,7 +29,33 @@ const cx = ClassNames.bind(Style);
 const MEMU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAmerica}></FontAwesomeIcon>,
-        title: 'English'
+        title: 'English',
+        children: {
+            title: 'language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Vietnamese',
+                },
+                {
+                    type: 'language',
+                    code: 'cn',
+                    title: 'China',
+                },
+                {
+                    type: 'language',
+                    code: 'jp',
+                    title: 'Japan',
+                },
+            ]
+
+        }
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
@@ -42,7 +68,7 @@ const MEMU_ITEM = [
     },
     {
         icon: <FontAwesomeIcon icon={faCircleHalfStroke}></FontAwesomeIcon>,
-        title: 'Light mode',
+        title: 'Dark mode',
         switch: true
     }
 ]
@@ -55,6 +81,19 @@ function Header() {
             setSearchResult([]);
         }, 0);
     }, []);
+
+
+    //handle logic
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+
+                break;
+
+            default:
+                break;
+        }
+    }
 
     return (
         <header className={cx('wrapper')}>
@@ -104,7 +143,8 @@ function Header() {
                         Log in
                     </Button>
                     <Menu
-                        item = {MEMU_ITEM}
+                        items={MEMU_ITEM}
+                        onChange={handleMenuChange}
                     >
                         <button className={cx('menu-btn')}>
                             <FontAwesomeIcon

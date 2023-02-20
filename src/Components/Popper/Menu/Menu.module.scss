@@ -1,8 +1,7 @@
-
 //Menu Wrapper
 .menu-list {
     width: 224px;
-    
+
     .menu-item {
         margin-left: 0;
         width: 100%;
@@ -10,8 +9,9 @@
         border-radius: 0;
         font-weight: 600;
         padding: 11px 16px;
+        line-height: 1.8rem;
 
-        &:hover{
+        &:hover {
             background: rgba(22, 24, 35, 0.03);
         }
     }
@@ -21,5 +21,28 @@
     padding-bottom: 8px;
 }
 
-//Menu Item
-
+//Header Item
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 223px;
+    height: 50px;
+    padding: 0 24px
+}
+.back-btn {
+    font-weight: 600;
+    font-size: 15px;
+    position: absolute;
+    background-color: transparent;
+    color: rgb(22, 24, 35);
+    cursor: pointer;
+}
+.header-title {
+    font-weight: 700;
+    font-size: 14px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #161823;
+}
