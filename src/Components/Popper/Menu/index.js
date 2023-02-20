@@ -11,12 +11,13 @@ function Menu({ children, item = [] }) {
 
     const renderItem = () => {
         return item.map((item, index) => (
-            <MenuItem key={index} data = {item}/>
+            <MenuItem key={index} data={item} />
         ))
     }
 
     return (
-        <Tippy 
+        <Tippy
+            delay= {[0, 700]}
             placement="bottom-end"
             interactive
             render={(attrs) => (

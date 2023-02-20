@@ -20,7 +20,6 @@ import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import { useEffect, useState } from 'react';
-import IOSTouch from '~/Components/Button/IOSTouch';
 
 import 'tippy.js/dist/tippy.css';
 import Menu from '~/Components/Popper/Menu/index';

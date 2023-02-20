@@ -1,31 +1,37 @@
-.wrapper{
+.wrapper {
     padding: 0px 10px;
     margin-top: -3px;
+    justify-self: end;
 }
 
+.dark {
+  background-color: red;
+}
+
+
 .container {
-    display:inline-flex;
+    display: inline-flex;
     position: relative;
     width: 55px;
     height: 30px;
-  }
-  
-  .container > input[type = checkbox] {
+}
+
+.container > input[type='checkbox'] {
     display: none;
-  }
-  
-  .background {
+}
+
+.background {
     display: block;
     position: absolute;
     width: 44px;
     height: 24px;
-    background-color: rgba(22, 24, 35, 0.12);;
+    background-color: rgba(22, 24, 35, 0.12);
     border-radius: 30px;
     transition: 0.25s;
     border: 2px solid #eeeeee;
-  }
-  
-  .mask {
+}
+
+.mask {
     display: block;
     position: absolute;
     width: 20px;
@@ -37,13 +43,13 @@
     top: 2px;
     transition: 0.25s;
     cursor: pointer;
-  }
-  
-  .container > input[type = checkbox]:checked + .background {
+}
+
+.container > input[type='checkbox']:checked + .background {
     background-color: #4cd964;
     border-color: #4cd964;
-  }
-  
-  .container > input[type = checkbox]:checked ~ .mask {
+}
+
+.container > input[type='checkbox']:checked ~ .mask {
     left: 22px;
-  }
+}

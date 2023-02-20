@@ -25,13 +25,13 @@ function Button({
     switchButton,
     ...passProps
 }) {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState('light');
 
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
     };
 
-    const classMode = isDarkMode ? 'dark' : 'light'
+    const classMode = isDarkMode ? 'light' : 'dark'
 
     let Comp = 'button';
 
@@ -69,11 +69,12 @@ function Button({
         disable,
     });
 
+
     return (
         <Comp className={classes} {...props}>
             {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
             <span className={cx('title')}>{children}</span>
-            {switchButton && <IOSTouch classMode={classMode}></IOSTouch>}
+            {switchButton && <IOSTouch classMode={classMode} onChange={toggleDarkMode}></IOSTouch>}
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
