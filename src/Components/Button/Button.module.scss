@@ -12,7 +12,6 @@
     padding: 8px 16px;
     user-select: none;
 
-
     + .wrapper {
         margin-left: 8px;
     }
@@ -25,10 +24,22 @@
     }
 }
 
-.icon  + .title, .title + .icon {
+
+.icon + .title,
+.title + .icon {
     margin-left: 4px;
 }
 
+.icon {
+    display: inline-block;
+    text-align: center;
+    width: 24px;
+}
+
+.title{
+    justify-content: left;
+    display: inline-flex;
+}
 
 //button types
 
@@ -59,10 +70,15 @@
     }
 }
 
+.switchButton{
+    
+}
+
 .primary {
     color: var(--white);
     background-color: #fe2c55;
     border-color: var(--primary);
+    width: 0;
 
     &:hover {
         background-color: linear-gradient(
@@ -94,9 +110,7 @@
     //min-width: 324px;
 }
 
-
 //custom className
 
 .custom-login {
-    
 }

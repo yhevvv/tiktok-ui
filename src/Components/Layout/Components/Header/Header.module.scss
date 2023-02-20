@@ -23,7 +23,6 @@
     width: 361px;
 }
 
-
 .search {
     position: relative;
     height: var(--search-height);
@@ -74,11 +73,11 @@
     padding: 0px 5px;
 }
 
-.search-title{
+.search-title {
     font-size: small;
     padding: 5px 12px;
-    font-weight: bold ;
-    color: rgba(22, 24, 35, 0.5);;
+    font-weight: bold;
+    color: rgba(22, 24, 35, 0.5);
 }
 
 .search-btn {
@@ -99,3 +98,13 @@
 
 .action {
 }
+
+.menu-btn {
+    min-width: 20px;
+    min-height: 20px;
+    margin-left: 8px;
+    background-color: transparent;
+    padding: 10px;
+    font-size: 17px;
+}
+
