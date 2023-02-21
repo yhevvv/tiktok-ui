@@ -98,7 +98,32 @@
     }
 }
 
+//Action
 .action {
+    display: flex;
+    align-items: center;
+}
+
+.custom-login {
+}
+
+.action-btn {
+    background-color: transparent;
+    font-size: 2.2rem;
+    color: #161823;
+    padding: 4px 16px;
+    cursor: pointer;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 9999px;
+    margin-left: 12px;
+}
+.menu-btn {
+
 }
 
 .menu-btn {
@@ -109,4 +134,5 @@
     padding: 10px;
     font-size: 17px;
     cursor: pointer;
+
 }
