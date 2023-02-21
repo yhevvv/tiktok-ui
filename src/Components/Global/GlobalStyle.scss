@@ -1,6 +1,31 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,300;1,600&display=swap');
 
+//Fonts emmbeded
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Semibold.woff2');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/Fonts/Proxima-Nova-Bold.woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/Fonts/sofiapro-bold.woff');
+    font-weight: 700;
+}
+
 :root {
     --primary: #fe2c55;
     --black: #000;
@@ -23,14 +48,12 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'ProximaNova', 'Montserrat', sans-serif !important;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
     background-color: #fff;
-
-
 }
 
 button,
@@ -40,8 +63,8 @@ input,
     border: none;
 }
 
-a[href]{
-    font-family: 'Montserrat', sans-serif !important;
+a[href] {
+    font-family: 'ProximaNova', 'Montserrat', sans-serif !important;
     color: var(--text-color);
     text-decoration: none; //bo gach chan the a
     font-size: 1.6rem;
@@ -49,11 +72,12 @@ a[href]{
 }
 
 span {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'ProximaNova', 'Montserrat', sans-serif !important;
 }
 
-a[href], span{
-    font-weight: 600 !important;
+a[href],
+span {
+    font-weight: 500 !important;
 }
 
 //custom tippy tooltip

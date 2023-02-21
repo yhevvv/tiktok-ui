@@ -4,7 +4,6 @@ import {
     faCircleHalfStroke,
     faCircleQuestion,
     faCircleXmark,
-    faCloudUpload,
     faCoins,
     faEarthAmerica,
     faEllipsisVertical,
@@ -17,18 +16,25 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
-
+import { useEffect, useState } from 'react';
 import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 
 import Style from './Header.module.scss';
-import images from '~/assets/images';
 import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
-import { useEffect, useState } from 'react';
+import Menu from '~/Components/Popper/Menu/index';
+import {
+    IconCreateEffect,
+    IconMessage,
+    IconNotification,
+} from '~/Components/Icons';
+//image from asset
+import images from '~/assets/images';
+//Image from component
+import ImageC from '~/Components/Image';
 
 import 'tippy.js/dist/tippy.css';
-import Menu from '~/Components/Popper/Menu/index';
 
 const cx = ClassNames.bind(Style);
 
@@ -59,9 +65,8 @@ const MEMU_ITEM = [
                     code: 'jp',
                     title: 'Japan',
                 },
-            ]
-
-        }
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
@@ -70,14 +75,14 @@ const MEMU_ITEM = [
     },
     {
         icon: <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>,
-        title: 'Keyboard shortcuts'
+        title: 'Keyboard shortcuts',
     },
     {
         icon: <FontAwesomeIcon icon={faCircleHalfStroke}></FontAwesomeIcon>,
         title: 'Dark mode',
-        switch: true
-    }
-]
+        switch: true,
+    },
+];
 
 const USER_MENU = [
     {
@@ -89,19 +94,16 @@ const USER_MENU = [
         icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
         title: 'Get Coins',
         to: '/coin',
-
     },
     {
         icon: <FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>,
         title: 'LIVE Studio',
         to: '/studio',
-
     },
     {
         icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
         title: 'Setting',
         to: '/Setting',
-
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAmerica}></FontAwesomeIcon>,
@@ -129,21 +131,17 @@ const USER_MENU = [
                     code: 'jp',
                     title: 'Japan',
                 },
-            ]
-
-        }
-
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
         title: 'Feedback and Help',
         to: '/feedback-and-help',
-
     },
     {
         icon: <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>,
         title: 'Keyboard shortcuts',
-
     },
     {
         icon: <FontAwesomeIcon icon={faCircleHalfStroke}></FontAwesomeIcon>,
@@ -151,13 +149,14 @@ const USER_MENU = [
         switch: true,
     },
     {
-        icon: <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>,
+        icon: (
+            <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
+        ),
         title: 'Log out',
         to: '/logout',
         separate: true,
     },
-
-]
+];
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
@@ -168,20 +167,18 @@ function Header() {
         }, 0);
     }, []);
 
-
     //handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
-
                 break;
 
             default:
                 break;
         }
-    }
+    };
 
-    const currentUser = true
+    const currentUser = true;
 
     return (
         <header className={cx('wrapper')}>
@@ -229,23 +226,45 @@ function Header() {
                     {/* dang nhap hoac guest */}
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 700]} offset={[12, 8]} content='Upload Video' placement='bottom'>
+                            <Button text>+ Upload</Button>
+                            <Tippy
+                                delay={[0, 100]}
+                                offset={[12, 8]}
+                                content="Create Effect"
+                                placement="bottom"
+                            >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload}></FontAwesomeIcon>
+                                    <IconCreateEffect></IconCreateEffect>
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                delay={[0, 100]}
+                                offset={[12, 8]}
+                                content="Upload Video"
+                                placement="bottom"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <IconMessage></IconMessage>
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                delay={[0, 100]}
+                                offset={[12, 8]}
+                                content="Inbox"
+                                placement="bottom"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <IconNotification></IconNotification>
                                 </button>
                             </Tippy>
                         </>
-
                     ) : (
-
                         <>
                             <Button text>+ Upload</Button>
                             <Button primary className={cx('custom-login')}>
                                 Log in
                             </Button>
-
                         </>
-
                     )}
 
                     <Menu
@@ -253,9 +272,14 @@ function Header() {
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
-                            <img className={cx('user-avatar')} alt='User' src={images.avatar1}></img>
+                            <ImageC
+                                className={cx('user-avatar')}
+                                alt="User"
+                                //src=''
+                                src={images.avatar1}
+                                // fallback= {images.avatar2}
+                            ></ImageC>
                         ) : (
-
                             <button className={cx('menu-btn')}>
                                 <FontAwesomeIcon
                                     icon={faEllipsisVertical}
