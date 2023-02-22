@@ -457,3 +457,11 @@ b2: Layouts
 19. tippy: pop thong bao
 https://github.com/atomiks/tippyjs-react
 https://atomiks.github.io/tippyjs/
+
+
+20. API: https://tiktok.fullstack.edu.vn/api/users/search?q=hoaa&type=less
+- Promise 
+- Fetch API
+- RESTful API
+- JSON
+

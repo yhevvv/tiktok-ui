@@ -20,12 +20,31 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3, 4]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+
+        setLoading(true);
+
+        //giai quyet ki tu trang khi co ki tu dau tien (khac khoang trang)
+        fetch(
+            `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
+                searchValue,
+            )}&type=less`,
+        ) //api
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    }, [searchValue]);
 
     const inputRef = useRef();
 
@@ -40,6 +59,10 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleSearchValue = (e) => {
+        setSearchValue(e.target.value);
+    };
+
     return (
         <HeadlessTippy
             visible={showResult && searchResult.length > 0}
@@ -49,9 +72,12 @@ function Search() {
                     <PropperWrapper>
                         <span className={cx('search-title')}>
                             Accounts
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
+                            {searchResult.map((result) => (
+                                <AccountItem
+                                    key={result.id}
+                                    data={result}
+                                ></AccountItem>
+                            ))}
                         </span>
                     </PropperWrapper>
                 </div>
@@ -61,18 +87,23 @@ function Search() {
             <div className={cx('search')}>
                 <input
                     ref={inputRef}
-                    value={searchValue}
+                    value={searchValue ? searchValue.trimStart() : ''}
                     placeholder="Search account and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleSearchValue}
                     onFocus={() => setShowResult(true)}
                 ></input>
-                {!!searchValue && (
+                {!!searchValue.trimStart() && !loading && (
                     <button className={cx('clear')} onClick={handleClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && (
+                    <FontAwesomeIcon
+                        className={cx('loading')}
+                        icon={faSpinner}
+                    />
+                )}
                 <button className={cx('search-btn')}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>

@@ -12,8 +12,8 @@ import {
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import { useEffect, useState } from 'react';
 import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
+import { Link } from 'react-router-dom';
 
 import Style from './Header.module.scss';
 import Button from '~/Components/Button';
@@ -170,7 +170,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="TikTok"></img>
+                <Link to={`/`}><img src={images.logo} alt="TikTok"></img></Link >
 
                 <Search></Search>
 

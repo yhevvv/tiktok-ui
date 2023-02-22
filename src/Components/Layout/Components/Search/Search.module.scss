@@ -54,13 +54,23 @@
 
 .loading {
     padding: 0px 5px;
+    animation: spinner 0.8s linear infinite; //spinner dynamic
+}
+
+@keyframes spinner { ///spinner dynamic
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 .search-title {
     font-size: small;
     padding: 5px 12px;
     font-weight: bold;
-    color: rgba(22, 24, 35, 0.5)
+    color: rgba(22, 24, 35, 0.5);
 }
 
 .search-btn {
