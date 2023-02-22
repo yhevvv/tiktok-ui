@@ -8,7 +8,7 @@ import Image from '../Image';
 import images from '~/assets/images';
 
 const cx = classNames.bind(Style);
-
+ 
 function AccountItem({ data }) {
     return (
         <Link to={`/@${data.nickname}`}>
