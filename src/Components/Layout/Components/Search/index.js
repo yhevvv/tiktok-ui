@@ -29,8 +29,7 @@ function Search() {
         }
 
         setLoading(true);
-
-        //giai quyet ki tu trang khi co ki tu dau tien (khac khoang trang)
+        
         fetch(
             `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
                 searchValue,
