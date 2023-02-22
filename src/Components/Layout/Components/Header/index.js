@@ -3,26 +3,20 @@ import {
     faArrowRightFromBracket,
     faCircleHalfStroke,
     faCircleQuestion,
-    faCircleXmark,
     faCoins,
     faEarthAmerica,
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faMagnifyingGlass,
-    faSpinner,
     faUser,
     faVideo,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useState } from 'react';
 import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 
 import Style from './Header.module.scss';
-import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
-import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import Menu from '~/Components/Popper/Menu/index';
 import {
     IconCreateEffect,
@@ -33,10 +27,9 @@ import {
 import images from '~/assets/images';
 //Image from component
 import ImageC from '~/Components/Image';
+import Search from '~/Components/Layout/Components/Search';
 
 import 'tippy.js/dist/tippy.css';
-
-const cx = ClassNames.bind(Style);
 
 const MEMU_ITEM = [
     {
@@ -159,14 +152,6 @@ const USER_MENU = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
-
     //handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -178,49 +163,16 @@ function Header() {
         }
     };
 
+    const cx = ClassNames.bind(Style);
+
     const currentUser = true;
 
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <img src={images.logo} alt="TikTok"></img>
-                <HeadlessTippy
-                    delay={[0, 500]}
-                    interactive="true"
-                    render={(attrs) => (
-                        <div
-                            className={cx('search-result')}
-                            tabIndex="-1"
-                            {...attrs}
-                        >
-                            <PropperWrapper>
-                                <span className={cx('search-title')}>
-                                    Account
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                </span>
-                            </PropperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input
-                            placeholder="Search account and videos"
-                            spellCheck={false}
-                        ></input>
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon
-                            className={cx('loading')}
-                            icon={faSpinner}
-                        />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+
+                <Search></Search>
 
                 <div className={cx('action')}>
                     {/* dang nhap hoac guest */}
