@@ -244,6 +244,9 @@ function Header() {
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
+                                    <sup className={cx('notificationAlert')}>
+                                        1
+                                    </sup>
                                     <IconMessage></IconMessage>
                                 </button>
                             </Tippy>
@@ -254,6 +257,9 @@ function Header() {
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
+                                    <sup className={cx('notificationAlert')}>
+                                        30
+                                    </sup>
                                     <IconNotification></IconNotification>
                                 </button>
                             </Tippy>

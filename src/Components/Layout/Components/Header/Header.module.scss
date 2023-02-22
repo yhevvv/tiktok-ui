@@ -18,17 +18,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px var(--default-layout-horizontal-spacer);
+    top: 0%
 }
 
 .search,
 .search-result {
     width: 361px;
+    margin-left: 200px;
+    overflow: hidden;
 }
+
 
 .search {
     position: relative;
     height: var(--search-height);
-    background-color: #2829301c;
+    background-color: rgba(22, 24, 35, .06);
     border-radius: var(--search-border-radius);
     display: flex;
     padding-left: 16px;
@@ -54,7 +58,7 @@
         right: var(--search-button-width);
         height: 28px;
         width: 1px;
-        background-color: rgba(22, 24, 35, 0.12);
+        background-color: rgba(22, 24, 35, .12);
     }
 
     &:focus-within {
@@ -79,7 +83,7 @@
     font-size: small;
     padding: 5px 12px;
     font-weight: bold;
-    color: rgba(22, 24, 35, 0.5);
+    color: rgba(22, 24, 35, .06);
 }
 
 .search-btn {
@@ -87,11 +91,11 @@
     height: 100%;
     border-top-right-radius: var(--search-border-radius);
     border-bottom-right-radius: var(--search-border-radius);
-    background-color: #0723d300;
+    background-color: transparent;
     color: #2829302f;
     font-size: 1.8rem;
     &:hover {
-        background-color: #2829302f;
+        background-color: transparent;
     }
     &:active {
         background-color: rgba(22, 24, 35, 0.06);
@@ -107,7 +111,6 @@
     margin: 0 0 0 16px;
 }
 
-
 .custom-login {
 }
 
@@ -116,7 +119,7 @@
     font-size: 2.2rem;
     color: #161823;
     cursor: pointer;
-    margin-left: 2px;
+    margin-left: 12px;
 }
 .user-avatar {
     width: 32px;
@@ -124,8 +127,8 @@
     position: relative;
     cursor: pointer;
     border-radius: 9999px;
-    margin-left: 12px;
-    margin-bottom: 7px;
+    margin-left: 24px;
+    margin-bottom: 12px;
 }
 
 .menu-btn {
@@ -137,3 +140,23 @@
     font-size: 17px;
     cursor: pointer;
 }
+
+
+.notificationAlert {
+    font-family: 'ProximaNova', 'Montserrat', sans-serif !important;
+    font-size: 14px;
+    text-align: unset;
+    background-color: rgb(254, 44, 85);
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    border-radius: 9999px;
+    position: absolute;
+    height: 20px;
+    min-width: 20px;
+    margin-left: 16px;
+    top: 7px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
