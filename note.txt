@@ -465,5 +465,8 @@ https://atomiks.github.io/tippyjs/
 - RESTful API
 - JSON
 
-21. 
+21. Debounce:
+//fix request when search, define my hooks
+
+22.
 

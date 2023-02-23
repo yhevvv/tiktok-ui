@@ -11,6 +11,8 @@ import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 import AccountItem from '~/Components/AccountItem';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import Style from './Search.module.scss';
+import { useDebounce } from '~/hooks';
+
 
 import 'tippy.js/dist/tippy.css';
 
@@ -22,8 +24,10 @@ function Search() {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const debounced = useDebounce(searchValue, 700); //fix request when search, define my hooks
+
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
@@ -32,7 +36,7 @@ function Search() {
         
         fetch(
             `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-                searchValue,
+                debounced,
             )}&type=less`,
         ) //api
             .then((res) => res.json())
@@ -43,7 +47,8 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounced]);
 
     const inputRef = useRef();
 
