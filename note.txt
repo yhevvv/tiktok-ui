@@ -468,5 +468,16 @@ https://atomiks.github.io/tippyjs/
 21. Debounce:
 //fix request when search, define my hooks
 
-22.
+22. thu vien Axios:
+
+//XMLhttpRequest
+//Fetch
+full_name -> fullName
+
+22.5  thu vien supperagent (doc them)'
+
+
+23. https://firebase.google.com
+
+
 
