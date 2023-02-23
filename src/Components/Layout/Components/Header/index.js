@@ -28,6 +28,8 @@ import images from '~/assets/images';
 //Image from component
 import ImageC from '~/Components/Image';
 import Search from '~/Components/Layout/Components/Search';
+import routesConfig from '~/Config/routes'
+
 
 import 'tippy.js/dist/tippy.css';
 
@@ -170,7 +172,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={`/`}><img src={images.logo} alt="TikTok"></img></Link >
+                <Link to={routesConfig.root}>
+                    <img src={images.logo} alt="TikTok"></img>
+                </Link>
 
                 <Search></Search>
 
@@ -232,7 +236,7 @@ function Header() {
                         {currentUser ? (
                             <ImageC
                                 className={cx('user-avatar')}
-                                alt="User"
+                                alt="User"              
                                 //src=''
                                 src={images.avatar1}
                                 // fallback= {images.avatar2}

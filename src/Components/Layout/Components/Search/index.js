@@ -12,7 +12,7 @@ import AccountItem from '~/Components/AccountItem';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import Style from './Search.module.scss';
 import { useDebounce } from '~/hooks';
-import * as searchService from '~/ApiService/searchServices'
+import * as searchService from '~/ApiService/searchServices';
 
 import 'tippy.js/dist/tippy.css';
 
@@ -43,7 +43,7 @@ function Search() {
             setLoading(false);
         };
 
-        fetchApi()
+        fetchApi();
     }, [debounced]);
 
     const inputRef = useRef();
@@ -61,6 +61,10 @@ function Search() {
 
     const handleSearchValue = (e) => {
         setSearchValue(e.target.value);
+
+        // if (!setSearchValue.startWith(` `)){
+        //     setSearchValue(searchValue);
+        // }
     };
 
     return (
@@ -104,7 +108,10 @@ function Search() {
                         icon={faSpinner}
                     />
                 )}
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    onMouseDown={(e) => e.preventDefault()}
+                >
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
             </div>

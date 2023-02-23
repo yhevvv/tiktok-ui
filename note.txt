@@ -480,4 +480,14 @@ full_name -> fullName
 23. https://firebase.google.com
 
 
+24. 
+- link logo ve trang chu -> ok
+- sua phong chu trong o tim kiem -> ok 
+- khong cho nhap ki tu dau tien la space trong o tim kiem -> ok  
+- bo qua hanh vi focus vao o tim kiem khi submit -> ok
+- khong an memu khi click vao avata -> ok  
+- xy ly thanh cuon trong menu da cap, khi co nhieu content 
+- them style overlay cho thanh cuon body 
+- sua title trang va update favicon 
+- fix warning thu vien tippy 
 

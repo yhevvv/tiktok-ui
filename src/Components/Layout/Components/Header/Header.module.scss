@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0px var(--default-layout-horizontal-spacer);
-    top: 0%
+    top: 0%;
 }
 
 //Action
@@ -60,9 +60,8 @@
     cursor: pointer;
 }
 
-
 .notificationAlert {
-    font-family: 'ProximaNova', 'Montserrat', sans-serif !important;
+    font-family: var(--default-font-family);
     font-size: 14px;
     text-align: unset;
     background-color: rgb(254, 44, 85);
@@ -78,4 +77,3 @@
     align-items: center;
     font-weight: 600;
 }
-
