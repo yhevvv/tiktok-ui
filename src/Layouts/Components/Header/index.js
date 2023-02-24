@@ -27,10 +27,10 @@ import {
 import images from '~/assets/images';
 //Image from component
 import ImageC from '~/Components/Image';
-import Search from '~/Components/Layout/Components/Search';
-import routesConfig from '~/Config/routes';
+import Search from '~/Layouts/Components/Search';
+import Config from '~/Config';
 
-import dataLanguage from '~/Components/Layout/Components/Header/dataLanguage.json';
+import dataLanguage from '~/Layouts/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
 
@@ -131,7 +131,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.root}>
+                <Link to={Config.routes.root}>
                     <img src={images.logo} alt="TikTok"></img>
                 </Link>
 

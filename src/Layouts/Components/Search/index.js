@@ -11,8 +11,8 @@ import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 import AccountItem from '~/Components/AccountItem';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import Style from './Search.module.scss';
-import { useDebounce } from '~/hooks';
-import * as searchService from '~/ApiService/searchServices';
+import { useDebounce } from '~/Hooks';
+import * as searchService from '~/Service/searchService';
 
 import 'tippy.js/dist/tippy.css';
 
