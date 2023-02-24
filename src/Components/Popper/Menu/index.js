@@ -59,7 +59,7 @@ function Menu({
                                 }}
                             ></Header>
                         )}
-                        {renderItem()}
+                        <div className={cx('menu-body')}>{renderItem()}</div>
                     </PropperWrapper>
                 </div>
             )}

@@ -28,8 +28,9 @@ import images from '~/assets/images';
 //Image from component
 import ImageC from '~/Components/Image';
 import Search from '~/Components/Layout/Components/Search';
-import routesConfig from '~/Config/routes'
+import routesConfig from '~/Config/routes';
 
+import dataLanguage from '~/Components/Layout/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
 
@@ -39,28 +40,7 @@ const MEMU_ITEM = [
         title: 'Language',
         children: {
             title: 'language',
-            data: [
-                {
-                    type: 'language',
-                    code: 'en',
-                    title: 'English',
-                },
-                {
-                    type: 'language',
-                    code: 'vi',
-                    title: 'Vietnamese',
-                },
-                {
-                    type: 'language',
-                    code: 'cn',
-                    title: 'China',
-                },
-                {
-                    type: 'language',
-                    code: 'jp',
-                    title: 'Japan',
-                },
-            ],
+            data: dataLanguage,
         },
     },
     {
@@ -105,28 +85,7 @@ const USER_MENU = [
         title: 'Language',
         children: {
             title: 'language',
-            data: [
-                {
-                    type: 'language',
-                    code: 'en',
-                    title: 'English',
-                },
-                {
-                    type: 'language',
-                    code: 'vi',
-                    title: 'Vietnamese',
-                },
-                {
-                    type: 'language',
-                    code: 'cn',
-                    title: 'China',
-                },
-                {
-                    type: 'language',
-                    code: 'jp',
-                    title: 'Japan',
-                },
-            ],
+            data: dataLanguage,
         },
     },
     {
@@ -236,7 +195,7 @@ function Header() {
                         {currentUser ? (
                             <ImageC
                                 className={cx('user-avatar')}
-                                alt="User"              
+                                alt="User"
                                 //src=''
                                 src={images.avatar1}
                                 // fallback= {images.avatar2}

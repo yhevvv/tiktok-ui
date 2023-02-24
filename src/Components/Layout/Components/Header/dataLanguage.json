@@ -1,0 +1,152 @@
+[
+    {
+        "title": "English",
+        "code": "en",
+        "type": "language"
+    },
+    {
+        "title": "Spanish",
+        "code": "es",
+        "type": "language"
+    },
+    {
+        "title": "French",
+        "code": "fr",
+        "type": "language"
+    },
+    {
+        "title": "German",
+        "code": "de",
+        "type": "language"
+    },
+    {
+        "title": "Italian",
+        "code": "it",
+        "type": "language"
+    },
+    {
+        "title": "Portuguese",
+        "code": "pt",
+        "type": "language"
+    },
+    {
+        "title": "Dutch",
+        "code": "nl",
+        "type": "language"
+    },
+    {
+        "title": "Swedish",
+        "code": "sv",
+        "type": "language"
+    },
+    {
+        "title": "Norwegian",
+        "code": "no",
+        "type": "language"
+    },
+    {
+        "title": "Danish",
+        "code": "da",
+        "type": "language"
+    },
+    {
+        "title": "Finnish",
+        "code": "fi",
+        "type": "language"
+    },
+    {
+        "title": "Russian",
+        "code": "ru",
+        "type": "language"
+    },
+    {
+        "title": "Arabic",
+        "code": "ar",
+        "type": "language"
+    },
+    {
+        "title": "Chinese",
+        "code": "zh",
+        "type": "language"
+    },
+    {
+        "title": "Japanese",
+        "code": "ja",
+        "type": "language"
+    },
+    {
+        "title": "Korean",
+        "code": "ko",
+        "type": "language"
+    },
+    {
+        "title": "Thai",
+        "code": "th",
+        "type": "language"
+    },
+    {
+        "title": "Indonesian",
+        "code": "id",
+        "type": "language"
+    },
+    {
+        "title": "Malay",
+        "code": "ms",
+        "type": "language"
+    },
+    {
+        "title": "Vietnamese",
+        "code": "vi",
+        "type": "language"
+    },
+    {
+        "title": "Hindi",
+        "code": "hi",
+        "type": "language"
+    },
+    {
+        "title": "Bengali",
+        "code": "bn",
+        "type": "language"
+    },
+    {
+        "title": "Punjabi",
+        "code": "pa",
+        "type": "language"
+    },
+    {
+        "title": "Urdu",
+        "code": "ur",
+        "type": "language"
+    },
+    {
+        "title": "Persian",
+        "code": "fa",
+        "type": "language"
+    },
+    {
+        "title": "Hebrew",
+        "code": "he",
+        "type": "language"
+    },
+    {
+        "title": "Greek",
+        "code": "el",
+        "type": "language"
+    },
+    {
+        "title": "Turkish",
+        "code": "tr",
+        "type": "language"
+    },
+    {
+        "title": "Hungarian",
+        "code": "hu",
+        "type": "language"
+    },
+    {
+        "title": "Polish",
+        "code": "pl",
+        "type": "language"
+    }
+]

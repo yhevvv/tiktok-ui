@@ -67,55 +67,61 @@ function Search() {
         // }
     };
 
-    return (
-        <HeadlessTippy
-            visible={showResult && searchResult.length > 0}
-            interactive="true"
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PropperWrapper>
-                        <span className={cx('search-title')}>
-                            Accounts
-                            {searchResult.map((result) => (
-                                <AccountItem
-                                    key={result.id}
-                                    data={result}
-                                ></AccountItem>
-                            ))}
-                        </span>
-                    </PropperWrapper>
-                </div>
-            )}
-            onClickOutside={handlehideResoult} //an khi click ra ngoai
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue ? searchValue.trimStart() : ''}
-                    placeholder="Search account and videos"
-                    spellCheck={false}
-                    onChange={handleSearchValue}
-                    onFocus={() => setShowResult(true)}
-                ></input>
-                {!!searchValue.trimStart() && !loading && (
-                    <button className={cx('clear')} onClick={handleClear}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
+    return (   //fix warning tippy using div
+        <div>
+            <HeadlessTippy
+                visible={showResult && searchResult.length > 0}
+                interactive="true"
+                render={(attrs) => (
+                    <div
+                        className={cx('search-result')}
+                        tabIndex="-1"
+                        {...attrs}
+                    >
+                        <PropperWrapper>
+                            <span className={cx('search-title')}>
+                                Accounts
+                                {searchResult.map((result) => (
+                                    <AccountItem
+                                        key={result.id}
+                                        data={result}
+                                    ></AccountItem>
+                                ))}
+                            </span>
+                        </PropperWrapper>
+                    </div>
+                )}
+                onClickOutside={handlehideResoult} //an khi click ra ngoai
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue ? searchValue.trimStart() : ''}
+                        placeholder="Search account and videos"
+                        spellCheck={false}
+                        onChange={handleSearchValue}
+                        onFocus={() => setShowResult(true)}
+                    ></input>
+                    {!!searchValue.trimStart() && !loading && (
+                        <button className={cx('clear')} onClick={handleClear}>
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && (
+                        <FontAwesomeIcon
+                            className={cx('loading')}
+                            icon={faSpinner}
+                        />
+                    )}
+                    <button
+                        className={cx('search-btn')}
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
-                )}
-                {loading && (
-                    <FontAwesomeIcon
-                        className={cx('loading')}
-                        icon={faSpinner}
-                    />
-                )}
-                <button
-                    className={cx('search-btn')}
-                    onMouseDown={(e) => e.preventDefault()}
-                >
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </div>
-        </HeadlessTippy>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 

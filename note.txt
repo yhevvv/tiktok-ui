@@ -486,8 +486,8 @@ full_name -> fullName
 - khong cho nhap ki tu dau tien la space trong o tim kiem -> ok  
 - bo qua hanh vi focus vao o tim kiem khi submit -> ok
 - khong an memu khi click vao avata -> ok  
-- xy ly thanh cuon trong menu da cap, khi co nhieu content 
-- them style overlay cho thanh cuon body 
-- sua title trang va update favicon 
-- fix warning thu vien tippy 
+- xy ly thanh cuon trong menu da cap, khi co nhieu content -> ok
+- them style overlay cho thanh cuon body -> ok
+- sua title trang va update favicon (https://www.tiktok.com/favicon.ico) ->
+- fix warning thu vien tippy -> ok
 
