@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Style from './Button.module.scss';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,7 @@ function Button({
     to,
     href,
     children,
-    primary = false, 
+    primary = false,
     outline = false,
     onClick,
     small = false,
@@ -31,7 +32,7 @@ function Button({
         setIsDarkMode(!isDarkMode);
     };
 
-    const classMode = isDarkMode ? 'light' : 'dark'
+    const classMode = isDarkMode ? 'light' : 'dark';
 
     let Comp = 'button';
 
@@ -69,15 +70,38 @@ function Button({
         disable,
     });
 
-
     return (
         <Comp className={classes} {...props}>
             {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
             <span className={cx('title')}>{children}</span>
-            {switchButton && <IOSTouch classMode={classMode} onChange={toggleDarkMode}></IOSTouch>}
+            {switchButton && (
+                <IOSTouch
+                    classMode={classMode}
+                    onChange={toggleDarkMode}
+                ></IOSTouch>
+            )}
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
 }
+
+Button.propTypes = {
+    children: PropTypes.node,
+    to: PropTypes.string,
+    href: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    primary: PropTypes.bool,
+    outline: PropTypes.bool,
+    onClick: PropTypes.func,
+    small: PropTypes.bool,
+    Large: PropTypes.bool,
+    text: PropTypes.bool,
+    disable: PropTypes.bool,
+    rounded: PropTypes.bool,
+    className: PropTypes.string,
+    leftIcon: PropTypes.node,
+    rightIcon: PropTypes.node,
+    switchButton: PropTypes.bool,
+};
 
 export default Button;

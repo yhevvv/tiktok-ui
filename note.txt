@@ -491,3 +491,5 @@ full_name -> fullName
 - sua title trang va update favicon (https://www.tiktok.com/favicon.ico) ->
 - fix warning thu vien tippy -> ok
 
+25. thu vien proptypes:
+https://www.npmjs.com/package/prop-types
