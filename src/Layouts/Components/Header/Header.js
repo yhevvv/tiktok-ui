@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 import Style from './Header.module.scss';
 import Button from '~/Components/Button';
-import Menu from '~/Components/Popper/Menu/index';
+import Menu from '~/Components/Popper/Menu/Menu';
 import {
     IconCreateEffect,
     IconMessage,

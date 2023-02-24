@@ -1,10 +1,11 @@
 .wrapper {
     justify-content: center;
+    align-items: center;
     display: inline-flex;
     font-size: 16px;
     font-weight: 700;
     min-width: 100px;
-    //min-height: 36px;
+    max-height: 36px;
     border-radius: 4px;
     cursor: pointer; //chi dinh nut bam
     background-color: var(--white);
@@ -75,7 +76,7 @@
 }
 
 .primary {
-    color: var(--white);
+    color: var(--white) !important; 
     background-color: #fe2c55;
     border-color: var(--primary);
     width: 0;

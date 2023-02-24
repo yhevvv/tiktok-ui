@@ -40,6 +40,16 @@ function Menu({
         });
     };
 
+    const handleResetToFirstPage = () => {
+        setHistory((prev) => prev.slice(0, 1));
+    };
+
+    const handleBack = () => {
+        setHistory((prev) =>
+            prev.slice(0, prev.length - 1),
+        );
+    }
+
     return (
         <Tippy
             delay={[0, 700]}
@@ -53,18 +63,14 @@ function Menu({
                         {history.length > 1 && (
                             <Header
                                 title={current.title}
-                                onBack={() => {
-                                    setHistory((prev) =>
-                                        prev.slice(0, prev.length - 1),
-                                    );
-                                }}
+                                onBack={handleBack}
                             ></Header>
                         )}
                         <div className={cx('menu-body')}>{renderItem()}</div>
                     </PropperWrapper>
                 </div>
             )}
-            onHide={() => setHistory((prev) => prev.slice(0, 1))}
+            onHide={handleResetToFirstPage}
         >
             {children}
         </Tippy>
