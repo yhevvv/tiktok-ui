@@ -2,7 +2,15 @@ import classNames from 'classnames/bind';
 import config from '~/Config';
 import Style from './Sidebar.module.scss';
 import Menu, { MenuItem } from './Menu';
-import { HomeIcon, UserGroupIcon, LiveIcon, HomeIconActive, UserGroupIconActive, LiveIconActive } from '~/Components/Icons';
+import {
+    HomeIcon,
+    UserGroupIcon,
+    LiveIcon,
+    HomeIconActive,
+    UserGroupIconActive,
+    LiveIconActive,
+} from '~/Components/Icons';
+import SuggestedAccounts from '~/Components/SuggestedAccounts';
 
 function Sidebar() {
     const cx = classNames.bind(Style);
@@ -10,26 +18,28 @@ function Sidebar() {
     return (
         <aside className={cx('wrapper')}>
             <Menu>
-                <MenuItem 
+                <MenuItem
                     title="For You"
                     to={config.routes.root}
                     icon={<HomeIcon />}
                     activeIcon={<HomeIconActive></HomeIconActive>}
                 ></MenuItem>
-                <MenuItem 
+                <MenuItem
                     title="Following"
                     to={config.routes.following}
                     icon={<UserGroupIcon />}
-                    activeIcon = {<UserGroupIconActive></UserGroupIconActive>}
+                    activeIcon={<UserGroupIconActive></UserGroupIconActive>}
                 ></MenuItem>
                 <MenuItem
                     title="LIVE"
                     to={config.routes.live}
                     icon={<LiveIcon />}
-                    activeIcon = {<LiveIconActive></LiveIconActive>}
+                    activeIcon={<LiveIconActive></LiveIconActive>}
                 ></MenuItem>
             </Menu>
             <hr className={cx('hr-item')}></hr>
+            <SuggestedAccounts label='Suggested accounts' more='See all'></SuggestedAccounts>
+            <SuggestedAccounts label='Following accounts' more='See more'></SuggestedAccounts>
         </aside>
     );
 }

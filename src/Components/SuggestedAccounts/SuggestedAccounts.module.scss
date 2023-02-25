@@ -1,0 +1,60 @@
+//AccItem .js
+
+.account-item {
+    display: flex;
+    padding-left: 8px;
+}
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 6px;
+}
+.item-info {
+    margin-left: 12px;
+}
+.nickname {
+    margin-top: 9px;
+    font-size: 1.6rem;
+    color: #161823;
+    font-weight: 700;
+    font-family: var(--name-font-family);
+}
+.name {
+    font-size: 1.2rem;
+    color: rgba(22, 24, 35, 0.75);
+    margin-top: -2px;
+}
+
+.check {
+    margin: 4px;
+    font-size: 1.4rem;
+    color: #20d5ec;
+}
+
+
+//suggestAc .js
+
+.wrapper {
+
+}
+
+.label {
+    color: rgba(22, 24, 35, 0.75);
+    padding: 0 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.more-item {
+    padding-left: 8px;
+    margin-top: 3px;
+    color: rgb(254, 44, 85);
+    font-family: var(--default-font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
