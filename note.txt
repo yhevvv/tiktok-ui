@@ -440,6 +440,8 @@ npm i -D sass
 14: Route React: (coi huong dan tren google)
 import { Routes, Route, Link } from 'react-router-dom'
 
+C:\Users\Admin\Desktop\tiktok-ui\src\Layouts\Components\SideBar\Menu\MenuItem.js => useLocation
+
 15. customize-cra??? 
 https://github.com/arackaf/customize-cra
 https://github.com/timarney/react-app-rewired/
@@ -492,4 +494,4 @@ full_name -> fullName
 - fix warning thu vien tippy -> ok
 
 25. thu vien proptypes:
-https://www.npmjs.com/package/prop-types
+https://www.npmjs.com/package/prop-

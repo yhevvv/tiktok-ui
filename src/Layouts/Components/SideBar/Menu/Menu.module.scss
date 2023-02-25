@@ -1,0 +1,29 @@
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-left: 3px;
+    border-radius: 4px;
+    transition: background-color ease-in-out 200ms;
+
+    &.active {
+        .title-item {
+            color: var(--primary);
+        }
+        color: var(--primary);
+    }
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+        // color: rgba(254, 44, 85, 1) !important;
+    }
+}
+
+.title-item {
+    margin-left: 8px;
+    color: rgba(22, 24, 35, 1);
+    font-family: var(--default-font-family);
+    font-size: 18px;
+    line-height: 25px;
+    margin-left: 8px;
+    font-weight: 700 !important;
+}

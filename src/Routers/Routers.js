@@ -1,4 +1,4 @@
-import Config from '~/Config'
+import Config from '~/Config';
 //layout
 import { HeaderOnly } from '~/Layouts';
 
@@ -7,6 +7,7 @@ import Following from '~/Pages/Following';
 import Profile from '~/Pages/Profiles';
 import Upload from '~/Pages/Upload';
 import Search from '~/Pages/Search';
+import Live from '~/Pages/Live';
 
 //public Routers
 const PublicRouters = [
@@ -15,6 +16,8 @@ const PublicRouters = [
     { path: Config.routes.profile, component: Profile },
     { path: Config.routes.upload, component: Upload, layout: HeaderOnly },
     { path: Config.routes.search, component: Search, layout: null },
+    { path: Config.routes.live, component: Live },
+
 ];
 
 // Từ react-router-dom 6.6.0 pattern chứa @ không còn dùng được nữa
