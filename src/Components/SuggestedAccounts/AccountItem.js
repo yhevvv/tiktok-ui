@@ -2,6 +2,7 @@ import Style from './SuggestedAccounts.module.scss';
 import classNames from 'classnames/bind';
 import images from '~/assets/images';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
+import Images from '~/Components/Image';
 
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,14 +10,14 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import AccountPreview from './AccountPreview';
 
-function AccountItem() {
+function AccountItem({ data }) {
     const cx = classNames.bind(Style);
 
     const previews = (props) => {
         return (
             <div className={cx('preview')} tabIndex="-1" {...props}>
                 <PropperWrapper>
-                    <AccountPreview/>
+                    <AccountPreview data={data} />
                 </PropperWrapper>
             </div>
         );
@@ -29,24 +30,27 @@ function AccountItem() {
                 interactive
                 delay={[800, 800]}
                 placement="bottom-start"
-                offset= {[0, -10]}
+                offset={[0, -10]}
             >
                 <div className={cx('account-item')}>
-                    <img
+                    <Images
                         className={cx('avatar')}
-                        src={images.NoImage}
-                        alt=""
-                    ></img>
+                        src={data.avatar}
+                        alt={images.NoImage}
+                    ></Images>
                     <div className={cx('item-info')}>
                         <span className={cx('nickname')}>
-                            Pham Van A
-                            <FontAwesomeIcon
-                                className={cx('check')}
-                                icon={faCheckCircle}
-                            ></FontAwesomeIcon>
+                            {data.first_name} {data.last_name}
+                            {data.tick ? (
+                                <FontAwesomeIcon
+                                    className={cx('check')}
+                                    icon={faCheckCircle}
+                                ></FontAwesomeIcon>
+                            ) : (
+                                <></>
+                            )}
                         </span>
-                        <p className={cx('name')}>Pham Van A</p>
-                        
+                        <p className={cx('name')}>{data.nickname}</p>
                     </div>
                 </div>
             </Tippy>
@@ -54,6 +58,8 @@ function AccountItem() {
     );
 }
 
-AccountItem.propTypes = {};
+AccountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AccountItem;
