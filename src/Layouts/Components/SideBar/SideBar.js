@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 
 import config from '~/Config';
@@ -11,9 +11,13 @@ import {
     HomeIconActive,
     UserGroupIconActive,
     LiveIconActive,
+    HashTag,
+    MusicNote,
 } from '~/Components/Icons';
 import SuggestedAccounts from '~/Components/SuggestedAccounts';
 import * as userService from '~/Service/userService';
+import Discover from '~/Components/Discover';
+import Tag from '~/Components/Discover/tag';
 
 
 function Sidebar() {
@@ -69,12 +73,21 @@ function Sidebar() {
                 data={suggestedUsers}
                 onSeeAll={handleSeeAll}
             ></SuggestedAccounts>
+            <hr className={cx('hr-item')}></hr>
 
             {/* lam them mot cai followingAccount, tam thoi de cho no giong */}
             <SuggestedAccounts
                 label="Following accounts"
                 more="See more"
             ></SuggestedAccounts>
+            <hr className={cx('hr-item')}></hr>
+
+            <Discover>
+                <Tag title='suthatla' icon={<HashTag></HashTag>}></Tag>
+                <Tag title='Yêu Đơn Phương Là Gì (MEE Remix)' icon={<MusicNote/>}></Tag>
+            </Discover>
+            <hr className={cx('hr-item')}></hr>
+
         </aside>
     );
 }
