@@ -23,7 +23,11 @@ import Tag from '~/Components/Discover/tag';
 function Sidebar() {
     const cx = classNames.bind(Style);
 
-    const INIT_PAGE = 1;
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+    const INIT_PAGE = getRandomInt(12);
     const PER_PAGE = 5;
 
     const [page, setPage] = useState(INIT_PAGE);

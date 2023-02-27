@@ -73,6 +73,7 @@
 
 .hashtag {
     cursor: pointer;
+    margin-left: 3px;
     &:hover {
         text-decoration: underline;
     }
@@ -131,7 +132,7 @@
     display: flex;
     flex-direction: column-reverse;
     margin-top: 62px;
-    margin-left: -41px;
+    margin-left: -28px;
     color: rgba(22, 24, 35, 0.75);
     font-size: 12px;
     text-align: center;
@@ -140,5 +141,5 @@
 .hr-item {
     height: 1px;
     border-color: rgba(22, 24, 35, 0.12);
-    margin: 20px 20px 28px 8px;
+    margin: 20px 20px -20px 10px;
 }

@@ -13,52 +13,57 @@ import {
     faHeart,
     faShare,
 } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 const cx = classNames.bind(Style);
 
-function VideoItem() {
+function VideoItem({ data }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
                 <Link>
                     <Image
                         className={cx('avatar')}
-                        src={''}
+                        src={data.user.avatar}
                         alt={images.NoImage}
                     ></Image>
                 </Link>
                 <Link className={cx('id_nickname')}>
-                    <h3 className={cx('id')}>QuanDoiABC</h3>
-                    <FontAwesomeIcon
-                        className={cx('tick')}
-                        icon={faCircleCheck}
-                    ></FontAwesomeIcon>
-                    <h4 className={cx('nickname')}>World Army</h4>
+                    <h3 className={cx('id')}>{data.user.first_name} {data.user.last_name}</h3>
+                    {data.user.tick && (
+                        <FontAwesomeIcon
+                            className={cx('tick')}
+                            icon={faCircleCheck}
+                        ></FontAwesomeIcon>
+                    )}
+                    <h4 className={cx('nickname')}>{data.user.nickname}</h4>
                 </Link>
                 <Button outline className={cx('btn-follow')}>
                     Follow
                 </Button>
             </div>
             <span className={cx('description')}>
-                Nga tạm dừng tham gia Hiệp ước New START, thế giới đứng trước
-                nguy cơ chiến tranh hạt nhân
-                <strong className={cx('hashtag')}>#russia #vietnam #quansuthegioi</strong>
+               {data.description}
+                <strong className={cx('hashtag')}>
+                    #vietnam
+                </strong>
             </span>
             <h4 className={cx('music-tag')}>
-                <MusicNote></MusicNote> Nhạc cực chiến ngầu đét - DDC
+                <MusicNote></MusicNote> {data.music}
             </h4>
             <div className={cx('position-fix')}>
                 <video
                     className={cx('video-play')}
-                    src={Videos}
+                    src={data.file_url}
                     controls
+                    poster={data.thumb_url}
                 ></video>
                 <div className={cx('interact')}>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>276.6K</strong>
+                        <strong className={cx('count-item')}>{data.likes_count}</strong>
                     </Button>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
@@ -66,13 +71,13 @@ function VideoItem() {
                                 icon={faCommentDots}
                             ></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>276.6K</strong>
+                        <strong className={cx('count-item')}>{data.comments_count}</strong>
                     </Button>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
                             <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>276.6K</strong>
+                        <strong className={cx('count-item')}>{data.shares_count}</strong>
                     </Button>
                 </div>
             </div>
@@ -80,5 +85,9 @@ function VideoItem() {
         </div>
     );
 }
+
+VideoItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default VideoItem;
