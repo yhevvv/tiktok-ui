@@ -102,6 +102,20 @@
     }
 }
 
+
+.noneBtn {
+    border: 1px;
+    background: none;
+    outline: none;
+    padding: 0px;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+}
+
 //size small button
 .small {
     min-width: 88px;

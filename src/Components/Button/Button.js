@@ -14,6 +14,7 @@ function Button({
     children,
     primary = false,
     outline = false,
+    noneBtn= false,
     onClick,
     small = false,
     Large = false,
@@ -62,6 +63,7 @@ function Button({
     const classes = cx('wrapper', {
         primary, //button style 1
         outline, //button style 2
+        noneBtn, //button style 3
         text, //button style 3
         rounded, //button style 4
         small, //size small button

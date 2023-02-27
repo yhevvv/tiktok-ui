@@ -1,0 +1,22 @@
+.icon-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    font-size: 15px;
+    border-radius: 50%;
+    transition: all 200ms ease-in-out 0s;
+    background-color: rgba(22, 24, 35, 0.06);
+    margin-top: 8px;
+    margin-bottom: 6px;
+    color: black;
+}
+
+
+.hr-item {
+    height: 1px;
+    border-color: rgba(22, 24, 35, .12);
+    margin-left: 8px;
+    margin-right: 28px;
+}
