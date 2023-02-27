@@ -1,4 +1,118 @@
-.icon-item{
+//home
+.wrapper-all{
+    overflow:auto;
+    height:100vh;
+}
+//videoItem
+.wrapper {
+    margin-left: -5px;
+    padding: 44px 0 20px 149px;
+    margin-right: 16px;
+}
+
+.position {
+    display: flex;
+}
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+}
+.id_nickname {
+    display: inline-flex;
+    width: 510px;
+    margin: -18px 8px;
+}
+.id {
+    font-family: var(--name-font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    display: inline-block;
+    margin-right: 4px;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.tick {
+    margin-top: 23px;
+    color: #20d5ec;
+    height: 14px;
+    width: 14px;
+}
+.nickname {
+    font-weight: 400 !important;
+    font-size: 14px;
+    line-height: 20px;
+    display: inline-block;
+    line-height: 28px;
+    margin-left: 6px;
+}
+
+.btn-follow {
+    margin-top: 8px;
+    height: 28px;
+    font-size: 16px;
+}
+
+.description {
+    width: 510px;
+    display: block;
+    padding-left: 67px;
+    margin-top: -33px;
+    font-size: 16px;
+    font-weight: 400 !important;
+}
+
+.hashtag {
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.music-tag {
+    margin: 5px 67px 0px;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.position-fix {
+    display: flex;
+}
+.video-play {
+    min-width: 336px;
+    max-width: 556px;
+    min-height: 314px;
+    max-height: 600px;
+    margin-left: 67px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.interact {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: -15px;
+}
+
+.btn-interact {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+}
+
+.icon-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,10 +127,18 @@
     color: black;
 }
 
+.count-item {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 62px;
+    margin-left: -41px;
+    color: rgba(22, 24, 35, 0.75);
+    font-size: 12px;
+    text-align: center;
+}
 
 .hr-item {
     height: 1px;
-    border-color: rgba(22, 24, 35, .12);
-    margin-left: 8px;
-    margin-right: 28px;
+    border-color: rgba(22, 24, 35, 0.12);
+    margin: 20px 20px 28px 8px;
 }
