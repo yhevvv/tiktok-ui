@@ -27,7 +27,7 @@ function Sidebar() {
         return Math.floor(Math.random() * max);
       }
 
-    const INIT_PAGE = getRandomInt(5);
+    const INIT_PAGE = getRandomInt(4);
     const PER_PAGE = 5;
 
     const [page, setPage] = useState(INIT_PAGE);

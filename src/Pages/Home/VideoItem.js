@@ -5,7 +5,6 @@ import Style from './Home.module.scss';
 import { Link } from 'react-router-dom';
 import Button from '~/Components/Button';
 import { MusicNote } from '~/Components/Icons';
-import Videos from '~/assets/Videos/ShortVideo/demo.mp4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
@@ -14,10 +13,30 @@ import {
     faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-
-const cx = classNames.bind(Style);
+import VideoPlayer from './VideoPlayer';
+import { useState, useRef } from 'react';
 
 function VideoItem({ data }) {
+    const cx = classNames.bind(Style);
+
+    const videoRef = useRef(null);
+
+    const handlePlay = () => {
+        videoRef.current.play();
+        setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+        videoRef.current.stop();
+        setIsPlaying(false);
+    };
+
+    const handleVolumeChange = (volume) => {
+        videoRef.current.setVolume(volume);
+    };
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content')}>
@@ -29,7 +48,9 @@ function VideoItem({ data }) {
                     ></Image>
                 </Link>
                 <Link className={cx('id_nickname')}>
-                    <h3 className={cx('id')}>{data.user.first_name} {data.user.last_name}</h3>
+                    <h3 className={cx('id')}>
+                        {data.user.first_name} {data.user.last_name}
+                    </h3>
                     {data.user.tick && (
                         <FontAwesomeIcon
                             className={cx('tick')}
@@ -43,30 +64,36 @@ function VideoItem({ data }) {
                 </Button>
             </div>
 
-
-            
             <span className={cx('description')}>
-               {data.description}
-                <strong className={cx('hashtag')}>
-                    #vietnam
-                </strong>
+                {data.description}
+                <strong className={cx('hashtag')}>#vietnam</strong>
             </span>
             <h4 className={cx('music-tag')}>
                 <MusicNote></MusicNote> {data.music}
             </h4>
             <div className={cx('position-fix')}>
-                <video
-                    className={cx('video-play')}
+                <VideoPlayer
                     src={data.file_url}
-                    controls
                     poster={data.thumb_url}
-                ></video>
+                    ref={videoRef}
+                ></VideoPlayer>
+                <input
+                    className={cx('range-volume')}
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.1}
+                    defaultValue={1}
+                    onChange={(event) => handleVolumeChange(event.target.value)}
+                />
                 <div className={cx('interact')}>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>{data.likes_count}</strong>
+                        <strong className={cx('count-item')}>
+                            {data.likes_count}
+                        </strong>
                     </Button>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
@@ -74,16 +101,27 @@ function VideoItem({ data }) {
                                 icon={faCommentDots}
                             ></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>{data.comments_count}</strong>
+                        <strong className={cx('count-item')}>
+                            {data.comments_count}
+                        </strong>
                     </Button>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
                             <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
                         </span>
-                        <strong className={cx('count-item')}>{data.shares_count}</strong>
+                        <strong className={cx('count-item')}>
+                            {data.shares_count}
+                        </strong>
                     </Button>
                 </div>
             </div>
+            <Button
+                className={cx('btn-playing')}
+                noneBtn
+                onClick={isPlaying ? handlePause : handlePlay}
+            >
+                {isPlaying ? 'pause' : 'play'}
+            </Button>
             <hr className={cx('hr-item')}></hr>
         </div>
     );
