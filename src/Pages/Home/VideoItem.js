@@ -14,31 +14,40 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import VideoPlayer from './VideoPlayer';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
+import { useInView } from 'react-intersection-observer';
 
 function VideoItem({ data }) {
     const cx = classNames.bind(Style);
 
-    const videoRef = useRef(null);
+    const playerRef = useRef(null);
 
-    const handlePlay = () => {
-        videoRef.current.play();
-        setIsPlaying(true);
-    };
+    const [isPlaying, setIsPlaying] = useState(true);
+    const { ref, inView } = useInView({
+        threshold: 0.7,
+        delay: 500,
+    });
 
-    const handlePause = () => {
-        videoRef.current.stop();
-        setIsPlaying(false);
-    };
-
-    const handleVolumeChange = (volume) => {
-        videoRef.current.setVolume(volume);
-    };
-
-    const [isPlaying, setIsPlaying] = useState(false);
+    useEffect(() => {
+        if (inView) {
+            setIsPlaying(true);
+        } else if (!inView) {
+            setIsPlaying(false);
+        }
+    }, [inView]);
 
     return (
         <div className={cx('wrapper')}>
+            {inView ? (
+                <span role="img" aria-label="In view">
+                    ✅
+                </span>
+            ) : (
+                <span role="img" aria-label="Outside the viewport">
+                    ❌
+                </span>
+            )}
             <div className={cx('content')}>
                 <Link>
                     <Image
@@ -71,21 +80,12 @@ function VideoItem({ data }) {
             <h4 className={cx('music-tag')}>
                 <MusicNote></MusicNote> {data.music}
             </h4>
-            <div className={cx('position-fix')}>
+            <div className={cx('position-fix')} ref={ref}>
                 <VideoPlayer
-                    src={data.file_url}
-                    poster={data.thumb_url}
-                    ref={videoRef}
+                    url={data.file_url}
+                    ref={playerRef}
+                    isPlaying={isPlaying}
                 ></VideoPlayer>
-                <input
-                    className={cx('range-volume')}
-                    type="range"
-                    min={0}
-                    max={1}
-                    step={0.1}
-                    defaultValue={1}
-                    onChange={(event) => handleVolumeChange(event.target.value)}
-                />
                 <div className={cx('interact')}>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
@@ -115,13 +115,6 @@ function VideoItem({ data }) {
                     </Button>
                 </div>
             </div>
-            <Button
-                className={cx('btn-playing')}
-                noneBtn
-                onClick={isPlaying ? handlePause : handlePlay}
-            >
-                {isPlaying ? 'pause' : 'play'}
-            </Button>
             <hr className={cx('hr-item')}></hr>
         </div>
     );

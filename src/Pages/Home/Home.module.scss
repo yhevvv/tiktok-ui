@@ -96,12 +96,6 @@
     margin-left: -15px;
 }
 
-.range-volume {
-    transform: rotate(270deg);
-    padding: 0px;
-    margin-left: -12%;
-    margin-bottom: -20%;
-}
 .btn-interact {
     padding-bottom: 40px;
     padding-top: 40px;
@@ -140,19 +134,13 @@
     border-color: rgba(22, 24, 35, 0.12);
     margin: 47px 20px -20px 10px;
 }
-.btn-playing {
-    left: 8%;
-    margin-top: -6%;
-    color: white;
-}
 
 //videoPlayer
 .video-play {
-    min-width: 336px;
-    max-width: 556px;
-    min-height: 314px;
-    max-height: 600px;
+
     margin-left: 67px;
     margin-top: 10px;
     border-radius: 10px;
+    max-width: 600px !important; 
+    height: 50% auto !important;
 }
