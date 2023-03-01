@@ -45,8 +45,10 @@ function Menu({
     };
 
     const handleBack = () => {
-        setHistory((prev) => prev.slice(0, prev.length - 1));
-    };
+        setHistory((prev) =>
+            prev.slice(0, prev.length - 1),
+        );
+    }
 
     return (
         <Tippy
@@ -55,6 +57,7 @@ function Menu({
             placement="bottom-end"
             interactive
             hideOnClick={hideOnClick}
+            offset= {[0, -40]}
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PropperWrapper className={cx('menu-popper')}>

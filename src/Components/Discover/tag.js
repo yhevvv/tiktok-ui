@@ -8,7 +8,7 @@ function Tag({title, icon}) {
     return (
         <div className={cx('wrapper-tag')}>
             <Button text className={cx("btn-tag")}>
-                <span className={cx("icon-tag")}>{icon}</span >
+                <span className={cx("icon-tag")}>{icon}</span>
                 <span className={cx("name-tag")}>{title}</span>
             </Button>
         </div>
