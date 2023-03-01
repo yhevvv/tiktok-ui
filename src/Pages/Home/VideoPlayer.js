@@ -7,17 +7,17 @@ import ReactPlayer from 'react-player';
 const VideoPlayer = React.forwardRef((props, ref) => {
     const cx = classNames.bind(Style);
     return (
-        <ReactPlayer
-            onPlay
-            url={props.url}
-            ref={ref}
-            className={cx('video-play')}
-            controls
-            height={'600px'}
-            width={'500px'}
-            playing={props.isPlaying}
-            volume={'0.2'}
-        ></ReactPlayer>
+        <div className={cx('video-play')}>
+            <ReactPlayer
+                onPlay={props.onPlay}
+                url={props.url}
+                ref={ref}
+                className={cx('video-play')}
+                controls
+                playing={props.isPlaying}
+                volume={props.volume}
+            ></ReactPlayer>
+        </div>
     );
 });
 

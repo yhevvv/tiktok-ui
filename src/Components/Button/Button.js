@@ -91,7 +91,6 @@ Button.propTypes = {
     children: PropTypes.node,
     to: PropTypes.string,
     href: PropTypes.string,
-    children: PropTypes.node.isRequired,
     primary: PropTypes.bool,
     outline: PropTypes.bool,
     onClick: PropTypes.func,

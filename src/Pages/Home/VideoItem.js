@@ -39,15 +39,6 @@ function VideoItem({ data }) {
 
     return (
         <div className={cx('wrapper')}>
-            {inView ? (
-                <span role="img" aria-label="In view">
-                    ✅
-                </span>
-            ) : (
-                <span role="img" aria-label="Outside the viewport">
-                    ❌
-                </span>
-            )}
             <div className={cx('content')}>
                 <Link>
                     <Image
@@ -85,6 +76,7 @@ function VideoItem({ data }) {
                     url={data.file_url}
                     ref={playerRef}
                     isPlaying={isPlaying}
+                    volume={0.2}
                 ></VideoPlayer>
                 <div className={cx('interact')}>
                     <Button noneBtn className={cx('btn-interact')}>
@@ -121,7 +113,21 @@ function VideoItem({ data }) {
 }
 
 VideoItem.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.shape({
+        user: PropTypes.shape({
+            avatar: PropTypes.string.isRequired,
+            first_name: PropTypes.string.isRequired,
+            last_name: PropTypes.string.isRequired,
+            nickname: PropTypes.string.isRequired,
+            tick: PropTypes.bool,
+        }).isRequired,
+        description: PropTypes.string.isRequired,
+        music: PropTypes.string.isRequired,
+        file_url: PropTypes.string.isRequired,
+        likes_count: PropTypes.number.isRequired,
+        comments_count: PropTypes.number.isRequired,
+        shares_count: PropTypes.number.isRequired,
+    }).isRequired,
 };
 
 export default VideoItem;

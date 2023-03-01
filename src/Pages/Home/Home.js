@@ -4,20 +4,22 @@ import Style from './Home.module.scss';
 
 import * as homeService from '~/Service/homeService';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 function Home() {
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
-    const INIT_PAGE = getRandomInt(21);
+
     const TYPE = 'for-you';
     const cx = classNames.bind(Style);
 
     const [videos, setGetVideos] = useState([]);
 
     useEffect(() => {
+        const INIT_PAGE_VIDEO = getRandomInt(21);
         homeService
-            .home(TYPE, INIT_PAGE)
+            .home(TYPE, INIT_PAGE_VIDEO)
             .then((data) => {
                 setGetVideos(data);
             })
@@ -32,5 +34,9 @@ function Home() {
         </div>
     );
 }
+
+Home.propTypes = {
+    data: PropTypes.object
+};
 
 export default Home;
