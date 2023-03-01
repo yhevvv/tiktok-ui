@@ -1,0 +1,16 @@
+page Home: 
+
+scroll top: not work (retry later)
+menu get app
+tippy for avata home
+login
+logout
+like, comment, share (optional)
+
+page profile: not overview
+
+
+page following: not overview
+
+
+page live: not overview
