@@ -3,6 +3,7 @@ page Home:
 scroll top: not work (retry later) 
 menu get app ok
 tippy for avata home ok
+set default volume 0.2
 login
 logout
 like, comment, share (optional)
