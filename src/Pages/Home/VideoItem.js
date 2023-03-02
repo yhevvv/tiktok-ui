@@ -17,6 +17,9 @@ import VideoPlayer from './VideoPlayer';
 import { useState, useRef, useEffect } from 'react';
 
 import { useInView } from 'react-intersection-observer';
+import Tippy from '@tippyjs/react/headless';
+import { Wrapper as PropperWrapper } from '~/Components/Popper';
+import AccountPreview from './AccountPreview';
 
 function VideoItem({ data }) {
     const cx = classNames.bind(Style);
@@ -37,28 +40,49 @@ function VideoItem({ data }) {
         }
     }, [inView]);
 
+    const previewUser = () => {
+        return (
+            <div>
+                <PropperWrapper>
+                    <AccountPreview data={data.user}></AccountPreview>
+                </PropperWrapper>
+            </div>
+        );
+    };
+
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('content')}>
-                <Link>
-                    <Image
-                        className={cx('avatar')}
-                        src={data.user.avatar}
-                        alt={images.NoImage}
-                    ></Image>
-                </Link>
-                <Link className={cx('id_nickname')}>
-                    <h3 className={cx('id')}>
-                        {data.user.first_name} {data.user.last_name}
-                    </h3>
-                    {data.user.tick && (
-                        <FontAwesomeIcon
-                            className={cx('tick')}
-                            icon={faCircleCheck}
-                        ></FontAwesomeIcon>
-                    )}
-                    <h4 className={cx('nickname')}>{data.user.nickname}</h4>
-                </Link>
+            <Tippy
+                render={previewUser}
+                interactive
+                delay={[700, 700]}
+                offset={[0, -5]}
+                placement={'bottom-start'}
+                hideOnClick={true}
+            >
+                <div className={cx('content')}>
+                    <Link>
+                        <Image
+                            className={cx('avatar')}
+                            src={data.user.avatar}
+                            alt={images.NoImage}
+                        ></Image>
+                    </Link>
+                    <Link className={cx('id_nickname')}>
+                        <h3 className={cx('id')}>
+                            {data.user.first_name} {data.user.last_name}
+                        </h3>
+                        {data.user.tick && (
+                            <FontAwesomeIcon
+                                className={cx('tick')}
+                                icon={faCircleCheck}
+                            ></FontAwesomeIcon>
+                        )}
+                        <h4 className={cx('nickname')}>{data.user.nickname}</h4>
+                    </Link>
+                </div>
+            </Tippy>
+            <div className={cx('btn')}>
                 <Button outline className={cx('btn-follow')}>
                     Follow
                 </Button>

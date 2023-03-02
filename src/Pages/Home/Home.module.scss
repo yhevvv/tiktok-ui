@@ -41,6 +41,7 @@
     height: 56px;
     border-radius: 50%;
     cursor: pointer;
+    padding: 4px;
 }
 
 .content {
@@ -79,17 +80,22 @@
     margin-left: 6px;
 }
 
+.btn {
+    margin-top: -50px;
+}
+
 .btn-follow {
-    margin-top: 8px;
     height: 28px;
     font-size: 16px;
+    left: 74%;
+    position: relative;
 }
 
 .description {
     width: 510px;
     display: block;
     padding-left: 67px;
-    margin-top: -33px;
+    margin-top: -15px;
     font-size: 16px;
     font-weight: 400 !important;
 }

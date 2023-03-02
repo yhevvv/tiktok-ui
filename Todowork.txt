@@ -1,8 +1,8 @@
 page Home: 
 
 scroll top: not work (retry later) 
-menu get app ok nhung (fix not hideOnClick)
-tippy for avata home
+menu get app ok
+tippy for avata home ok
 login
 logout
 like, comment, share (optional)
