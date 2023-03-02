@@ -18,14 +18,14 @@ import SuggestedAccounts from '~/Components/SuggestedAccounts';
 import * as userService from '~/Service/userService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
-
+import PopupSign from '../Header/PopupSign';
 
 function Sidebar() {
     const cx = classNames.bind(Style);
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
-      }
+    }
 
     const INIT_PAGE = getRandomInt(4);
     const PER_PAGE = 5;
@@ -37,7 +37,7 @@ function Sidebar() {
         userService
             .getSuggested({ page, perPage: PER_PAGE })
             .then((data) => {
-                setSuggestUsers(prevUsers => [...prevUsers, ...data]); //lay du lieu cu va them du lieu
+                setSuggestUsers((prevUsers) => [...prevUsers, ...data]); //lay du lieu cu va them du lieu
             })
             .catch((error) => console.log(error));
     }, [page]);
@@ -46,7 +46,7 @@ function Sidebar() {
         setPage(page + 1);
     };
 
-
+    const currentUser = false;
 
     return (
         <aside className={cx('wrapper')}>
@@ -71,6 +71,16 @@ function Sidebar() {
                 ></MenuItem>
             </Menu>
             <hr className={cx('hr-item')}></hr>
+            {!currentUser && (
+                <>
+                    <p className={cx('wrapper-login')}>
+                        Log in to follow creators, like videos, and view
+                        comments.
+                    </p>
+                    <PopupSign title={'Log In'}></PopupSign>
+                    <hr className={cx('hr-item')}></hr>
+                </>
+            )}
             <SuggestedAccounts
                 label="Suggested accounts"
                 more="See all"
@@ -80,18 +90,24 @@ function Sidebar() {
             <hr className={cx('hr-item')}></hr>
 
             {/* lam them mot cai followingAccount, tam thoi de cho no giong */}
-            <SuggestedAccounts
-                label="Following accounts"
-                more="See more"
-            ></SuggestedAccounts>
-            <hr className={cx('hr-item')}></hr>
+            {currentUser && (
+                <>
+                    <SuggestedAccounts
+                        label="Following accounts"
+                        more="See more"
+                    ></SuggestedAccounts>
+                    <hr className={cx('hr-item')}></hr>
+                </>
+            )}
 
             <Discover>
-                <Tag title='suthatla' icon={<HashTag></HashTag>}></Tag>
-                <Tag title='Yêu Đơn Phương Là Gì (MEE Remix)' icon={<MusicNote/>}></Tag>
+                <Tag title="suthatla" icon={<HashTag></HashTag>}></Tag>
+                <Tag
+                    title="Yêu Đơn Phương Là Gì (MEE Remix)"
+                    icon={<MusicNote />}
+                ></Tag>
             </Discover>
             <hr className={cx('hr-item')}></hr>
-
         </aside>
     );
 }

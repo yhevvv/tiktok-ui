@@ -1,3 +1,9 @@
+.btn-outline{
+    margin-bottom: 20px;
+    padding: 23px 139px;
+    margin-left: 10px;
+}
+
 .close {
     position: relative;
     left: 90%;
@@ -18,7 +24,8 @@
     text-align: center;
     padding: 0 52px;
 }
-.btn-choice-sign-1, .btn-choice-sign-2 {
+.btn-choice-sign-1,
+.btn-choice-sign-2 {
     font-family: var(--default-font-family);
     font-size: 15px;
     display: flex;
@@ -31,13 +38,11 @@
     padding: 21px 28px;
 }
 
-
-
-.btn-choice-sign-1{
+.btn-choice-sign-1 {
     margin-left: 7px;
 }
 
-.icon{
+.icon {
     position: absolute;
     left: 3%;
     margin-top: -3px;
@@ -49,6 +54,23 @@
     cursor: pointer;
     margin-top: 17px;
     border: 1px solid rgba(22, 24, 35, 0.12);
+}
+
+.policy {
+    text-align: center;
+    font-size: 12px;
+    font-family: var(--default-font-family);
+    color: rgba(22, 24, 35, 0.5);
+    line-height: 15px;
+    padding: 0 52px;
+
+    margin-top: 60px;
+}
+.policy-link {
+    font-size: 12px;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 .sign-up {
     color: rgb(254, 44, 85);
