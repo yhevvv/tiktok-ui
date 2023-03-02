@@ -5,9 +5,12 @@ import Style from './Home.module.scss';
 import * as homeService from '~/Service/homeService';
 import { useEffect, useState } from 'react';
 import Menu from './Menu/Menu'
-import { Computer, MobilePhone } from '~/Components/Icons';
+import { Computer, IconX, MobilePhone } from '~/Components/Icons';
 
 const APP = [
+    {
+        icon: <IconX></IconX>,
+    },
     {
         icon: <Computer />,
         title: 'Get TikTok for desktop',

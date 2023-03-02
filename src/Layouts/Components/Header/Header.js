@@ -33,6 +33,7 @@ import Config from '~/Config';
 import dataLanguage from '~/Layouts/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
+import PopupSign from './PopupSign';
 
 const MEMU_ITEM = [
     {
@@ -126,7 +127,7 @@ function Header() {
 
     const cx = ClassNames.bind(Style);
 
-    const currentUser = true;
+    const currentUser = false;
 
     return (
         <header className={cx('wrapper')}>
@@ -181,10 +182,8 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button text>+ Upload</Button>
-                            <Button primary className={cx('custom-login')}>
-                                Log in
-                            </Button>
+                            <PopupSign title={'+ Upload'}></PopupSign>
+                            <PopupSign title={'Log in'}></PopupSign>
                         </>
                     )}
 

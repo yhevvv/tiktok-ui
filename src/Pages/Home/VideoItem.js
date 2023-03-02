@@ -100,7 +100,7 @@ function VideoItem({ data }) {
                     url={data.file_url}
                     ref={playerRef}
                     isPlaying={isPlaying}
-                    volume={0}
+                    volume={0.2}
                 ></VideoPlayer>
                 <div className={cx('interact')}>
                     <Button noneBtn className={cx('btn-interact')}>
