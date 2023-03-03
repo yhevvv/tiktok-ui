@@ -1,7 +1,8 @@
 import Button from '~/Components/Button';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
-import Style from './FormLogic.module.scss';
+import Style from './Login.module.scss';
+import { CloseEye, OpenEye } from '~/Components/Icons';
 
 function Login() {
     const cx = classNames.bind(Style);
@@ -31,27 +32,35 @@ function Login() {
                 <p className={cx('title')}>Email or username</p>
                 <input
                     type={'text'}
-                    className={cx('input-form')}
+                    className={cx('text-input')}
                     value={inputValueLogin}
                     onChange={handleInputChangeLogin}
                     placeholder={'Email or username'}
                 ></input>
                 <input
                     type={showPassword ? 'text' : 'password'}
-                    className={cx('input-form')}
+                    className={cx('password-input')}
                     value={inputValuePass}
                     onChange={handleInputChangePass}
                     placeholder={'Password'}
                 ></input>
-                <span onClick={handleTogglePassword} className={cx('status-password')}>
-                    {showPassword ? 'Hide' : 'Show'}
+                <span
+                    onClick={handleTogglePassword}
+                    className={cx('status-password')}
+                >
+                    {showPassword ? <CloseEye></CloseEye> : <OpenEye></OpenEye>}
                 </span>
                 <p className={cx('error-logic')}>
                     Username or password doesn't match our records. Try again.
                 </p>
-                <span className={cx('forgot')}>Forgot password?</span>
-                <Button primary disable={!inputValueLogin || !inputValuePass} className={cx('btn-login')}>
-                    Log in
+                <a href="https://www.tiktok.com/login/email/forget-password" className={cx('forgot')}>Forgot password?</a>
+                <br></br>
+                <Button
+                    primary
+                    disable={!inputValueLogin || !inputValuePass}
+                    className={cx('btn-login')}
+                >
+                    Login
                 </Button>
             </form>
         </>

@@ -1,0 +1,79 @@
+//Login
+.form-wrapper {
+}
+.Log-title {
+    text-align: center;
+    color: rgb(22, 24, 35);
+    font-family: var(--name-font-family);
+    font-size: 32px;
+    margin: 16px auto;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+.title {
+    position: relative;
+    left: 10%;
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.text-input, .password-input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 10%;
+    border-radius: 2px;
+    background-color: rgba(22, 24, 35, 0.06);
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    padding-inline-start: 12px;
+    color: rgb(22, 24, 35);
+    line-height: 100%;
+    outline: none;
+    font-size: 16px;
+    height: 44px;
+    caret-color: rgb(254, 44, 85);
+    width: 80%;
+    margin-bottom: 8px;
+}
+.password-input{
+    padding-inline-end: 55px;
+}
+
+.status-password {
+    position: relative;
+    left: 82%;
+    display: flex;
+    margin-top: -8.8%;
+}
+.error-logic {
+    padding: 0px 52px;
+    font-family: var(--default-font-family);
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 22px;
+    margin-left: -3px;
+    color: rgb(255, 76, 58);
+    display: flex;
+    
+}
+.forgot {
+    padding: 0 52px;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 600;
+    font-family: var(--default-font-family);
+    font-size: 12px;
+    display: inline-block;
+    margin-left: -3px;
+
+    &:hover{
+        text-decoration: underline rgba(22, 24, 35, 0.75);
+    }
+}
+.btn-login {
+    position: relative;
+    left: 11%;
+    padding: 22px 187px;
+}
+
+

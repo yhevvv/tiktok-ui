@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 10%;
+}
+.days, .months, .years{
+    width: 120px;
+    height: 44px;
+    margin-right: 12px;
+}
+

@@ -3,7 +3,13 @@ import Button from '~/Components/Button';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Style from './PopupSign.module.scss';
-import { FacebokIcon, GoogleIcon, IconX, UserIcon } from '~/Components/Icons';
+import {
+    FacebokIcon,
+    GoogleIcon,
+    IconX,
+    LeftBack,
+    UserIcon,
+} from '~/Components/Icons';
 import Login from './FormLogic/Login';
 import Signup from './FormLogic/Signup';
 
@@ -112,7 +118,7 @@ function PopupSign({ title }) {
                                         className={cx('back-sign')}
                                         onClick={setHandleLogin}
                                     >
-                                        <IconX></IconX>
+                                        <LeftBack></LeftBack>
                                     </span>
                                     <span
                                         className={cx('close-sign')}
@@ -171,9 +177,9 @@ function PopupSign({ title }) {
                                 <>
                                     <span
                                         className={cx('back-sign')}
-                                        onClick={setHandleLogin}
+                                        onClick={setHandleSignup}
                                     >
-                                        <IconX></IconX>
+                                        <LeftBack></LeftBack>
                                     </span>
                                     <span
                                         className={cx('close-sign')}
@@ -184,18 +190,18 @@ function PopupSign({ title }) {
                                     <Signup></Signup>
                                 </>
                             )}
-                            <p class={cx('policy')}>
+                            <p className={cx('policy')}>
                                 By continuing, you agree to TikTok’s{' '}
                                 <a
                                     href="https://www.tiktok.com/legal/terms-of-use?lang=en"
-                                    class={cx('policy-link')}
+                                    className={cx('policy-link')}
                                 >
                                     Terms of Service
                                 </a>{' '}
                                 and confirm that you have read TikTok’s{' '}
                                 <a
                                     href="https://www.tiktok.com/legal/privacy-policy?lang=en"
-                                    class={cx('policy-link')}
+                                    className={cx('policy-link')}
                                 >
                                     Privacy Policy
                                 </a>

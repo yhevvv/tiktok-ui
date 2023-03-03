@@ -1,8 +1,9 @@
 import Button from '~/Components/Button';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
-import Style from './FormLogic.module.scss';
+import Style from './Signup.module.scss';
 import SelectBirthday from '../SelectBirthday';
+import { CloseEye, OpenEye } from '~/Components/Icons';
 
 function Signin() {
     const cx = classNames.bind(Style);
@@ -28,7 +29,7 @@ function Signin() {
     return (
         <>
             <form className={cx('form-wrapper')}>
-                <h1 className={cx('Log-title')}>Signup</h1>
+                <h1 className={cx('Log-title')}>Sign up</h1>
                 <p className={cx('birthday-title')}>When’s your birthday?</p>
                 <SelectBirthday></SelectBirthday>
                 <p className={cx('birthday-warn')}>
@@ -38,14 +39,14 @@ function Signin() {
                 <p className={cx('title')}>Email</p>
                 <input
                     type={'text'}
-                    className={cx('input-form')}
+                    className={cx('text-input')}
                     value={inputValueLogin}
                     onChange={handleInputChangeLogin}
                     placeholder={'Email address'}
                 ></input>
                 <input
                     type={showPassword ? 'text' : 'password'}
-                    className={cx('input-form')}
+                    className={cx('password-input')}
                     value={inputValuePass}
                     onChange={handleInputChangePass}
                     placeholder={'Password'}
@@ -54,27 +55,31 @@ function Signin() {
                     onClick={handleTogglePassword}
                     className={cx('status-password')}
                 >
-                    {showPassword ? 'Hide' : 'Show'}
+                    {showPassword ? <CloseEye></CloseEye> : <OpenEye></OpenEye>}
                 </span>
-                <p className={cx('condition-wrapper')}>Your password must have:</p>
-                <p className={cx('condition')}>
+                <p className={cx('condition-wrapper')}>
+                    Your password must have:
+                </p>
+                <p className={cx('condition-1')}>
                     {/* icon */} 8 to 20 characters
                 </p>
-                <p className={cx('condition')}>
+                <p className={cx('condition-2')}>
                     {/* icon */} Letters, numbers, and special characters
                 </p>
-
-                <span>
-                    <input type={'checkbox'}></input>Get trending content,
-                    newsletters, promotions, recommendations, and account
-                    updates sent to your email
+                <br></br>
+                <span className={cx('policy')}>
+                    <input className={cx('checkbox')} type={'checkbox'}></input>
+                    <span className={cx('policy-title')}>
+                        Get trending content, newsletters, promotions, recommendations, and account updates sent to your email.
+                    </span>
                 </span>
+                <br></br>
                 <Button
                     primary
                     disable={!inputValueLogin || !inputValuePass}
                     className={cx('btn-login')}
                 >
-                    Sign up
+                    Signup
                 </Button>
             </form>
         </>
