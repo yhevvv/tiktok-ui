@@ -18,7 +18,7 @@ import SuggestedAccounts from '~/Components/SuggestedAccounts';
 import * as userService from '~/Service/userService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
-import PopupSign from '../Header/PopupSign';
+import PopupSign from '../../../Components/PopupSign';
 
 function Sidebar() {
     const cx = classNames.bind(Style);

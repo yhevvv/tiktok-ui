@@ -25,7 +25,6 @@
     }
 }
 
-
 .icon + .title,
 .title + .icon {
     margin-left: 7px;
@@ -37,7 +36,7 @@
     width: 24px;
 }
 
-.title{
+.title {
     justify-content: left;
     display: inline-flex;
 }
@@ -71,12 +70,11 @@
     }
 }
 
-.switchButton{
-    
+.switchButton {
 }
 
 .primary {
-    color: var(--white) !important; 
+    color: var(--white) !important;
     background-color: #fe2c55;
     border-color: var(--primary);
     width: 0;
@@ -91,6 +89,13 @@
     }
 }
 
+.disable {
+    border: none;
+    color: rgba(22, 24, 35, 0.34) !important;
+    background-color: rgba(22, 24, 35, 0.06);
+    pointer-events: none;
+}
+
 .text {
     border: 1px solid rgba(22, 24, 35, 0.12);
     margin-right: 5px;
@@ -100,7 +105,6 @@
         // text-decoration: underline;
     }
 }
-
 
 .noneBtn {
     border: 1px;

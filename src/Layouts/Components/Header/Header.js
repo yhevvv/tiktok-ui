@@ -33,7 +33,7 @@ import Config from '~/Config';
 import dataLanguage from '~/Layouts/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
-import PopupSign from './PopupSign';
+import PopupSign from '../../../Components/PopupSign';
 
 const MEMU_ITEM = [
     {
