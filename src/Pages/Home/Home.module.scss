@@ -1,12 +1,23 @@
 //home
 .wrapper-all {
-    overflow: auto;
     height: 100vh;
+    position: relative;
+    left: 37%;
+
+    @media screen and (max-width: 768px) {
+        left: 0%;
+        .btn-follow {
+            left: 55%;
+        }
+        .description {
+            padding-right: 33%;
+        }
+    }
 }
 
 .getApp-btn {
     font-family: var(--default-font-family);
-    position: absolute;
+    position: fixed;
     min-width: 90px;
     height: 32px;
     top: 95.4%;
@@ -87,7 +98,7 @@
 .btn-follow {
     height: 28px;
     font-size: 16px;
-    left: 74%;
+    left: 46%;
     position: relative;
 }
 
@@ -122,7 +133,8 @@
     align-items: flex-end;
     display: flex;
     flex-direction: column-reverse;
-    margin-left: -171px;
+    position: relative;
+    left: -23.8%;
 }
 
 .btn-interact {
@@ -162,6 +174,7 @@
     height: 1px;
     border-color: rgba(22, 24, 35, 0.12);
     margin: 47px 20px -49px 10px;
+    width: 54.5%;
 }
 
 //videoPlayer
@@ -181,6 +194,6 @@
     margin-left: 35px;
     margin-top: 10px;
     border-radius: 10px;
-    width: 68% !important;
-    height: 65% !important;
+    width: 55% !important;
+    height: 100% !important;
 }

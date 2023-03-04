@@ -15,6 +15,11 @@
     padding: 0px 24px;
     background-color: var(--white);
     box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    position: fixed;
+
+    @media screen and (max-width: 768px) {
+        display: none
+    }
 }
 .inner {
     height: 100%;
