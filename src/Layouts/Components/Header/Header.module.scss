@@ -17,9 +17,6 @@
     box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
     position: fixed;
 
-    @media screen and (max-width: 768px) {
-        display: none
-    }
 }
 .inner {
     height: 100%;
@@ -29,6 +26,12 @@
     justify-content: space-between;
     padding: 0 24px 0 20px;
     top: 0%;
+
+    @media screen and (max-width: 768px) {
+        scale: 46%;
+        position: relative;
+        left: -16%;
+    }
 }
 
 //Action

@@ -70,44 +70,46 @@ function Sidebar() {
                     activeIcon={<LiveIconActive></LiveIconActive>}
                 ></MenuItem>
             </Menu>
-            <hr className={cx('hr-item')}></hr>
-            {!currentUser && (
-                <>
-                    <p className={cx('wrapper-login')}>
-                        Log in to follow creators, like videos, and view
-                        comments.
-                    </p>
-                    <PopupSign title={'Log In'}></PopupSign>
-                    <hr className={cx('hr-item')}></hr>
-                </>
-            )}
-            <SuggestedAccounts
-                label="Suggested accounts"
-                more="See all"
-                data={suggestedUsers}
-                onSeeAll={handleSeeAll}
-            ></SuggestedAccounts>
-            <hr className={cx('hr-item')}></hr>
+            <div className={cx('mobile-fixed')}>
+                <hr className={cx('hr-item')}></hr>
+                {!currentUser && (
+                    <>
+                        <p className={cx('wrapper-login')}>
+                            Log in to follow creators, like videos, and view
+                            comments.
+                        </p>
+                        <PopupSign title={'Log In'}></PopupSign>
+                        <hr className={cx('hr-item')}></hr>
+                    </>
+                )}
+                <SuggestedAccounts
+                    label="Suggested accounts"
+                    more="See all"
+                    data={suggestedUsers}
+                    onSeeAll={handleSeeAll}
+                ></SuggestedAccounts>
+                <hr className={cx('hr-item')}></hr>
 
-            {/* lam them mot cai followingAccount, tam thoi de cho no giong */}
-            {currentUser && (
-                <>
-                    <SuggestedAccounts
-                        label="Following accounts"
-                        more="See more"
-                    ></SuggestedAccounts>
-                    <hr className={cx('hr-item')}></hr>
-                </>
-            )}
+                {/* lam them mot cai followingAccount, tam thoi de cho no giong */}
+                {currentUser && (
+                    <>
+                        <SuggestedAccounts
+                            label="Following accounts"
+                            more="See more"
+                        ></SuggestedAccounts>
+                        <hr className={cx('hr-item')}></hr>
+                    </>
+                )}
 
-            <Discover>
-                <Tag title="suthatla" icon={<HashTag></HashTag>}></Tag>
-                <Tag
-                    title="Yêu Đơn Phương Là Gì (MEE Remix)"
-                    icon={<MusicNote />}
-                ></Tag>
-            </Discover>
-            <hr className={cx('hr-item')}></hr>
+                <Discover>
+                    <Tag title="suthatla" icon={<HashTag></HashTag>}></Tag>
+                    <Tag
+                        title="Yêu Đơn Phương Là Gì (MEE Remix)"
+                        icon={<MusicNote />}
+                    ></Tag>
+                </Discover>
+                <hr className={cx('hr-item')}></hr>
+            </div>
         </aside>
     );
 }

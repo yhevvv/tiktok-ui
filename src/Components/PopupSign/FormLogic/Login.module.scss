@@ -8,7 +8,7 @@
     font-size: 32px;
     margin: 16px auto;
     font-weight: bold;
-    overflow-wrap: break-word;
+    overflow-y-wrap: break-word;
 }
 .title {
     position: relative;
@@ -18,7 +18,8 @@
     font-size: 15px;
     margin-bottom: 5px;
 }
-.text-input, .password-input {
+.text-input,
+.password-input {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -36,7 +37,7 @@
     width: 80%;
     margin-bottom: 8px;
 }
-.password-input{
+.password-input {
     padding-inline-end: 55px;
 }
 
@@ -55,7 +56,6 @@
     margin-left: -3px;
     color: rgb(255, 76, 58);
     display: flex;
-    
 }
 .forgot {
     padding: 0 52px;
@@ -66,7 +66,7 @@
     display: inline-block;
     margin-left: -3px;
 
-    &:hover{
+    &:hover {
         text-decoration: underline rgba(22, 24, 35, 0.75);
     }
 }
@@ -75,5 +75,3 @@
     left: 11%;
     padding: 22px 187px;
 }
-
-

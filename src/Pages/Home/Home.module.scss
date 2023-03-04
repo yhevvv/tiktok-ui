@@ -5,9 +5,10 @@
     left: 37%;
 
     @media screen and (max-width: 768px) {
-        left: 0%;
+        left: 6%;
         .btn-follow {
-            left: 55%;
+            left: 45%;
+            scale: 80%;
         }
         .description {
             padding-right: 33%;
