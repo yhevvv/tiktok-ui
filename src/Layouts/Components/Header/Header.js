@@ -14,6 +14,8 @@ import {
 import Tippy from '@tippyjs/react';
 import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 import { Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 import Style from './Header.module.scss';
 import Button from '~/Components/Button';
@@ -29,13 +31,14 @@ import images from '~/assets/images';
 import ImageC from '~/Components/Image';
 import Search from '~/Layouts/Components/Search';
 import Config from '~/Config';
+import { dataContext } from '~/Components/PopupSign/dataContext';
 
 import dataLanguage from '~/Layouts/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
 import PopupSign from '../../../Components/PopupSign';
 
-const MEMU_ITEM = [
+const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faEarthAmerica}></FontAwesomeIcon>,
         title: 'Language',
@@ -114,6 +117,21 @@ const USER_MENU = [
 ];
 
 function Header() {
+    const [isCheckUser, setisCheckUser] = useState([]);
+
+    const [data, setData] = useState();
+
+    const dataArray = useContext(dataContext);
+
+    useEffect(() => {
+        if (dataContext !== []) {
+            setisCheckUser(dataArray);
+        }
+        const dataCookie = JSON.parse(Cookies.get('dataUser'));
+        setData(dataCookie);
+        setisCheckUser(dataCookie);
+    }, [dataArray, isCheckUser]);
+
     //handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -125,9 +143,14 @@ function Header() {
         }
     };
 
+    //Cookies.set('dataUser', null); //cleardata
+
     const cx = ClassNames.bind(Style);
 
-    const currentUser = false;
+    const currentUser = data === null ? false : true;
+
+    //console.log(data)
+    // console.log(currentUser);
 
     return (
         <header className={cx('wrapper')}>
@@ -188,7 +211,7 @@ function Header() {
                     )}
 
                     <Menu
-                        items={currentUser ? USER_MENU : MEMU_ITEM}
+                        items={currentUser ? USER_MENU : MENU_ITEM}
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
@@ -197,7 +220,7 @@ function Header() {
                                 alt="User"
                                 //src=''
                                 src={images.avatar1}
-                                // fallback= {images.avatar2}
+                                fallback={images.avatar2}
                             ></ImageC>
                         ) : (
                             <button className={cx('menu-btn')}>

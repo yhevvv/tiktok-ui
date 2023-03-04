@@ -3,6 +3,11 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Style from './Login.module.scss';
 import { CloseEye, OpenEye } from '~/Components/Icons';
+import { dataContext } from '~/Components/PopupSign/dataContext';
+import Cookies from 'js-cookie';
+
+import * as loginsService from '~/Service/loginsService.js';
+import Header from '~/Layouts/Components/Header';
 
 function Login() {
     const cx = classNames.bind(Style);
@@ -12,6 +17,7 @@ function Login() {
     const [inputValuePass, setInputValuePass] = useState('');
     //logic show/hide password
     const [showPassword, setShowPassword] = useState(false);
+    const [dataUser, setDataUser] = useState([]);
 
     //logic btn log in
     function handleInputChangeLogin(event) {
@@ -25,8 +31,37 @@ function Login() {
         setInputValuePass(event.target.value);
     }
 
+    const setEmail = inputValueLogin;
+    const setPassword = inputValuePass;
+
+    // console.log(dataUser);
+
+    const HandleLogin = async (event) => {
+        event.preventDefault();
+        const data = await loginsService.login({
+            email: setEmail,
+            password: setPassword,
+        });
+        if (data === undefined) {
+            setDataUser(undefined);
+        }
+        if (data != null) {
+            Cookies.set('dataUser', JSON.stringify(data));
+            setDataUser(data);
+            await new Promise((resolve) => setTimeout(resolve, 2500));
+            window.location.reload();
+        }
+    };
     return (
         <>
+            {dataUser && (
+                <dataContext.Provider value={dataUser}>
+                    <div className={cx('header-display')}>
+                        <Header></Header>
+                    </div>
+                </dataContext.Provider>
+            )}
+
             <form className={cx('form-wrapper')}>
                 <h1 className={cx('Log-title')}>Log in</h1>
                 <p className={cx('title')}>Email or username</p>
@@ -50,15 +85,26 @@ function Login() {
                 >
                     {showPassword ? <CloseEye></CloseEye> : <OpenEye></OpenEye>}
                 </span>
-                <p className={cx('error-logic')}>
-                    Username or password doesn't match our records. Try again.
-                </p>
-                <a href="https://www.tiktok.com/login/email/forget-password" className={cx('forgot')}>Forgot password?</a>
+                {dataUser ? (
+                    <p className={cx('error-logic')}></p>
+                ) : (
+                    <p className={cx('error-logic')}>
+                        Username or password doesn't match our records. Try
+                        again.
+                    </p>
+                )}
+                <a
+                    href="https://www.tiktok.com/login/email/forget-password"
+                    className={cx('forgot')}
+                >
+                    Forgot password?
+                </a>
                 <br></br>
                 <Button
                     primary
                     disable={!inputValueLogin || !inputValuePass}
                     className={cx('btn-login')}
+                    onClick={HandleLogin}
                 >
                     Login
                 </Button>

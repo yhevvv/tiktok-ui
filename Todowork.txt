@@ -10,7 +10,7 @@ set default volume 0.2: ok
 login-signup:
 login:
     giao dien login: ok
-    giao dien dang nhap o trong dang nhap email:
+    giao dien dang nhap o trong dang nhap email: (fix loi menu da cap khong chuyen huong)
     logic login:
 signup:
     giao dien signup: ok

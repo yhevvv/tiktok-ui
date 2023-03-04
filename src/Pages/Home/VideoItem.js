@@ -52,36 +52,40 @@ function VideoItem({ data }) {
 
     return (
         <div className={cx('wrapper')}>
-            <Tippy
-                render={previewUser}
-                interactive
-                delay={[700, 700]}
-                offset={[0, -5]}
-                placement={'bottom-start'}
-                hideOnClick={true}
-            >
-                <div className={cx('content')}>
-                    <Link>
-                        <Image
-                            className={cx('avatar')}
-                            src={data.user.avatar}
-                            alt={images.NoImage}
-                        ></Image>
-                    </Link>
-                    <Link className={cx('id_nickname')}>
-                        <h3 className={cx('id')}>
-                            {data.user.first_name} {data.user.last_name}
-                        </h3>
-                        {data.user.tick && (
-                            <FontAwesomeIcon
-                                className={cx('tick')}
-                                icon={faCircleCheck}
-                            ></FontAwesomeIcon>
-                        )}
-                        <h4 className={cx('nickname')}>{data.user.nickname}</h4>
-                    </Link>
-                </div>
-            </Tippy>
+            <div>
+                <Tippy
+                    render={previewUser}
+                    interactive
+                    delay={[700, 700]}
+                    offset={[0, -5]}
+                    placement={'bottom-start'}
+                    hideOnClick={true}
+                >
+                    <div className={cx('content')}>
+                        <Link>
+                            <Image
+                                className={cx('avatar')}
+                                src={data.user.avatar}
+                                alt={images.NoImage}
+                            ></Image>
+                        </Link>
+                        <Link className={cx('id_nickname')}>
+                            <h3 className={cx('id')}>
+                                {data.user.first_name} {data.user.last_name}
+                            </h3>
+                            {data.user.tick && (
+                                <FontAwesomeIcon
+                                    className={cx('tick')}
+                                    icon={faCircleCheck}
+                                ></FontAwesomeIcon>
+                            )}
+                            <h4 className={cx('nickname')}>
+                                {data.user.nickname}
+                            </h4>
+                        </Link>
+                    </div>
+                </Tippy>
+            </div>
             <div className={cx('btn')}>
                 <Button outline className={cx('btn-follow')}>
                     Follow

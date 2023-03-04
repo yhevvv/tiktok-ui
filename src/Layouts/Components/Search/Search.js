@@ -61,13 +61,10 @@ function Search() {
 
     const handleSearchValue = (e) => {
         setSearchValue(e.target.value);
-
-        // if (!setSearchValue.startWith(` `)){
-        //     setSearchValue(searchValue);
-        // }
     };
 
-    return (   //fix warning tippy using div
+    return (
+        //fix warning tippy using div
         <div>
             <HeadlessTippy
                 visible={showResult && searchResult.length > 0}
@@ -124,6 +121,5 @@ function Search() {
         </div>
     );
 }
- 
 
 export default Search;

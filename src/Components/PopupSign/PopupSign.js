@@ -12,6 +12,7 @@ import {
 } from '~/Components/Icons';
 import Login from './FormLogic/Login';
 import Signup from './FormLogic/Signup';
+import PropTypes from 'prop-types';
 
 function PopupSign({ title }) {
     var cx = classNames.bind(Style);
@@ -228,5 +229,11 @@ function PopupSign({ title }) {
         </div>
     );
 }
+
+PopupSign.propTypes = {
+    title: PropTypes.string,
+    setEmail: PropTypes.func,
+    setPassword: PropTypes.func,
+};
 
 export default PopupSign;

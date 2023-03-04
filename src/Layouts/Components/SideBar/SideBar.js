@@ -15,7 +15,7 @@ import {
     MusicNote,
 } from '~/Components/Icons';
 import SuggestedAccounts from '~/Components/SuggestedAccounts';
-import * as userService from '~/Service/userService';
+import * as userService from '~/Service/videosService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
 import PopupSign from '../../../Components/PopupSign';
