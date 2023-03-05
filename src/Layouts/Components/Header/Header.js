@@ -111,15 +111,13 @@ const USER_MENU = [
             <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
         ),
         title: 'Log out',
-        to: '/logout',
+        to: null,
         separate: true,
     },
 ];
 
 function Header() {
-    const [isCheckUser, setisCheckUser] = useState([]);
-
-    const [data, setData] = useState();
+    const [isCheckUser, setisCheckUser] = useState(null);
 
     const dataArray = useContext(dataContext);
 
@@ -127,30 +125,35 @@ function Header() {
         if (dataContext !== []) {
             setisCheckUser(dataArray);
         }
-        const dataCookie = JSON.parse(Cookies.get('dataUser'));
-        setData(dataCookie);
-        setisCheckUser(dataCookie);
-    }, [dataArray, isCheckUser]);
+        const dataCookie = Cookies.get('dataUser');
+        if (dataCookie) {
+            try {
+                const parsedData = JSON.parse(dataCookie);
+                setisCheckUser(parsedData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setTimeout(2500);
+                window.location.reload();
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const currentUser = isCheckUser === null ? false : true;
+    //console.log(currentUser ? USER_MENU : MENU_ITEM);
+    const items = !currentUser ? USER_MENU : MENU_ITEM //bug
 
     //handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
                 break;
-
             default:
                 break;
         }
     };
 
-    //Cookies.set('dataUser', null); //cleardata
-
     const cx = ClassNames.bind(Style);
-
-    const currentUser = data === null ? false : true;
-
-    //console.log(data)
-    // console.log(currentUser);
 
     return (
         <header className={cx('wrapper')}>
@@ -211,7 +214,7 @@ function Header() {
                     )}
 
                     <Menu
-                        items={currentUser ? USER_MENU : MENU_ITEM}
+                        items={items}
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
@@ -219,8 +222,8 @@ function Header() {
                                 className={cx('user-avatar')}
                                 alt="User"
                                 //src=''
-                                src={images.avatar1}
-                                fallback={images.avatar2}
+                                src={isCheckUser.avatar}
+                                fallback={images.NoImage}
                             ></ImageC>
                         ) : (
                             <button className={cx('menu-btn')}>

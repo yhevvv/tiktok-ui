@@ -34,24 +34,24 @@ function Login() {
     const setEmail = inputValueLogin;
     const setPassword = inputValuePass;
 
-    // console.log(dataUser);
-
     const HandleLogin = async (event) => {
         event.preventDefault();
         const data = await loginsService.login({
             email: setEmail,
             password: setPassword,
         });
-        if (data === undefined) {
-            setDataUser(undefined);
-        }
-        if (data != null) {
+
+        if (data !== undefined && data !== null) {
             Cookies.set('dataUser', JSON.stringify(data));
             setDataUser(data);
             await new Promise((resolve) => setTimeout(resolve, 2500));
             window.location.reload();
+        } else {
+            setDataUser(null);
         }
+        console.log(dataUser);
     };
+
     return (
         <>
             {dataUser && (
@@ -86,7 +86,7 @@ function Login() {
                     {showPassword ? <CloseEye></CloseEye> : <OpenEye></OpenEye>}
                 </span>
                 {dataUser ? (
-                    <p className={cx('error-logic')}></p>
+                    <p className={cx('true-logic')}></p>
                 ) : (
                     <p className={cx('error-logic')}>
                         Username or password doesn't match our records. Try

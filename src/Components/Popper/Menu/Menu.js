@@ -7,6 +7,7 @@ import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
 
 const cx = classNames.bind(Style);
 
@@ -26,6 +27,7 @@ function Menu({
     const renderItem = () => {
         return current.data.map((items, index) => {
             const isParent = !!items.children; //!! chuyen dang boolean
+            const logicLogOut = !!items.separate;
             return (
                 <MenuItem
                     key={index}
@@ -33,6 +35,13 @@ function Menu({
                     onClick={() => {
                         if (isParent) {
                             setHistory((prev) => [...prev, items.children]);
+                        } else onChange(items);
+                        if (logicLogOut) {
+                            Cookies.set('dataUser', null);
+                            setTimeout(() => {
+                                // eslint-disable-next-line no-restricted-globals
+                                location.reload();
+                            }, 2000);
                         } else onChange(items);
                     }}
                 ></MenuItem>
