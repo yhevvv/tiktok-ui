@@ -15,9 +15,10 @@ import {
     HashTag,
     MusicNote,
 } from '~/Components/Icons';
+
 import SuggestedAccounts from '~/Components/SuggestedAccounts';
 
-import * as userService from '~/Service/videosService';
+import * as userService from '~/Service/suggestedService';
 import * as followingAccountsService from '~/Service/followingAccountsService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
@@ -28,15 +29,15 @@ function Sidebar() {
     const cx = classNames.bind(Style);
 
     function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
+        return Math.floor(Math.random() * max) + 1;
     }
 
-    const INIT_PAGE_SUGGEST = getRandomInt(10);
-    const INIT_PAGE_FOLLOWING = getRandomInt(1, 4);
+    const INIT_PAGE_SUGGEST = getRandomInt(20);
+    const INIT_FOLLOWING = getRandomInt(4);
     const PER_PAGE = 5;
 
+    const [pageFollowing, setPageFollowing] = useState(INIT_FOLLOWING);
     const [pageSuggest, setPageSuggest] = useState(INIT_PAGE_SUGGEST);
-    const [pageFollowing, setPageFollowing] = useState(INIT_PAGE_FOLLOWING);
 
     const [suggestedUsers, setSuggestUsers] = useState([]);
     const [followingUsers, setFollowingUsers] = useState([]);
@@ -45,7 +46,7 @@ function Sidebar() {
 
     useLayoutEffect(() => {
         userService
-            .getSuggested({ pageSuggest, perPage: PER_PAGE })
+            .getSuggested({ page: pageSuggest, perPage: PER_PAGE })
             .then((data) => {
                 setSuggestUsers((prevUsers) => [...prevUsers, ...data]); //lay du lieu cu va them du lieu
             })
@@ -61,11 +62,11 @@ function Sidebar() {
                 setisCheckUser(parsedData);
                 const isToken = parsedData.meta.token;
                 followingAccountsService
-                    .followingAccount({ pageFollowing }, isToken)
-                    .then((data) => {
-                        setFollowingUsers((prevUsers) => [
-                            ...prevUsers,
-                            ...data,
+                    .followingAccount({ page: pageFollowing, token: isToken })
+                    .then((data2) => {
+                        setFollowingUsers((prevFollowing) => [
+                            ...prevFollowing,
+                            ...data2,
                         ]); //lay du lieu cu va them du lieu
                     })
                     .catch((error) => console.log(error));
@@ -76,13 +77,8 @@ function Sidebar() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageSuggest]);
 
-    console.log(pageSuggest);
-
-    const getSuggestedhandleSeeAll = () => {
+    const getSuggestedHandleSeeAll = (moreItem) => {
         setPageSuggest(pageSuggest + 1);
-    };
-
-    const followingAccountsServicehandleSeeAll = () => {
         setPageFollowing(pageFollowing + 1);
     };
 
@@ -114,33 +110,33 @@ function Sidebar() {
             <div className={cx('mobile-fixed')}>
                 <hr className={cx('hr-item')}></hr>
                 {!currentUser && (
-                    <>
+                    <div>
                         <p className={cx('wrapper-login')}>
                             Log in to follow creators, like videos, and view
                             comments.
                         </p>
                         <PopupSign title={'Log In'}></PopupSign>
                         <hr className={cx('hr-item')}></hr>
-                    </>
+                    </div>
                 )}
                 <SuggestedAccounts
                     label="Suggested accounts"
                     more="See all"
                     data={suggestedUsers}
-                    onSeeAll={getSuggestedhandleSeeAll}
+                    onClick={getSuggestedHandleSeeAll}
                 ></SuggestedAccounts>
                 <hr className={cx('hr-item')}></hr>
 
                 {currentUser && (
-                    <>
+                    <div>
                         <SuggestedAccounts
                             label="Following accounts"
                             more="See more"
                             data={followingUsers}
-                            onSeeAll={followingAccountsServicehandleSeeAll}
+                            onClick={getSuggestedHandleSeeAll}
                         ></SuggestedAccounts>
                         <hr className={cx('hr-item')}></hr>
-                    </>
+                    </div>
                 )}
 
                 <Discover>

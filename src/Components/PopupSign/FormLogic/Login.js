@@ -35,8 +35,8 @@ function Login() {
     const setEmail = inputValueLogin;
     const setPassword = inputValuePass;
 
-    const dataDebounce = useDebounce(setEmail, 500)
-    const dataPass = useDebounce(setPassword, 500)
+    const dataDebounce = useDebounce(setEmail, 200)
+    const dataPass = useDebounce(setPassword, 100)
 
     const HandleLogin = async (event) => {
         event.preventDefault();
