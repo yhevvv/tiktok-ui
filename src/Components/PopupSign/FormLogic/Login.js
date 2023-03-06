@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 
 import * as loginsService from '~/Service/loginsService.js';
 import Header from '~/Layouts/Components/Header';
+import { useDebounce } from '~/hooks';
 
 function Login() {
     const cx = classNames.bind(Style);
@@ -34,13 +35,16 @@ function Login() {
     const setEmail = inputValueLogin;
     const setPassword = inputValuePass;
 
+    const dataDebounce = useDebounce(setEmail, 500)
+    const dataPass = useDebounce(setPassword, 500)
+
     const HandleLogin = async (event) => {
         event.preventDefault();
         const data = await loginsService.login({
-            email: setEmail,
-            password: setPassword,
+            email: dataDebounce,
+            password: dataPass,
         });
-
+        
         if (data !== undefined && data !== null) {
             Cookies.set('dataUser', JSON.stringify(data));
             setDataUser(data);

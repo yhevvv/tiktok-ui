@@ -203,9 +203,7 @@ function Header() {
                                 <ImageC
                                     className={cx('user-avatar')}
                                     alt="User"
-                                    //src=''
-                                    src={isCheckUser.data.avatar}
-                                    fallback={images.NoImage}
+                                    src={isCheckUser?.data?.avatar}
                                 ></ImageC>
                             </Menu>
                         </>

@@ -1,6 +1,6 @@
 import Popup from 'reactjs-popup';
 import Button from '~/Components/Button';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import Style from './PopupSign.module.scss';
 import {
@@ -39,6 +39,7 @@ function PopupSign({ title }) {
     const toggleHandleLogin = () => {
         setHandleLogin(!handleLogin);
     };
+
     const toggleHandleSignup = () => {
         setHandleSignup(!handleSignup);
     };
@@ -236,4 +237,4 @@ PopupSign.propTypes = {
     setPassword: PropTypes.func,
 };
 
-export default PopupSign;
+export default React.memo(PopupSign);
