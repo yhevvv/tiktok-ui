@@ -12,7 +12,7 @@ login:
     giao dien login: ok
     giao dien dang nhap o trong dang nhap email: ok
     logic login: ok
-    following suggestedUsers Account in sidebar:
+    following suggestedUsers Account in sidebar: (fix bug trung API khi goi ca suggest va following o sidebar)
 signup:
     giao dien signup: ok
     giao dien dang nhap o trong dang nhap email:

@@ -1,11 +1,11 @@
 import * as Request from '~/Utils/httpRequest';
 
-export const getSuggested = async ({ page, perPage }) => {
+export const followingAccount = async (page, token) => {
     try {
-        const res = await Request.get(`users/suggested`, {
+        const res = await Request.get(`me/followings`, {
             params: {
                 page,
-                per_page: perPage,
+                token: token,
             },
         }); //api
         return res.data;

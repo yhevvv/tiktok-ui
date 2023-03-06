@@ -140,7 +140,6 @@ function Header() {
 
     const currentUser = isCheckUser === null ? false : true;
 
-
     //handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -205,7 +204,7 @@ function Header() {
                                     className={cx('user-avatar')}
                                     alt="User"
                                     //src=''
-                                    src={isCheckUser.avatar}
+                                    src={isCheckUser.data.avatar}
                                     fallback={images.NoImage}
                                 ></ImageC>
                             </Menu>

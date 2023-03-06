@@ -16,7 +16,9 @@ import {
     MusicNote,
 } from '~/Components/Icons';
 import SuggestedAccounts from '~/Components/SuggestedAccounts';
+
 import * as userService from '~/Service/videosService';
+import * as followingAccountsService from '~/Service/followingAccountsService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
 import PopupSign from '~/Components/PopupSign';
@@ -29,47 +31,62 @@ function Sidebar() {
         return Math.floor(Math.random() * max);
     }
 
-    const INIT_PAGE = getRandomInt(20);
+    const INIT_PAGE_SUGGEST = getRandomInt(10);
+    const INIT_PAGE_FOLLOWING = getRandomInt(1, 4);
     const PER_PAGE = 5;
 
-    const [page, setPage] = useState(INIT_PAGE);
+    const [pageSuggest, setPageSuggest] = useState(INIT_PAGE_SUGGEST);
+    const [pageFollowing, setPageFollowing] = useState(INIT_PAGE_FOLLOWING);
+
     const [suggestedUsers, setSuggestUsers] = useState([]);
+    const [followingUsers, setFollowingUsers] = useState([]);
+
+    const [isCheckUser, setisCheckUser] = useState(null);
 
     useLayoutEffect(() => {
         userService
-            .getSuggested({ page, perPage: PER_PAGE })
+            .getSuggested({ pageSuggest, perPage: PER_PAGE })
             .then((data) => {
                 setSuggestUsers((prevUsers) => [...prevUsers, ...data]); //lay du lieu cu va them du lieu
             })
             .catch((error) => console.log(error));
-    }, [page]);
 
-    const handleSeeAll = () => {
-        setPage(page + 1);
-    };
-
-    const [isCheckUser, setisCheckUser] = useState(null);
-
-    const dataArray = useContext(dataContext);
-
-    useLayoutEffect(() => {
         if (dataContext !== []) {
             setisCheckUser(dataArray);
         }
         const dataCookie = Cookies.get('dataUser');
-        if (dataCookie) {
+        if (dataCookie || dataCookie != null) {
             try {
                 const parsedData = JSON.parse(dataCookie);
                 setisCheckUser(parsedData);
+                const isToken = parsedData.meta.token;
+                followingAccountsService
+                    .followingAccount({ pageFollowing }, isToken)
+                    .then((data) => {
+                        setFollowingUsers((prevUsers) => [
+                            ...prevUsers,
+                            ...data,
+                        ]); //lay du lieu cu va them du lieu
+                    })
+                    .catch((error) => console.log(error));
             } catch (error) {
-                console.error('Error parsing JSON:', error);
-                setTimeout(2500);
-                window.location.reload();
+                //console.error('Error parsing JSON:', error); //is always null for data cookie
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [pageSuggest]);
 
+    console.log(pageSuggest);
+
+    const getSuggestedhandleSeeAll = () => {
+        setPageSuggest(pageSuggest + 1);
+    };
+
+    const followingAccountsServicehandleSeeAll = () => {
+        setPageFollowing(pageFollowing + 1);
+    };
+
+    const dataArray = useContext(dataContext);
     const currentUser = isCheckUser === null ? false : true;
 
     return (
@@ -110,16 +127,17 @@ function Sidebar() {
                     label="Suggested accounts"
                     more="See all"
                     data={suggestedUsers}
-                    onSeeAll={handleSeeAll}
+                    onSeeAll={getSuggestedhandleSeeAll}
                 ></SuggestedAccounts>
                 <hr className={cx('hr-item')}></hr>
 
-                {/* lam them mot cai followingAccount, tam thoi de cho no giong */}
                 {currentUser && (
                     <>
                         <SuggestedAccounts
                             label="Following accounts"
                             more="See more"
+                            data={followingUsers}
+                            onSeeAll={followingAccountsServicehandleSeeAll}
                         ></SuggestedAccounts>
                         <hr className={cx('hr-item')}></hr>
                     </>
