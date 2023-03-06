@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect, useContext } from 'react';
 import classNames from 'classnames/bind';
+import Cookies from 'js-cookie';
 
 import config from '~/Config';
 import Style from './Sidebar.module.scss';
@@ -18,7 +19,8 @@ import SuggestedAccounts from '~/Components/SuggestedAccounts';
 import * as userService from '~/Service/videosService';
 import Discover from '~/Components/Discover';
 import Tag from '~/Components/Discover/tag';
-import PopupSign from '../../../Components/PopupSign';
+import PopupSign from '~/Components/PopupSign';
+import { dataContext } from '~/Components/PopupSign/dataContext';
 
 function Sidebar() {
     const cx = classNames.bind(Style);
@@ -27,13 +29,13 @@ function Sidebar() {
         return Math.floor(Math.random() * max);
     }
 
-    const INIT_PAGE = getRandomInt(4);
+    const INIT_PAGE = getRandomInt(20);
     const PER_PAGE = 5;
 
     const [page, setPage] = useState(INIT_PAGE);
     const [suggestedUsers, setSuggestUsers] = useState([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         userService
             .getSuggested({ page, perPage: PER_PAGE })
             .then((data) => {
@@ -46,7 +48,29 @@ function Sidebar() {
         setPage(page + 1);
     };
 
-    const currentUser = false;
+    const [isCheckUser, setisCheckUser] = useState(null);
+
+    const dataArray = useContext(dataContext);
+
+    useLayoutEffect(() => {
+        if (dataContext !== []) {
+            setisCheckUser(dataArray);
+        }
+        const dataCookie = Cookies.get('dataUser');
+        if (dataCookie) {
+            try {
+                const parsedData = JSON.parse(dataCookie);
+                setisCheckUser(parsedData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                setTimeout(2500);
+                window.location.reload();
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const currentUser = isCheckUser === null ? false : true;
 
     return (
         <aside className={cx('wrapper')}>

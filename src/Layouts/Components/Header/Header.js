@@ -14,7 +14,7 @@ import {
 import Tippy from '@tippyjs/react';
 import ClassNames from 'classnames/bind'; ///them dau - khi dat ten classname
 import { Link } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useLayoutEffect } from 'react';
 import Cookies from 'js-cookie';
 
 import Style from './Header.module.scss';
@@ -32,7 +32,6 @@ import ImageC from '~/Components/Image';
 import Search from '~/Layouts/Components/Search';
 import Config from '~/Config';
 import { dataContext } from '~/Components/PopupSign/dataContext';
-
 import dataLanguage from '~/Layouts/Components/Header/dataLanguage.json';
 
 import 'tippy.js/dist/tippy.css';
@@ -121,7 +120,7 @@ function Header() {
 
     const dataArray = useContext(dataContext);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (dataContext !== []) {
             setisCheckUser(dataArray);
         }
@@ -140,8 +139,7 @@ function Header() {
     }, []);
 
     const currentUser = isCheckUser === null ? false : true;
-    //console.log(currentUser ? USER_MENU : MENU_ITEM);
-    const items = !currentUser ? USER_MENU : MENU_ITEM //bug
+
 
     //handle logic
     const handleMenuChange = (menuItem) => {
@@ -161,11 +159,8 @@ function Header() {
                 <Link to={Config.routes.root}>
                     <img src={images.logo} alt="TikTok"></img>
                 </Link>
-
                 <Search></Search>
-
                 <div className={cx('action')}>
-                    {/* dang nhap hoac guest */}
                     {currentUser ? (
                         <>
                             <Button text>+ Upload</Button>
@@ -205,34 +200,29 @@ function Header() {
                                     <IconNotification></IconNotification>
                                 </button>
                             </Tippy>
+                            <Menu items={USER_MENU} onChange={handleMenuChange}>
+                                <ImageC
+                                    className={cx('user-avatar')}
+                                    alt="User"
+                                    //src=''
+                                    src={isCheckUser.avatar}
+                                    fallback={images.NoImage}
+                                ></ImageC>
+                            </Menu>
                         </>
                     ) : (
                         <>
                             <PopupSign title={'+ Upload'}></PopupSign>
                             <PopupSign title={'Log in'}></PopupSign>
+                            <Menu items={MENU_ITEM} onChange={handleMenuChange}>
+                                <button className={cx('menu-btn')}>
+                                    <FontAwesomeIcon
+                                        icon={faEllipsisVertical}
+                                    ></FontAwesomeIcon>
+                                </button>
+                            </Menu>
                         </>
                     )}
-
-                    <Menu
-                        items={items}
-                        onChange={handleMenuChange}
-                    >
-                        {currentUser ? (
-                            <ImageC
-                                className={cx('user-avatar')}
-                                alt="User"
-                                //src=''
-                                src={isCheckUser.avatar}
-                                fallback={images.NoImage}
-                            ></ImageC>
-                        ) : (
-                            <button className={cx('menu-btn')}>
-                                <FontAwesomeIcon
-                                    icon={faEllipsisVertical}
-                                ></FontAwesomeIcon>
-                            </button>
-                        )}
-                    </Menu>
                 </div>
             </div>
         </header>
