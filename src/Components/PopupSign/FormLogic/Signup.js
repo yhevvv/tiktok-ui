@@ -1,9 +1,9 @@
 import Button from '~/Components/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import Style from './Signup.module.scss';
 import SelectBirthday from '../SelectBirthday';
-import { CloseEye, OpenEye } from '~/Components/Icons';
+import { CloseEye, OpenEye, TickGreen, TickBlack } from '~/Components/Icons';
 import { useDebounce } from '~/hooks';
 import * as signUpService from '~/Service/signUpService';
 
@@ -20,6 +20,9 @@ function Signin() {
 
     const [dataUser, setDataUser] = useState([]);
     const [logicTrue, setlogicTrue] = useState([]);
+
+    const [tick1, setTick1] = useState(false);
+    const [tick2, setTick2] = useState(false);
 
     //logic btn log in
     function handleInputChangeLogin(event) {
@@ -53,7 +56,7 @@ function Signin() {
             });
             setDataUser(data);
             if (!!data === true) {
-                setlogicTrue(false)
+                setlogicTrue(false);
                 await new Promise((resolve) => setTimeout(resolve, 2500));
                 window.location.reload();
             }
@@ -65,6 +68,51 @@ function Signin() {
             console.log(error.response.data);
         }
     };
+    //condition1
+    const condition1 = cx({
+        'condition-unavailable': inputValuePass.length <= 0,
+        'condition-1':
+            inputValuePass.length >= 8 && inputValuePass.length <= 20,
+        'condition-false':
+            (inputValuePass.length > 0 && inputValuePass.length < 8) ||
+            inputValuePass.length > 20,
+    });
+
+    //condition2
+    const hasUpperCase = /[A-Z]/.test(inputValuePass);
+    const hasLowerCase = /[a-z]/.test(inputValuePass);
+    const hasNumber = /\d/.test(inputValuePass);
+    const hasSpecialChar = /[!@#$%^&*()_+[\]{};':"\\|,.<>/?-]/.test(
+        inputValuePass,
+    );
+    const isNotEmpty = inputValuePass.length > 0;
+
+    const isCondition2Met =
+        hasUpperCase &&
+        hasLowerCase &&
+        hasNumber &&
+        hasSpecialChar &&
+        isNotEmpty;
+
+    useEffect(() => {
+        if (inputValuePass.length >= 8 && inputValuePass.length <= 20) {
+            setTick1(false);
+        } else if (inputValuePass.length < 8 || inputValuePass.length > 20) {
+            setTick1(true);
+        }
+        if (isCondition2Met) {
+            setTick2(false);
+        } else {
+            setTick2(true);
+        }
+        // eslint-disable-next-line no-use-before-define
+    }, [inputValuePass.length, isCondition2Met]);
+
+    const condition2 = cx({
+        'condition-unavailable': !isNotEmpty,
+        'condition-2': isCondition2Met,
+        'condition-false': isNotEmpty && !isCondition2Met,
+    });
 
     return (
         <>
@@ -78,7 +126,7 @@ function Signin() {
 
                 <p className={cx('title')}>Email</p>
                 <input
-                    type={'text'}
+                    type={'email'}
                     className={cx('text-input')}
                     value={inputValueLogin}
                     onChange={handleInputChangeLogin}
@@ -100,11 +148,13 @@ function Signin() {
                 <p className={cx('condition-wrapper')}>
                     Your password must have:
                 </p>
-                <p className={cx('condition-1')}>
-                    {/* icon */} 8 to 20 characters
+                <p className={condition1}>
+                    {tick1 ? <TickBlack></TickBlack> : <TickGreen></TickGreen>}8
+                    to 20 characters
                 </p>
-                <p className={cx('condition-2')}>
-                    {/* icon */} Letters, numbers, and special characters
+                <p className={condition2}>
+                    {tick2 ? <TickBlack></TickBlack> : <TickGreen></TickGreen>}
+                    Letters, numbers, and special characters
                 </p>
                 {dataUser ? (
                     <>
@@ -143,7 +193,14 @@ function Signin() {
                 <br></br>
                 <Button
                     primary
-                    disable={!inputValueLogin || !inputValuePass || !checkBox}
+                    disable={
+                        !inputValueLogin ||
+                        !inputValuePass ||
+                        inputValuePass.length < 8 ||
+                        inputValuePass.length > 20 ||
+                        !checkBox ||
+                        !isCondition2Met
+                    }
                     className={cx('btn-login')}
                     onClick={HandleSignup}
                 >
