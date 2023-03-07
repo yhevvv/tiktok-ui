@@ -91,6 +91,29 @@
     font-weight: 300 !important;
 }
 
+.logic-error-email,
+.logic-error-overlap {
+    padding: 0px 52px;
+    font-family: var(--default-font-family);
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 22px;
+    margin-left: -3px;
+    color: rgb(255, 76, 58);
+    display: flex;
+}
+
+.logic-true {
+    padding: 0px 52px;
+    font-family: var(--default-font-family);
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 22px;
+    margin-left: -3px;
+    color: rgb(11, 224, 155);
+    display: flex;
+}
+
 .condition-1 {
     margin-top: -10px;
 }

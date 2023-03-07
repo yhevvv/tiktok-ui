@@ -18,6 +18,7 @@ function Login() {
     const [inputValuePass, setInputValuePass] = useState('');
     //logic show/hide password
     const [showPassword, setShowPassword] = useState(false);
+
     const [dataUser, setDataUser] = useState([]);
 
     //logic btn log in
@@ -35,8 +36,8 @@ function Login() {
     const setEmail = inputValueLogin;
     const setPassword = inputValuePass;
 
-    const dataDebounce = useDebounce(setEmail, 200)
-    const dataPass = useDebounce(setPassword, 100)
+    const dataDebounce = useDebounce(setEmail, 200);
+    const dataPass = useDebounce(setPassword, 100);
 
     const HandleLogin = async (event) => {
         event.preventDefault();
@@ -44,7 +45,7 @@ function Login() {
             email: dataDebounce,
             password: dataPass,
         });
-        
+
         if (data !== undefined && data !== null) {
             Cookies.set('dataUser', JSON.stringify(data));
             setDataUser(data);
@@ -53,7 +54,6 @@ function Login() {
         } else {
             setDataUser(null);
         }
-        console.log(dataUser);
     };
 
     return (

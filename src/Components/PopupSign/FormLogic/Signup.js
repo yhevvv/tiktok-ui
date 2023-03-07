@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 import Style from './Signup.module.scss';
 import SelectBirthday from '../SelectBirthday';
 import { CloseEye, OpenEye } from '~/Components/Icons';
+import { useDebounce } from '~/hooks';
+import * as signUpService from '~/Service/signUpService';
 
 function Signin() {
     const cx = classNames.bind(Style);
@@ -15,6 +17,9 @@ function Signin() {
 
     //logic show/hide password
     const [showPassword, setShowPassword] = useState(false);
+
+    const [dataUser, setDataUser] = useState([]);
+    const [logicTrue, setlogicTrue] = useState([]);
 
     //logic btn log in
     function handleInputChangeLogin(event) {
@@ -28,9 +33,38 @@ function Signin() {
         setInputValuePass(event.target.value);
     }
     //logic check box
-    function handleCheckBox (event){
-        setCheckBox(!checkBox)
+    function handleCheckBox() {
+        setCheckBox(!checkBox);
     }
+
+    const setEmail = inputValueLogin;
+    const setPassword = inputValuePass;
+
+    const dataDebounce = useDebounce(setEmail, 200);
+    const dataPass = useDebounce(setPassword, 100);
+
+    const HandleSignup = async (event) => {
+        event.preventDefault();
+        try {
+            const data = await signUpService.SignUp({
+                type: 'email',
+                email: dataDebounce,
+                password: dataPass,
+            });
+            setDataUser(data);
+            if (!!data === true) {
+                setlogicTrue(false)
+                await new Promise((resolve) => setTimeout(resolve, 2500));
+                window.location.reload();
+            }
+            // const response = await axios.post(
+            //     'https://tiktok.fullstack.edu.vn/api/auth/register',
+            //     data,
+            // );
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
 
     return (
         <>
@@ -72,11 +106,38 @@ function Signin() {
                 <p className={cx('condition-2')}>
                     {/* icon */} Letters, numbers, and special characters
                 </p>
+                {dataUser ? (
+                    <>
+                        <span className={cx('logic-true')}></span>
+                        {logicTrue ? (
+                            <></>
+                        ) : (
+                            <span className={cx('logic-true')}>
+                                You have successfully registered, please login
+                            </span>
+                        )}
+                    </>
+                ) : (
+                    <p className={cx('logic-error-email')}>
+                        The email must be a valid email address.
+                    </p>
+                )}
+
+                {/* <p className={cx('logic-error-overlap')}>
+                    The request could not be completed due to a conflict with
+                    the current state of the resource.
+                </p> */}
                 <br></br>
                 <span className={cx('policy')}>
-                    <input className={cx('checkbox')} type={'checkbox'} checked={checkBox} onChange={handleCheckBox}></input>
+                    <input
+                        className={cx('checkbox')}
+                        type={'checkbox'}
+                        checked={checkBox}
+                        onChange={handleCheckBox}
+                    ></input>
                     <span className={cx('policy-title')}>
-                        Get trending content, newsletters, promotions, recommendations, and account updates sent to your email.
+                        Get trending content, newsletters, promotions,
+                        recommendations, and account updates sent to your email.
                     </span>
                 </span>
                 <br></br>
@@ -84,6 +145,7 @@ function Signin() {
                     primary
                     disable={!inputValueLogin || !inputValuePass || !checkBox}
                     className={cx('btn-login')}
+                    onClick={HandleSignup}
                 >
                     Signup
                 </Button>

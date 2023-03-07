@@ -15,8 +15,7 @@ login:
     following suggestedUsers Account in sidebar: ok (bug because API)
 signup:
     giao dien signup: ok
-    giao dien dang nhap o trong dang nhap email:
-    logic signup:
+    logic signup: ok (missing checked error and add more vertify password)
     
 like, comment, share (optional)
 
