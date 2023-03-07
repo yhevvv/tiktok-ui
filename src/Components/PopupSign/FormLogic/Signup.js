@@ -11,6 +11,8 @@ function Signin() {
     //logic btn log in
     const [inputValueLogin, setInputValueLogin] = useState('');
     const [inputValuePass, setInputValuePass] = useState('');
+    const [checkBox, setCheckBox] = useState(false);
+
     //logic show/hide password
     const [showPassword, setShowPassword] = useState(false);
 
@@ -24,6 +26,10 @@ function Signin() {
     }
     function handleInputChangePass(event) {
         setInputValuePass(event.target.value);
+    }
+    //logic check box
+    function handleCheckBox (event){
+        setCheckBox(!checkBox)
     }
 
     return (
@@ -68,7 +74,7 @@ function Signin() {
                 </p>
                 <br></br>
                 <span className={cx('policy')}>
-                    <input className={cx('checkbox')} type={'checkbox'}></input>
+                    <input className={cx('checkbox')} type={'checkbox'} checked={checkBox} onChange={handleCheckBox}></input>
                     <span className={cx('policy-title')}>
                         Get trending content, newsletters, promotions, recommendations, and account updates sent to your email.
                     </span>
@@ -76,7 +82,7 @@ function Signin() {
                 <br></br>
                 <Button
                     primary
-                    disable={!inputValueLogin || !inputValuePass}
+                    disable={!inputValueLogin || !inputValuePass || !checkBox}
                     className={cx('btn-login')}
                 >
                     Signup

@@ -61,6 +61,7 @@ function Sidebar() {
                 const parsedData = JSON.parse(dataCookie);
                 setisCheckUser(parsedData);
                 const isToken = parsedData.meta.token;
+                Cookies.set('isToken', isToken)
                 followingAccountsService
                     .followingAccount({ page: pageFollowing, token: isToken })
                     .then((data2) => {
