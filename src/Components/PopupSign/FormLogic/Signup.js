@@ -60,10 +60,6 @@ function Signin() {
                 await new Promise((resolve) => setTimeout(resolve, 2500));
                 window.location.reload();
             }
-            // const response = await axios.post(
-            //     'https://tiktok.fullstack.edu.vn/api/auth/register',
-            //     data,
-            // );
         } catch (error) {
             console.log(error.response.data);
         }
@@ -169,7 +165,8 @@ function Signin() {
                     </>
                 ) : (
                     <p className={cx('logic-error-email')}>
-                        The email must be a valid email address.
+                        The email must be a valid email address or email already
+                        exist.
                     </p>
                 )}
 
@@ -185,7 +182,7 @@ function Signin() {
                         checked={checkBox}
                         onChange={handleCheckBox}
                     ></input>
-                    <span className={cx('policy-title')}>
+                    <span className={cx('policy-title')} onClick={handleCheckBox}>
                         Get trending content, newsletters, promotions,
                         recommendations, and account updates sent to your email.
                     </span>

@@ -20,6 +20,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
     const [dataUser, setDataUser] = useState([]);
+    const [logicTrue, setlogicTrue] = useState([]);
 
     //logic btn log in
     function handleInputChangeLogin(event) {
@@ -49,6 +50,7 @@ function Login() {
         if (data !== undefined && data !== null) {
             Cookies.set('dataUser', JSON.stringify(data));
             setDataUser(data);
+            setlogicTrue(false);
             await new Promise((resolve) => setTimeout(resolve, 2500));
             window.location.reload();
         } else {
@@ -70,7 +72,7 @@ function Login() {
                 <h1 className={cx('Log-title')}>Log in</h1>
                 <p className={cx('title')}>Email or username</p>
                 <input
-                    type={'text'}
+                    type={'email'}
                     className={cx('text-input')}
                     value={inputValueLogin}
                     onChange={handleInputChangeLogin}
@@ -90,7 +92,16 @@ function Login() {
                     {showPassword ? <CloseEye></CloseEye> : <OpenEye></OpenEye>}
                 </span>
                 {dataUser ? (
-                    <p className={cx('true-logic')}></p>
+                    <div>
+                        <p></p>
+                        {logicTrue ? (
+                            <></>
+                        ) : (
+                            <span className={cx('logic-true')}>
+                                You have successfully login
+                            </span>
+                        )}
+                    </div>
                 ) : (
                     <p className={cx('error-logic')}>
                         Username or password doesn't match our records. Try

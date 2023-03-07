@@ -15,14 +15,40 @@ login:
     following suggestedUsers Account in sidebar: ok (bug because API)
 signup:
     giao dien signup: ok
-    logic signup: ok (missing checked error)
+    logic signup: ok
     
-like, comment, share (optional)
+like, comment, share (optional):
 
-page profile: not overview
+
+page profile: 
+
+my profile:
+    giu nguyen header: ok
+    giu lai get app:
+    sidebar bo phan suggest:
+    giao dien:
+    call API: 
+    popup-editprofile:
+
+friend profile:
+    giu nguyen header: ok
+    giu lai get app:
+    sidebar giu lai: ok
+    giao dien:
+    call API: 
+
+unfollowing profile: 
+    giu nguyen header: ok
+    giu lai get app:
+    sidebar giu lai: ok
+    giao dien:
+    call API: 
 
 
 page following: not overview
 
 
 page live: not overview
+
+
+upload: not overview

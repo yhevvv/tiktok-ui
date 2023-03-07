@@ -1,5 +1,5 @@
-//header 
-.header-display{
+//header
+.header-display {
     display: none;
 }
 
@@ -52,6 +52,18 @@
     display: flex;
     margin-top: -8.8%;
 }
+
+.logic-true {
+    padding: 0px 52px;
+    font-family: var(--default-font-family);
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 22px;
+    margin-left: -3px;
+    color: rgb(11, 224, 155);
+    display: flex;
+}
+
 .error-logic {
     padding: 0px 52px;
     font-family: var(--default-font-family);
