@@ -1,0 +1,156 @@
+.wrapper {
+    position: fixed;
+    left: 13.6%;
+    padding: 32px 24px;
+    margin: 0;
+}
+.profile-item {
+    display: flex;
+    flex-direction: row;
+}
+.avatar {
+    width: 116px;
+    height: 116px;
+    border-radius: 50%;
+}
+.title-container {
+    flex: 1 1 0%;
+    cursor: pointer;
+    overflow: visible;
+    margin-left: 20px;
+}
+.name {
+    position: relative;
+    font-family: var(--name-font-family);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.nickname {
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    text-overflow: ellipsis;
+    height: 25px;
+    overflow: hidden;
+    max-width: 450px;
+    white-space: nowrap;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 5px;
+    margin-left: 1px;
+}
+.outline-editProfile {
+    width: 136px;
+    height: 36px;
+    padding: 0px;
+    margin: 16px 0px 0px;
+}
+.btn-editProfile {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(22, 24, 35);
+    border-color: rgba(22, 24, 35, 0.12);
+    background-color: rgb(255, 255, 255);
+    min-height: 36px;
+    font-weight: 600;
+    font-family: var(--name-font-family);
+    position: relative;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 36px;
+    font-size: 16px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 16px;
+    min-width: 136px;
+    line-height: 24px;
+    margin-right: 8px;
+}
+.statistical {
+    display: flex;
+    position: absolute;
+    left: 4%;
+    align-items: center;
+    margin-top: 22px;
+    color: rgba(18, 18, 18, 0.75);
+}
+.statistical-item {
+    color: rgb(22, 24, 35);
+    font-family: var(--name-font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    display: flex;
+    direction: ltr;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+}
+.number-following,
+.number-followers,
+.number-like {
+    margin-left: 3px;
+}
+.following,
+.followers,
+.like {
+    color: rgba(22, 24, 35, 0.75);
+    font-family: var(--default-font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    display: inline-block;
+    margin-left: 6px;
+}
+.number-followers {
+}
+.followers {
+}
+.number-like {
+}
+.like {
+}
+.bio {
+    position: absolute;
+    top: 54%;
+    text-align: left;
+    color: rgb(22, 24, 35);
+    font-family: var(--default-font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    white-space: pre-line;
+}
+.btn-share {
+    position: relative;
+    top: 11px;
+    cursor: pointer;
+    left: 19%;
+}
+.videos-user {
+    position: absolute;
+}
+.tab-videos {
+}
+.tab-like {
+}
+.transform-animation {
+}
+.videos-item {
+}
+.obtainer {
+}
+.line-1 {
+}
+.line-2 {
+}

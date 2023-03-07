@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import { useState, useContext, useLayoutEffect } from 'react';
 import Cookies from 'js-cookie';
 
-import Style from './Header.module.scss';
+import Style from './HeaderFull.module.scss';
 import Button from '~/Components/Button';
 import Menu from '~/Components/Popper/Menu/Menu';
 import {

@@ -4,22 +4,8 @@ import Style from './Home.module.scss';
 
 import * as homeService from '~/Service/homeService';
 import { useEffect, useState } from 'react';
-import Menu from './Menu/Menu'
-import { Computer, IconX, MobilePhone } from '~/Components/Icons';
+import GetApp from '~/Components/GetApp';
 
-const APP = [
-    {
-        icon: <IconX></IconX>,
-    },
-    {
-        icon: <Computer />,
-        title: 'Get TikTok for desktop',
-    },
-    {
-        icon: <MobilePhone />,
-        title: 'Get TikTok App',
-    },
-];
 
 function Home() {
     function getRandomInt(max) {
@@ -43,11 +29,7 @@ function Home() {
 
     return (
         <div className={cx('wrapper-all')}>
-            <div className={cx('app-item')}>
-                <Menu items={APP}>
-                    <button className={cx('getApp-btn')}>Get app</button>
-                </Menu>
-            </div>
+            <GetApp></GetApp>
 
             {videos.map((data) => (
                 <VideoItem key={data.id} data={data}></VideoItem>

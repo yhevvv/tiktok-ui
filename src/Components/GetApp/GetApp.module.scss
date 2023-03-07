@@ -1,0 +1,21 @@
+.getApp-btn {
+    font-family: var(--default-font-family);
+    position: fixed;
+    min-width: 90px;
+    height: 32px;
+    top: 95.4%;
+    right: 20px;
+    border-radius: 52px;
+    font-size: 14px;
+    font-weight: 600 !important;
+    color: rgba(22, 24, 35, 0.75);
+    border: 0.5px solid rgba(22, 24, 35, 0.12);
+    margin-bottom: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+        // text-decoration: underline;
+    }
+}
