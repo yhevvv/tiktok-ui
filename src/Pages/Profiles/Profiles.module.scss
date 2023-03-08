@@ -1,8 +1,14 @@
 .wrapper {
     position: fixed;
-    left: 13.6%;
+    min-width: 13.6%;
     padding: 32px 24px;
     margin: 0;
+
+    @media screen and (max-width: 768px) {
+        position: fixed;
+        left: 13.6%;
+    }
+
 }
 .profile-item {
     display: flex;

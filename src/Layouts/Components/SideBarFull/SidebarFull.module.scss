@@ -3,7 +3,7 @@
     padding: 20px 0 26px;
     overflow-y: auto;
     height: 100vh;
-    position: fixed;
+    position: initial;
 
     @media screen and (max-width: 768px) {
         scale: 1;
