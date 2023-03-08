@@ -99,14 +99,14 @@ function VideoItem({ data }) {
             <h4 className={cx('music-tag')}>
                 <MusicNote></MusicNote> {data.music}
             </h4>
-            <div className={cx('position-fix')} ref={ref}>
+            <div className={cx('position-fix')}>
                 <VideoPlayer
                     url={data.file_url}
                     ref={playerRef}
                     isPlaying={isPlaying}
                     volume={0.2}
                 ></VideoPlayer>
-                <div className={cx('interact')}>
+                <div className={cx('interact')} ref={ref}>
                     <Button noneBtn className={cx('btn-interact')}>
                         <span className={cx('icon-item')}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
@@ -135,7 +135,7 @@ function VideoItem({ data }) {
                     </Button>
                 </div>
             </div>
-            <hr className={cx('hr-item')}></hr>
+            <hr className={cx('hr-item')} ></hr>
         </div>
     );
 }

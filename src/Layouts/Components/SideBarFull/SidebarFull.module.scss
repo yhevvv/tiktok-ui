@@ -1,0 +1,32 @@
+.wrapper {
+    width: 224px !important;
+    padding: 20px 0 26px;
+    overflow-y: auto;
+    height: 100vh;
+    position: fixed;
+
+    @media screen and (max-width: 768px) {
+        scale: 1;
+        position: absolute;
+        left: 0%;
+        padding-bottom: 10px;
+        color: transparent;
+        padding-right: 50%;
+        .mobile-fixed{
+            display: none;
+        }
+    }
+}
+
+.wrapper-login {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 16px;
+    line-height: 22px;
+    margin-left: 10px;
+}
+
+.hr-item {
+    height: 1px;
+    border-color: rgba(22, 24, 35, 0.12);
+    width: 94%;
+}

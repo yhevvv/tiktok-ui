@@ -14,8 +14,8 @@ import Login from './FormLogic/Login';
 import Signup from './FormLogic/Signup';
 import PropTypes from 'prop-types';
 
-function PopupSign({ title }) {
-    var cx = classNames.bind(Style);
+function PopupSign({ title, className }) {
+    const cx = classNames.bind(Style);
     //logic popup
     const [isOpen, setIsOpen] = useState(false);
     const [handleLogin, setHandleLogin] = useState(true);
@@ -51,7 +51,7 @@ function PopupSign({ title }) {
                     {title}
                 </Button>
             )}{' '}
-            {title === 'Log in' && (
+            {className === 'btn-loginHeader' && (
                 <Button
                     className={cx('btn-primary')}
                     primary
@@ -60,12 +60,13 @@ function PopupSign({ title }) {
                     {title}
                 </Button>
             )}
-            {title === 'Log In' && (
-                <Button
-                    className={cx('btn-outline')}
-                    outline
-                    onClick={togglePopup}
-                >
+            {className === 'btn-loginSidebar' && (
+                <Button className={cx('btn-outline')} outline onClick={togglePopup}>
+                    {title}
+                </Button>
+            )}
+            {(className === 'btn-loginFull') && (
+                <Button className={cx('btn-loginFull')} outline onClick={togglePopup}>
                     {title}
                 </Button>
             )}

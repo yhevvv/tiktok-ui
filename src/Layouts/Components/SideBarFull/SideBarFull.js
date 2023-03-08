@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Cookies from 'js-cookie';
 
 import config from '~/Config';
-import Style from './Sidebar.module.scss';
+import Style from './SidebarFull.module.scss';
 import Menu, { MenuItem } from './Menu';
 import {
     HomeIcon,
@@ -116,7 +116,7 @@ function Sidebar() {
                             Log in to follow creators, like videos, and view
                             comments.
                         </p>
-                        <PopupSign className={'btn-loginSidebar'} title = {'Log in'}></PopupSign>
+                        <PopupSign className={'btn-loginFull'} title={'Log in'}></PopupSign>
                         <hr className={cx('hr-item')}></hr>
                     </div>
                 )}

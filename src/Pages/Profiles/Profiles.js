@@ -7,7 +7,7 @@ import Button from '~/Components/Button';
 function Profile() {
     const cx = classNames.bind(Style);
     return (
-        <body className={cx('wrapper')}>
+        <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
                 <img className={cx('avatar')} src={images.avatar1} alt=""></img>
                 <div className={cx('title-container')}>
@@ -52,7 +52,7 @@ function Profile() {
                 </main>
             </div>
             <GetApp></GetApp>
-        </body>
+        </div>
     );
 }
 
