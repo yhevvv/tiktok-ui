@@ -8,7 +8,6 @@
         position: fixed;
         left: 13.6%;
     }
-
 }
 .profile-item {
     display: flex;
@@ -32,6 +31,7 @@
     font-size: 32px;
     line-height: 38px;
     margin: 0;
+    padding: 2px 0px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
@@ -68,28 +68,15 @@
     font-weight: 600;
     font-family: var(--name-font-family);
     position: relative;
-    -webkit-box-pack: center;
-    justify-content: center;
     user-select: none;
     cursor: pointer;
-    box-sizing: border-box;
-    height: 36px;
-    font-size: 16px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
     padding: 0px 16px;
     min-width: 136px;
-    line-height: 24px;
-    margin-right: 8px;
 }
 .statistical {
-    display: flex;
-    position: absolute;
-    left: 4%;
-    align-items: center;
-    margin-top: 22px;
     color: rgba(18, 18, 18, 0.75);
+    display: flex;
+    flex-direction: inherit;
 }
 .statistical-item {
     color: rgb(22, 24, 35);
@@ -99,13 +86,14 @@
     line-height: 25px;
     display: flex;
     direction: ltr;
-    -webkit-box-align: baseline;
     align-items: baseline;
+    position: relative;
+    top: 50%;
 }
 .number-following,
 .number-followers,
 .number-like {
-    margin-left: 3px;
+    margin-left: 10px;
 }
 .following,
 .followers,
@@ -127,15 +115,13 @@
 .like {
 }
 .bio {
-    position: absolute;
-    top: 54%;
-    text-align: left;
     color: rgb(22, 24, 35);
     font-family: var(--default-font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
     white-space: pre-line;
+    margin-left: 10px;
 }
 .btn-share {
     position: relative;
@@ -144,19 +130,85 @@
     left: 19%;
 }
 .videos-user {
+}
+.tab {
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 460px;
+    height: 44px;
+    margin-bottom: 8px;
+    margin-left: 10px;
 }
-.tab-videos {
+.tab-noClick {
+    font-family: var(--name-font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 0%;
+    height: 44px;
+    cursor: pointer;
+    text-align: center;
+    color: rgba(22, 24, 35, 0.5);
 }
-.tab-like {
+.tab-Click {
+    font-family: var(--name-font-family);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 0%;
+    height: 44px;
+    cursor: pointer;
+    text-align: center;
+    color: rgb(22, 24, 35);
 }
 .transform-animation {
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background: rgb(22, 24, 35);
+    left: 0px;
+    bottom: -11%;
+    transition: transform 0.3s ease 0s;
+    margin-left: 6%;
 }
+
 .videos-item {
+    position: fixed;
+    margin-top: 15%;
+    margin-left: 70px;
+    right: 37%;
 }
 .obtainer {
+    display: flow-root;
+    justify-content: center;
+    text-align: center;
+    position: relative;
 }
 .line-1 {
+    font-size: 24px;
+    line-height: 28px;
+    font-family: var(--name-font-family);
+    font-weight: 700;
+    color: rgb(22, 24, 35);
 }
 .line-2 {
+    font-size: 16px;
+    line-height: 22px;
+    font-family: var(--default-font-family);
+    font-weight: 400;
+    color: rgba(22, 24, 35, 0.75);
+    margin-top: 8px;
 }
