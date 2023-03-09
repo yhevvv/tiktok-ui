@@ -28,7 +28,8 @@ my profile: /me/:nickname ok
     sidebar bo phan suggest: ok
     giao dien: ok
     menu share: ok     
-    call API profile: 
+    call API profile: ok
+    fix-default-homepage: 
     popup-editprofile: 
     call API editprofile:
 
@@ -37,9 +38,8 @@ friend profile: /:nickname ok
     giu lai get app: ok
     sidebar bo phan suggest: ok
     giao dien: ok
-    menu share:
-    popup-editprofile:
-    call API: 
+    menu share: ok
+    call API friend profile:
 
 unfollowing profile: 
     giu nguyen header: ok

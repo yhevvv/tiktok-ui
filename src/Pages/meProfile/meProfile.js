@@ -1,12 +1,13 @@
-import Style from './Profiles.module.scss';
+import Style from './meProfile.module.scss';
 import classNames from 'classnames/bind';
 import GetApp from '~/Components/GetApp';
 import Button from '~/Components/Button';
-import { useState } from 'react';
-import images from '~/assets/images';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Share, Write, Lock, UserIconLager } from '~/Components/Icons';
 import MenuShare from '~/Components/MenuShare';
+import * as profileService from '~/Service/profileService';
+import Cookies from 'js-cookie';
 
 function Profile() {
     const cx = classNames.bind(Style);
@@ -17,6 +18,8 @@ function Profile() {
     const [line2, setLine2] = useState('Your videos will appear here');
 
     const [isHovering, setIsHovering] = useState(0);
+
+    const [profileUser, setProfileUser] = useState([]);
 
     const handleNoClick = () => {
         setNoClick('tab-noClick');
@@ -47,17 +50,32 @@ function Profile() {
             setIsHovering(230);
         }
     };
+    const isToken = Cookies.get('isToken');
+
+    useEffect(() => {
+        profileService
+            .Profile({ token: isToken })
+            .then((data) => {
+                setProfileUser(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }, [isToken]);
+
+    console.clear('');
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
-                <img className={cx('avatar')} src={images.avatar1} alt=""></img>
+                <img className={cx('avatar')} src={profileUser.avatar} alt=""></img>
                 <div className={cx('title-container')}>
-                    <h1 className={cx('name')}>meProfile Page - Name</h1>
-                    <h3 className={cx('nickname')}>Nickname</h3>
+                    <h1 className={cx('name')}>{profileUser.first_name + ' ' + profileUser.last_name}</h1>
+                    <h3 className={cx('nickname')}>{profileUser.nickname}</h3>
                     <div className={cx('outline-editProfile')}>
                         <Button text className={cx('btn-editProfile')}>
-                            <Write></Write>{' '}
+                            <Write></Write>
                             <strong className={cx('btn-text')}>
                                 Edit profile
                             </strong>
@@ -71,19 +89,19 @@ function Profile() {
             </div>
             <h2 className={cx('statistical')}>
                 <div className={cx('statistical-item')}>
-                    <strong className={cx('number-following')}>1</strong>
+                    <strong className={cx('number-following')}>{profileUser.followings_count == null ? '0' : profileUser.followings_count}</strong>
                     <span className={cx('following')}>Following</span>
                 </div>
                 <div className={cx('statistical-item')}>
-                    <strong className={cx('number-followers')}>2</strong>
-                    <span className={cx('followers')}>Followers</span>
+                    <strong className={cx('number-followers')}>{profileUser.followers_count == null ? '0' : profileUser.followers_count}</strong>
+                    <span className={cx('followers')}>followers</span>
                 </div>
                 <div className={cx('statistical-item')}>
-                    <strong className={cx('number-like')}>0</strong>
+                    <strong className={cx('number-like')}>{profileUser.likes_count}</strong>
                     <span className={cx('like')}>likes</span>
                 </div>
             </h2>
-            <h2 className={cx('bio')}>Bio is here</h2>
+            <h2 className={cx('bio')}>{profileUser.bio}</h2>
             <div className={cx('videos-user')}>
                 <div className={cx('tab')}>
                     <p
