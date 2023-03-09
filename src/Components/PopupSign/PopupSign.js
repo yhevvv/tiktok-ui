@@ -61,12 +61,20 @@ function PopupSign({ title, className }) {
                 </Button>
             )}
             {className === 'btn-loginSidebar' && (
-                <Button className={cx('btn-outline')} outline onClick={togglePopup}>
+                <Button
+                    className={cx('btn-outline')}
+                    outline
+                    onClick={togglePopup}
+                >
                     {title}
                 </Button>
             )}
-            {(className === 'btn-loginFull') && (
-                <Button className={cx('btn-loginFull')} outline onClick={togglePopup}>
+            {className === 'btn-loginFull' && (
+                <Button
+                    className={cx('btn-loginFull')}
+                    outline
+                    onClick={togglePopup}
+                >
                     {title}
                 </Button>
             )}
@@ -91,7 +99,9 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                         onClick={toggleHandleLogin}
                                     >
-                                        <UserIcon width={'2rem'} height={'2rem'}
+                                        <UserIcon
+                                            width={'2rem'}
+                                            height={'2rem'}
                                             className={cx('icon')}
                                         ></UserIcon>
                                         Use phone / email / username
@@ -101,6 +111,8 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                     >
                                         <FacebokIcon
+                                            width={'2rem'}
+                                            height={'2rem'}
                                             className={cx('icon')}
                                         ></FacebokIcon>
                                         Continues With Facebook
@@ -152,7 +164,9 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                         onClick={toggleHandleSignup}
                                     >
-                                        <UserIcon width={'2rem'} height={'2rem'}
+                                        <UserIcon
+                                            width={'2rem'}
+                                            height={'2rem'}
                                             className={cx('icon')}
                                         ></UserIcon>
                                         Use phone or email
@@ -162,6 +176,8 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                     >
                                         <FacebokIcon
+                                            width={'2rem'}
+                                            height={'2rem'}
                                             className={cx('icon')}
                                         ></FacebokIcon>
                                         Continues With Facebook

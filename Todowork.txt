@@ -27,7 +27,7 @@ my profile: /me/:nickname ok
     giu lai get app: ok
     sidebar bo phan suggest: ok
     giao dien: ok
-    menu share:     
+    menu share: ok     
     call API profile: 
     popup-editprofile: 
     call API editprofile:

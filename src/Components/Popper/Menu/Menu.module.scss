@@ -32,6 +32,32 @@
     max-height: 599px;
 }
 
+.menu-share {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    max-height: 280px;
+    max-width: 280px;
+}
+
+.icon-more-share {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 3px 46%;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.menu-share-more {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 448px;
+    max-width: 280px;
+}
+
 //Header Item
 .header {
     display: flex;

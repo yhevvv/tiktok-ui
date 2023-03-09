@@ -6,6 +6,7 @@ import Button from '~/Components/Button';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Share, Write, Lock, UserIconLager } from '~/Components/Icons';
+import MenuShare from '~/Components/MenuShare';
 
 function Profile() {
     const cx = classNames.bind(Style);
@@ -63,7 +64,7 @@ function Profile() {
                 </div>
                 <br></br>
                 <div className={cx('btn-share')}>
-                    <Share></Share>
+                    <MenuShare icon={<Share></Share>}></MenuShare>
                 </div>
             </div>
             <h2 className={cx('statistical')}>

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PrivateRouters, PublicRouters } from '~/Routers';
+import { PublicRouters } from '~/Routers';
 import { DefaultLayout } from './Layouts';
 import { Fragment } from 'react'; //Fragment: Layout null
 
@@ -30,7 +30,7 @@ function App() {
                             />
                         );
                     })}
-                    {PrivateRouters.map((route, index) => {
+                    {/* {PrivateRouters.map((route, index) => {
                         let Layout = DefaultLayout;
 
                         if (route.layout) {
@@ -51,7 +51,7 @@ function App() {
                                 }
                             />
                         );
-                    })}
+                    })} */}
                 </Routes>
             </div>
         </Router>

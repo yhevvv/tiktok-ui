@@ -6,7 +6,6 @@ import FullLayout from '~/Layouts/FullLayout';
 import Home from '~/Pages/Home';
 import Following from '~/Pages/Following';
 import Profile from '~/Pages/Profiles';
-import meProfile from '~/Pages/meProfile';
 import Upload from '~/Pages/Upload';
 import Search from '~/Pages/Search';
 import Live from '~/Pages/Live';
@@ -30,7 +29,6 @@ const PublicRouters = [
 
 //private Routers
 const PrivateRouters = [
-    { path: Config.routes.meProfile, component: meProfile, layout: FullLayout },
 ];
 
 export { PublicRouters, PrivateRouters };

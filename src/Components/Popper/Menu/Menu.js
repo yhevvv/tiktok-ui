@@ -9,6 +9,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import * as logoutService from '~/Service/logoutService';
+import { TriangleDown } from '~/Components/Icons';
 
 const cx = classNames.bind(Style);
 
@@ -19,15 +20,20 @@ function Menu({
     items = [],
     hideOnClick = false,
     onChange = defaultFn,
+    classBody,
 }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1]; //lay phan tu cuoi
+    const [more, setMore] = useState('');
 
     const HandleLogin = () => {
         const isToken = Cookies.get('isToken');
         logoutService.logout({ token: isToken });
     };
-    
+
+    const moreHandle = () => {
+        setMore('menu-share-more');
+    };
 
     //menu list nhieu cap
     //important UI header Tiktok #5
@@ -46,7 +52,7 @@ function Menu({
                         } else onChange(items);
                         if (logicLogOut) {
                             Cookies.set('dataUser', null);
-                            HandleLogin()
+                            HandleLogin();
                             Cookies.set('isToken', null);
                             setTimeout(() => {
                                 // eslint-disable-next-line no-restricted-globals
@@ -61,6 +67,7 @@ function Menu({
 
     const handleResetToFirstPage = () => {
         setHistory((prev) => prev.slice(0, 1));
+        setMore('');
     };
 
     const handleBack = () => {
@@ -83,7 +90,27 @@ function Menu({
                                 onBack={handleBack}
                             ></Header>
                         )}
-                        <div className={cx('menu-body')}>{renderItem()}</div>
+                        {classBody ? (
+                            <div>
+                                <div className={cx(more || classBody)}>
+                                    {renderItem()}
+                                </div>
+                                <span
+                                    className={cx('icon-more-share')}
+                                    onClick={moreHandle}
+                                >
+                                    {more ? (
+                                        <></>
+                                    ) : (
+                                        <TriangleDown></TriangleDown>
+                                    )}
+                                </span>
+                            </div>
+                        ) : (
+                            <div className={cx('menu-body')}>
+                                {renderItem()}
+                            </div>
+                        )}
                     </PropperWrapper>
                 </div>
             )}
