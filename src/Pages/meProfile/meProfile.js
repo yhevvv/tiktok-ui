@@ -1,4 +1,4 @@
-import Style from './Profiles.module.scss';
+import Style from './meProfile.module.scss';
 import classNames from 'classnames/bind';
 import images from '~/assets/images';
 import GetApp from '~/Components/GetApp';
@@ -50,9 +50,9 @@ function Profile() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
-                <img className={cx('avatar')} src={images.avatar2} alt=""></img>
+                <img className={cx('avatar')} src={images.avatar1} alt=""></img>
                 <div className={cx('title-container')}>
-                    <h1 className={cx('name')}>Profiles Page - Name</h1>
+                    <h1 className={cx('name')}>meProfile Page - Name</h1>
                     <h3 className={cx('nickname')}>Nickname</h3>
                     <div className={cx('outline-editProfile')}>
                         <Button text className={cx('btn-editProfile')}>

@@ -61,7 +61,7 @@ function Sidebar() {
                 const parsedData = JSON.parse(dataCookie);
                 setisCheckUser(parsedData);
                 const isToken = parsedData.meta.token;
-                Cookies.set('isToken', isToken)
+                Cookies.set('isToken', isToken);
                 followingAccountsService
                     .followingAccount({ page: pageFollowing, token: isToken })
                     .then((data2) => {
@@ -116,17 +116,20 @@ function Sidebar() {
                             Log in to follow creators, like videos, and view
                             comments.
                         </p>
-                        <PopupSign className={'btn-loginFull'} title={'Log in'}></PopupSign>
+                        <PopupSign
+                            className={'btn-loginFull'}
+                            title={'Log in'}
+                        ></PopupSign>
+                        <hr className={cx('hr-item')}></hr>
+                        <SuggestedAccounts
+                            label="Suggested accounts"
+                            more="See all"
+                            data={suggestedUsers}
+                            onClick={getSuggestedHandleSeeAll}
+                        ></SuggestedAccounts>
                         <hr className={cx('hr-item')}></hr>
                     </div>
                 )}
-                <SuggestedAccounts
-                    label="Suggested accounts"
-                    more="See all"
-                    data={suggestedUsers}
-                    onClick={getSuggestedHandleSeeAll}
-                ></SuggestedAccounts>
-                <hr className={cx('hr-item')}></hr>
 
                 {currentUser && (
                     <div>

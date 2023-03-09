@@ -1,36 +1,61 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { PublicRouters } from '~/Routers'
-import { DefaultLayout } from "./Layouts";
-import { Fragment } from "react"; //Fragment: Layout null
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { PrivateRouters, PublicRouters } from '~/Routers';
+import { DefaultLayout } from './Layouts';
+import { Fragment } from 'react'; //Fragment: Layout null
 
 function App() {
-  return (
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {PublicRouters.map((route, index) => {
+                        let Layout = DefaultLayout;
 
-    <Router>
-      <div className="App">
-        <Routes>
-          {PublicRouters.map((route, index) => {
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
 
-            let Layout = DefaultLayout
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                    {PrivateRouters.map((route, index) => {
+                        let Layout = DefaultLayout;
 
-            if (route.layout){
-              Layout = route.layout
-            }
-            else if (route.layout === null)  {
-              Layout = Fragment
-            }
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
 
-            const Page = route.component
-            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
-          })}
-        </Routes>
-      </div>
-    </Router>
-
-
-  );
+                        const Page = route.component;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
-
 
 export default App;

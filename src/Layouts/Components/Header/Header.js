@@ -66,7 +66,7 @@ const USER_MENU = [
     {
         icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
         title: 'View profile',
-        to: '/@id_123',
+        to: '/me/@id_123',
     },
     {
         icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
@@ -212,7 +212,10 @@ function Header() {
                     ) : (
                         <>
                             <PopupSign title={'+ Upload'}></PopupSign>
-                            <PopupSign title={'Log in'} className = 'btn-loginHeader'></PopupSign>
+                            <PopupSign
+                                title={'Log in'}
+                                className="btn-loginHeader"
+                            ></PopupSign>
                             <Menu items={MENU_ITEM} onChange={handleMenuChange}>
                                 <button className={cx('menu-btn')}>
                                     <FontAwesomeIcon

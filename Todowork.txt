@@ -22,19 +22,23 @@ like, comment, share (optional):
 
 page profile: 
 
-my profile:
+my profile: /me/:nickname ok
     giu nguyen header: ok
-    giu lai get app:
-    sidebar bo phan suggest:
-    giao dien:
-    call API: 
-    popup-editprofile:
+    giu lai get app: ok
+    sidebar bo phan suggest: ok
+    giao dien: ok
+    menu share:     
+    call API profile: 
+    popup-editprofile: 
+    call API editprofile:
 
-friend profile:
+friend profile: /:nickname ok
     giu nguyen header: ok
-    giu lai get app:
-    sidebar giu lai: ok
-    giao dien:
+    giu lai get app: ok
+    sidebar bo phan suggest: ok
+    giao dien: ok
+    menu share:
+    popup-editprofile:
     call API: 
 
 unfollowing profile: 

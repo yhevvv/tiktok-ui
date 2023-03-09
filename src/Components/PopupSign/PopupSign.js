@@ -91,7 +91,7 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                         onClick={toggleHandleLogin}
                                     >
-                                        <UserIcon
+                                        <UserIcon width={'2rem'} height={'2rem'}
                                             className={cx('icon')}
                                         ></UserIcon>
                                         Use phone / email / username
@@ -152,7 +152,7 @@ function PopupSign({ title, className }) {
                                         className={cx('btn-choice-sign-1')}
                                         onClick={toggleHandleSignup}
                                     >
-                                        <UserIcon
+                                        <UserIcon width={'2rem'} height={'2rem'}
                                             className={cx('icon')}
                                         ></UserIcon>
                                         Use phone or email
