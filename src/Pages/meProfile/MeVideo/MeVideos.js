@@ -25,12 +25,12 @@ function MeVideos({ nickname }) {
     Cookies.set('userVideo', userVideo);
 
     const handleMouseOver = (event) => {
-        const video = event.target;
+        const video = event.target.parentElement.querySelector('video');
         video.play();
     };
 
     const handleMouseOut = (event) => {
-        const video = event.target;
+        const video = event.target.parentElement.querySelector('video');
         video.currentTime = 0;
         video.pause();
     };
@@ -38,8 +38,8 @@ function MeVideos({ nickname }) {
     return (
         <div className={cx('wrapper-all')}>
             {userVideo !== undefined &&
-                userVideo.map((data) => (
-                    <div className={cx('wrapper')}>
+                userVideo.map((data, index) => (
+                    <div className={cx('wrapper')} key={index}>
                         <video
                             className={cx('video-item')}
                             src={data.file_url}
@@ -50,6 +50,10 @@ function MeVideos({ nickname }) {
                         ></video>
                         <span
                             className={cx('description')}
+                            onMouseOver={handleMouseOver}
+                            onMouseOut={handleMouseOut}
+                            key={index}
+
                         >
                             {data.description}
                         </span>

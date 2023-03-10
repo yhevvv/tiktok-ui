@@ -30,8 +30,9 @@ my profile: /me/:nickname ok
     menu share: ok     
     call API profile: ok 
     fix-default-homepage: ok (dung firebase roi set o trong package.json bo phan homepage di roi run build)
-    fix span video autoplay:
-    fix href:
+    fix span video autoplay: ok
+    fix href: ok
+    neu href duoc nhap vao khac @phamanhtuan2208 thi se tra ve 404 error:
     popup-editprofile: 
     call API editprofile: 
 
@@ -41,6 +42,7 @@ friend profile: /:nickname ok
     sidebar bo phan suggest: ok
     giao dien: ok
     menu share: ok
+    neu href duoc nhap vao khac @profilefrien thi se tra ve 404 error:
     call API friend profile:
 
 unfollowing profile: 

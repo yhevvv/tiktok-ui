@@ -62,60 +62,65 @@ const MENU_ITEM = [
     },
 ];
 
-const USER_MENU = [
-    {
-        icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
-        title: 'View profile',
-        to: '/me/@id_123',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
-        title: 'Get Coins',
-        to: '/coin',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>,
-        title: 'LIVE Studio',
-        to: '/studio',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
-        title: 'Setting',
-        to: '/Setting',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faEarthAmerica}></FontAwesomeIcon>,
-        title: 'Language',
-        children: {
-            title: 'language',
-            data: dataLanguage,
-        },
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
-        title: 'Feedback and Help',
-        to: '/feedback-and-help',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>,
-        title: 'Keyboard shortcuts',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCircleHalfStroke}></FontAwesomeIcon>,
-        title: 'Dark mode',
-        switch: true,
-    },
-    {
-        icon: (
-            <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
-        ),
-        title: 'Log out',
-        to: null,
-        separate: true,
-    },
-];
 
 function Header() {
+    
+    const dataCookie = JSON.parse(Cookies.get('dataUser'));
+    
+    
+    const USER_MENU = [
+        {
+            icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
+            title: 'View profile',
+            to: `/me/@${dataCookie?.data?.nickname || '?'}`,
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
+            title: 'Get Coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faVideo}></FontAwesomeIcon>,
+            title: 'LIVE Studio',
+            to: '/studio',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
+            title: 'Setting',
+            to: '/Setting',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faEarthAmerica}></FontAwesomeIcon>,
+            title: 'Language',
+            children: {
+                title: 'language',
+                data: dataLanguage,
+            },
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
+            title: 'Feedback and Help',
+            to: '/feedback-and-help',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>,
+            title: 'Keyboard shortcuts',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCircleHalfStroke}></FontAwesomeIcon>,
+            title: 'Dark mode',
+            switch: true,
+        },
+        {
+            icon: (
+                <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
+            ),
+            title: 'Log out',
+            to: null,
+            separate: true,
+        },
+    ];
+
     const [isCheckUser, setisCheckUser] = useState(null);
 
     const dataArray = useContext(dataContext);
