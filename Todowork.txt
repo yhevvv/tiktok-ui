@@ -29,7 +29,7 @@ my profile: /me/:nickname ok
     giao dien: ok
     menu share: ok     
     call API profile: ok
-    fix-default-homepage: 
+    fix-default-homepage: ok (dung firebase roi set o trong package.json bo phan homepage di roi run build)
     popup-editprofile: 
     call API editprofile:
 
