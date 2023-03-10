@@ -8,4 +8,4 @@ const routes = {
     live: '/live'
 };
 
-export default routes;
+export default routes; 
