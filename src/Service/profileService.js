@@ -1,12 +1,8 @@
 import * as Request from '~/Utils/httpRequest';
 
-export const Profile = async ({token}) => {
+export const Profile = async ({ nickname }) => {
     try {
-        const res = await Request.get(`auth/me`, {
-            params: {
-             token,
-            },
-        }); //api
+        const res = await Request.get(`users/@${nickname}`);
         return res.data;
     } catch (error) {
         console.log(error);

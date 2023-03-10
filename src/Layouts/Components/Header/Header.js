@@ -66,7 +66,7 @@ const USER_MENU = [
     {
         icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
         title: 'View profile',
-        to: '/me/@id_123',
+        to: '/me/@:nickname',
     },
     {
         icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,

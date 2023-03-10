@@ -1,1 +1,1 @@
-export {default} from './meProfile'
+export {default} from './MeProfile'

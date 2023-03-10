@@ -28,10 +28,12 @@ my profile: /me/:nickname ok
     sidebar bo phan suggest: ok
     giao dien: ok
     menu share: ok     
-    call API profile: ok
+    call API profile: ok 
     fix-default-homepage: ok (dung firebase roi set o trong package.json bo phan homepage di roi run build)
+    fix span video autoplay:
+    fix href:
     popup-editprofile: 
-    call API editprofile:
+    call API editprofile: 
 
 friend profile: /:nickname ok
     giu nguyen header: ok

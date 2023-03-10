@@ -1,0 +1,25 @@
+.wrapper-all {
+    overflow-y: auto;
+    height: 100vh;
+}
+.wrapper {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.video-item {
+    height: 275px;
+    width: 208px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.description {
+    display: flex;
+    max-width: 200px;
+    color: rgba(22, 24, 35, 1);
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: '...';
+    white-space: nowrap;
+}
