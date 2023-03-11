@@ -63,13 +63,22 @@ const MENU_ITEM = [
 ];
 
 function Header() {
-    const dataNickname = JSON.parse(Cookies.get('dataUser'));
+    const [hrefNickName, setHrefNickName] = useState('');
+    useLayoutEffect(() => {
+        if (JSON.parse(Cookies.get('dataUser') !== undefined)) {
+            setHrefNickName(
+                Cookies.get('dataUser') === ''
+                    ? ''
+                    : JSON.parse(Cookies.get('dataUser')),
+            );
+        }
+    }, []);
 
     const USER_MENU = [
         {
             icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
             title: 'View profile',
-            to: `/me/@${dataNickname?.data?.nickname || ''}`,
+            to: `/me/@${hrefNickName?.data?.nickname || ''}`,
         },
         {
             icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,

@@ -1,14 +1,14 @@
 import Style from './meProfile.module.scss';
 import classNames from 'classnames/bind';
 import GetApp from '~/Components/GetApp';
-import Button from '~/Components/Button';
 import { useState, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Share, Write, Lock, UserIconLager } from '~/Components/Icons';
+import { Share, Lock, UserIconLager } from '~/Components/Icons';
 import MenuShare from '~/Components/MenuShare';
 import * as meProfileService from '~/Service/meProfileService';
 import Cookies from 'js-cookie';
 import MeVideos from './MeVideo/MeVideos';
+import PopupEdit from '~/Components/PopupEdit';
 
 
 function Profile() {
@@ -79,12 +79,7 @@ function Profile() {
                     </h1>
                     <h3 className={cx('nickname')}>{profileUser.nickname}</h3>
                     <div className={cx('outline-editProfile')}>
-                        <Button text className={cx('btn-editProfile')}>
-                            <Write></Write>
-                            <strong className={cx('btn-text')}>
-                                Edit profile
-                            </strong>
-                        </Button>
+                        <PopupEdit title={'Edit profile'}></PopupEdit>
                     </div>
                 </div>
                 <br></br>

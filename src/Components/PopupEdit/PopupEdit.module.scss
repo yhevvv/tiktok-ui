@@ -1,0 +1,26 @@
+.btn-editProfile {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: #161823;
+    border-color: rgba(22, 24, 35, 0.12);
+    background-color: rgb(255, 255, 255);
+    min-height: 36px;
+    font-weight: 600;
+    font-family: var(--name-font-family);
+    position: relative;
+    cursor: pointer;
+    padding: 0px 16px;
+    min-width: 136px;
+    text-align: center;
+}
+.popup {
+    align-items: center;
+    width: 700px;
+    height: 100%;
+    position: relative;
+    margin-top: -27%;
+    border-radius: 10px;
+    background-color: rgb(255 255 255);
+    padding: 24px 0px 0;
+}
