@@ -1,3 +1,5 @@
+.wrapper {
+}
 .btn-editProfile {
     border-width: 1px;
     border-style: solid;
@@ -17,10 +19,209 @@
 .popup {
     align-items: center;
     width: 700px;
-    height: 100%;
+    height: 750px;
     position: relative;
     margin-top: -27%;
     border-radius: 10px;
     background-color: rgb(255 255 255);
-    padding: 24px 0px 0;
+}
+
+.btn-text {
+    margin-top: 4px;
+    margin-left: 3px;
+}
+.header-popup {
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    font-size: 24px;
+    padding: 24px 24px 12px;
+    line-height: 36px;
+    color: rgb(22, 24, 35);
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.close {
+    position: relative;
+    right: 0%;
+    cursor: pointer;
+}
+.body-popup {
+    width: 700px;
+    padding: 8px 24px 0px;
+}
+.profile-photo {
+    padding: 16px 0px;
+    display: flex;
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.12);
+}
+.title,
+.title-bio {
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    line-height: 24px;
+    font-size: 16px;
+    width: 120px;
+    margin-right: 24px;
+}
+.upload-avatar {
+    position: relative;
+    left: 20%;
+}
+.avatar {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.icon-upload > input {
+    cursor: pointer;
+    display: none;
+}
+.icon-upload {
+    position: relative;
+    right: 2%;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(208, 208, 211);
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+}
+.Username {
+    padding: 16px 0px;
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.12);
+    position: relative;
+}
+.input-type,
+.input-name {
+    width: 360px;
+    height: 38px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    font-size: 16px;
+    color: rgb(22, 24, 35);
+    line-height: 24px;
+    outline: none;
+    border: none;
+    padding: 7px 12px;
+    box-sizing: border-box;
+    position: relative;
+    left: 7%;
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    }
+}
+.preview-input {
+    font-size: 12px;
+    color: rgba(22, 24, 35, 0.75);
+    line-height: 18px;
+    margin-top: 16px;
+    max-width: 360px;
+    overflow: hidden;
+    margin-left: 22%;
+}
+.name {
+    padding: 16px 0px;
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.12);
+}
+.input-name {
+    position: relative;
+    left: 12%;
+}
+.alert-name {
+    font-size: 12px;
+    color: rgba(22, 24, 35, 0.75);
+    line-height: 18px;
+    max-width: 460px;
+    overflow: hidden;
+    margin-top: 8px;
+    width: 360px;
+    margin-left: 22%;
+}
+.bio {
+    position: relative;
+    padding: 16px 0px;
+}
+.title-bio {
+    position: absolute;
+}
+.textarea-bio {
+    width: 360px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    font-size: 16px;
+    color: rgb(22, 24, 35);
+    line-height: 24px;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    height: 100px;
+    padding: 12px;
+    resize: none;
+    position: relative;
+    left: 22%;
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    }
+}
+.number-charater {
+    color: rgba(22, 24, 35, 0.75);
+    font-size: 12px;
+    line-height: 18px;
+    margin-left: 22%;
+}
+
+.footer-popup {
+    height: 86px;
+    display: flex;
+    padding: 0px 24px;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    border-top: 0.5px solid rgba(22, 24, 35, 0.2);
+    -webkit-box-align: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+.button-interact {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(22, 24, 35);
+    border-color: rgba(22, 24, 35, 0.12);
+    background-color: rgb(255, 255, 255);
+    min-height: 28px;
+    font-family: var(--default-font-family);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 7px 16px;
+    min-width: 96px;
+    height: 36px;
+    margin-left: 16px;
 }
