@@ -32,7 +32,7 @@ my profile: /me/:nickname ok
     fix-default-homepage: ok (dung firebase roi set o trong package.json bo phan homepage di roi run build)
     fix span video autoplay: ok
     fix href: ok
-    neu href duoc nhap vao khac @phamanhtuan2208 thi se tra ve 404 error:
+    neu href duoc nhap vao khac @phamanhtuan2208 thi se tra ve 404 error: ok
     popup-editprofile: 
     call API editprofile: 
 

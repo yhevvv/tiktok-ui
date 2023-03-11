@@ -10,6 +10,7 @@ import * as meProfileService from '~/Service/meProfileService';
 import Cookies from 'js-cookie';
 import MeVideos from './MeVideo/MeVideos';
 
+
 function Profile() {
     const cx = classNames.bind(Style);
 
@@ -48,6 +49,7 @@ function Profile() {
             setIsHovering(230);
         }
     };
+    
     const isToken = Cookies.get('isToken');
 
     useLayoutEffect(() => {
@@ -61,7 +63,9 @@ function Profile() {
             });
     }, [isToken, profileUser.nickname]);
 
+
     return (
+        
         <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
                 <img
@@ -186,6 +190,7 @@ function Profile() {
             </div>
             <GetApp></GetApp>
         </div>
+
     );
 }
 

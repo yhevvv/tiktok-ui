@@ -10,6 +10,7 @@ import meProfile from '~/Pages/meProfile';
 import Upload from '~/Pages/Upload';
 import Search from '~/Pages/Search';
 import Live from '~/Pages/Live';
+import NotFound from '~/Pages/404';
 
 //public Routers
 const PublicRouters = [
@@ -19,6 +20,7 @@ const PublicRouters = [
     { path: Config.routes.search, component: Search, layout: null },
     { path: Config.routes.upload, component: Upload, layout: HeaderOnly },
     { path: Config.routes.Profile, component: Profile, layout: FullLayout },
+    { path:"*", component: NotFound, layout: null},
 ];
 
 // Từ react-router-dom 6.6.0 pattern chứa @ không còn dùng được nữa
@@ -31,6 +33,8 @@ const PublicRouters = [
 //private Routers
 const PrivateRouters = [
     { path: Config.routes.meProfile, component: meProfile, layout: FullLayout },
+    { path:"*", component: NotFound, layout: null},
 ];
+
 
 export { PublicRouters, PrivateRouters };

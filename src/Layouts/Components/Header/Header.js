@@ -63,12 +63,13 @@ const MENU_ITEM = [
 ];
 
 function Header() {
-    const dataCookie = JSON.parse(Cookies.get('dataUser'));
+    const dataNickname = JSON.parse(Cookies.get('dataUser'));
+
     const USER_MENU = [
         {
             icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
             title: 'View profile',
-            to: `/me/@${dataCookie?.data?.nickname || '?'}`,
+            to: `/me/@${dataNickname?.data?.nickname || ''}`,
         },
         {
             icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
