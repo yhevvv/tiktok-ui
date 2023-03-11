@@ -1,21 +1,72 @@
 import classNames from 'classnames/bind';
 import Style from './PopupEdit.module.scss';
 import Button from '../Button';
-import { Write, IconX, WriteEdit } from '../Icons';
+import { Write, IconX, WriteEdit, TickCheck } from '../Icons';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Popup from 'reactjs-popup';
 import images from '~/assets/images';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function PopupEdit({ title, className }) {
     const [click, setClick] = useState(false);
+
+    const [valueName, setValueName] = useState('');
+
+    const [showTick, setShowTick] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(true);
+    const prevValueNameRef = useRef('');
+
+    useEffect(() => {
+        if (valueName.trim() === '' || valueName.length < 6) {
+            // Reset component
+            setShowSpinner(true);
+            setShowTick(false);
+            return;
+        }
+
+        if (valueName !== prevValueNameRef.current) {
+            // Reset component
+            setShowSpinner(true);
+            setShowTick(false);
+        }
+
+        const timer = setTimeout(() => {
+            setShowSpinner(false);
+            setShowTick(true);
+        }, 700);
+
+        prevValueNameRef.current = valueName;
+
+        return () => clearTimeout(timer);
+    }, [valueName]);
+    //set value name
+    function handleInputChangeUsername(event) {
+        setValueName(event.target.value);
+    }
 
     const togglePopup = () => {
         setClick(!click);
     };
 
     const cx = classNames.bind(Style);
+
+    //shortenedValueName
+    const shortenedValueName =
+        valueName.length > 10 ? `${valueName.substring(0, 45)}` : valueName;
+
+    //condition name border red
+    const conditionName = cx({
+        'input-type-nameWarn':
+            (valueName.length >= 1 && valueName.length < 6) ||
+            valueName.length > 24,
+        'input-type-name':
+            valueName.length <= 0 ||
+            (valueName.length >= 6 && valueName.length <= 24),
+    });
+
     return (
         <div className={cx('wrapper')}>
             <Button
@@ -53,20 +104,46 @@ function PopupEdit({ title, className }) {
                                     </div>
                                 </label>
                             </div>
-                            {/* icon here */}
                         </div>
                         <div className={cx('Username')}>
                             <span className={cx('title')}>Username</span>
                             <input
                                 type={'text'}
-                                className={cx('input-type')}
+                                className={conditionName}
+                                placeholder={'Username'}
+                                value={valueName}
+                                onChange={handleInputChangeUsername}
                             ></input>
-                            {/* icon tick */}
+
+                            {valueName.length >= 6 &&
+                                valueName.length <= 24 && (
+                                    <div className={cx('icon-interact')}>
+                                        {showSpinner && (
+                                            <FontAwesomeIcon
+                                                className={cx('loading')}
+                                                icon={faSpinner}
+                                            ></FontAwesomeIcon>
+                                        )}
+                                        {showTick && <TickCheck />}
+                                    </div>
+                                )}
+                            <br></br>
+                            {valueName.length < 6 && valueName.length >= 1 && (
+                                <span className={cx('input-type-warn')}>
+                                    include at least 6 charaters in your name
+                                </span>
+                            )}
+                            {valueName.length > 24 && (
+                                <span className={cx('input-type-warn')}>
+                                    Maximum 24 characters
+                                </span>
+                            )}
+                            <br></br>
                             <Link
-                                className={cx('preview-input')}
-                                to={'/me/@phamanhtuan2208'}
+                                className={cx('preview-inputHref')}
+                                to={`/me/@${valueName}`}
                             >
-                                /me/@phamanhtuan2208
+                                .../me/@{shortenedValueName}
                             </Link>
                             <p className={cx('preview-input')}>
                                 Usernames can only contain letters, numbers,
@@ -79,6 +156,8 @@ function PopupEdit({ title, className }) {
                             <input
                                 type={'text'}
                                 className={cx('input-name')}
+                                placeholder={'Name'}
+                                //value={}
                             ></input>
                             <p className={cx('alert-name')}>
                                 Your nickname can only be changed once every 7
@@ -87,7 +166,10 @@ function PopupEdit({ title, className }) {
                         </div>
                         <div className={cx('bio')}>
                             <span className={cx('title-bio')}>Bio</span>
-                            <textarea className={cx('textarea-bio')}></textarea>
+                            <textarea
+                                className={cx('textarea-bio')}
+                                placeholder={'Bio'}
+                            ></textarea>
                             <p className={cx('number-charater')}>0/80</p>
                         </div>
                     </div>

@@ -104,7 +104,8 @@
     position: relative;
 }
 .input-type,
-.input-name {
+.input-name,
+.input-type-name {
     width: 360px;
     height: 38px;
     border-radius: 4px;
@@ -124,7 +125,59 @@
         outline: rgba(22, 24, 35, 0.2) solid 1.5px;
     }
 }
-.preview-input {
+
+.input-type-name {
+    padding-right: 50px;
+}
+.input-type-nameWarn{
+    width: 360px;
+    height: 38px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    outline: rgb(255, 76, 58) solid 1.5px;
+    font-size: 16px;
+    color: rgb(22, 24, 35);
+    line-height: 24px;
+    padding: 7px 12px;
+    box-sizing: border-box;
+    position: relative;
+    left: 7%;
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgb(255, 76, 58) solid 1.5px;
+    }
+}
+
+.icon-interact {
+    display: initial;
+    margin-left: 12px;
+}
+
+.loading {
+    animation: spinner 0.8s linear infinite; //spinner dynamic
+}
+
+@keyframes spinner {
+    ///spinner dynamic
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.input-type-warn {
+    height: 18px;
+    line-height: 18px;
+    color: rgb(255, 76, 58);
+    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 22%;
+}
+.preview-input,
+.preview-inputHref {
     font-size: 12px;
     color: rgba(22, 24, 35, 0.75);
     line-height: 18px;
@@ -133,6 +186,7 @@
     overflow: hidden;
     margin-left: 22%;
 }
+
 .name {
     padding: 16px 0px;
     border-bottom: 0.5px solid rgba(22, 24, 35, 0.12);
@@ -159,6 +213,7 @@
     position: absolute;
 }
 .textarea-bio {
+    font-family: var(--default-font-family);
     width: 360px;
     border-radius: 4px;
     background: rgba(22, 24, 35, 0.06);
