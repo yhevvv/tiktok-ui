@@ -121,6 +121,7 @@ html *::-webkit-scrollbar-track {
 //Popup
 .popup-overlay {
     background: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
 }
 
 @keyframes anvil {
