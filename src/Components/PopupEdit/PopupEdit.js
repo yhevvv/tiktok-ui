@@ -10,17 +10,19 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function PopupEdit({ title, className }) {
+function PopupEdit({ title }) {
     const [click, setClick] = useState(false);
 
     const [valueName, setValueName] = useState('');
+    const [valueName2, setValueName2] = useState('');
+    const [valueBio, setValueBio] = useState('');
 
     const [showTick, setShowTick] = useState(false);
     const [showSpinner, setShowSpinner] = useState(true);
     const prevValueNameRef = useRef('');
 
     useEffect(() => {
-        if (valueName.trim() === '' || valueName.length < 6) {
+        if (valueName.length < 6) {
             // Reset component
             setShowSpinner(true);
             setShowTick(false);
@@ -46,6 +48,14 @@ function PopupEdit({ title, className }) {
     function handleInputChangeUsername(event) {
         setValueName(event.target.value);
     }
+    //set value name2
+    function handleInputChangeUsername2(event) {
+        setValueName2(event.target.value);
+    }
+    //set value Bio
+    function handleInputChangeBio(event) {
+        setValueBio(event.target.value);
+    }
 
     const togglePopup = () => {
         setClick(!click);
@@ -56,15 +66,36 @@ function PopupEdit({ title, className }) {
     //shortenedValueName
     const shortenedValueName =
         valueName.length > 10 ? `${valueName.substring(0, 45)}` : valueName;
+    //charater special
+    const hasSpecialChar = /[`~!@#$%^&*()+=[\]{};':"\\|,.<>/?-]/.test(
+        valueName,
+    );
 
     //condition name border red
     const conditionName = cx({
         'input-type-nameWarn':
             (valueName.length >= 1 && valueName.length < 6) ||
-            valueName.length > 24,
+            valueName.length > 24 ||
+            valueName.indexOf(' ') !== -1 ||
+            hasSpecialChar,
         'input-type-name':
             valueName.length <= 0 ||
             (valueName.length >= 6 && valueName.length <= 24),
+    });
+    //condition name 2 border red
+    const conditionName2 = cx({
+        'input-name': valueName2.length <= 30,
+        'input-type-name2Warn': valueName2.length > 30,
+    });
+
+    //condition Bio border red
+    const conditionBio = cx({
+        'textarea-bio': valueBio.length <= 80,
+        'textarea-bio-warning': valueBio.length > 80,
+    });
+    //condition Bio number length value
+    const conditionBioLength = cx({
+        'bioLength-warn': valueBio.length > 80,
     });
 
     return (
@@ -116,7 +147,8 @@ function PopupEdit({ title, className }) {
                             ></input>
 
                             {valueName.length >= 6 &&
-                                valueName.length <= 24 && (
+                                valueName.length <= 24 &&
+                                valueName.indexOf(' ') === -1 && (
                                     <div className={cx('icon-interact')}>
                                         {showSpinner && (
                                             <FontAwesomeIcon
@@ -128,15 +160,30 @@ function PopupEdit({ title, className }) {
                                     </div>
                                 )}
                             <br></br>
-                            {valueName.length < 6 && valueName.length >= 1 && (
+                            {valueName.indexOf(' ') !== -1 || hasSpecialChar ? (
                                 <span className={cx('input-type-warn')}>
-                                    include at least 6 charaters in your name
+                                    must not contain spaces, special characters,
+                                    except "_" in the name
                                 </span>
-                            )}
-                            {valueName.length > 24 && (
-                                <span className={cx('input-type-warn')}>
-                                    Maximum 24 characters
-                                </span>
+                            ) : (
+                                <>
+                                    {valueName.length < 6 &&
+                                        valueName.length >= 1 && (
+                                            <span
+                                                className={cx(
+                                                    'input-type-warn',
+                                                )}
+                                            >
+                                                include at least 6 charaters in
+                                                your name
+                                            </span>
+                                        )}
+                                    {valueName.length > 24 && (
+                                        <span className={cx('input-type-warn')}>
+                                            Maximum 24 characters
+                                        </span>
+                                    )}
+                                </>
                             )}
                             <br></br>
                             <Link
@@ -155,29 +202,57 @@ function PopupEdit({ title, className }) {
                             <span className={cx('title')}>Name</span>
                             <input
                                 type={'text'}
-                                className={cx('input-name')}
+                                className={conditionName2}
                                 placeholder={'Name'}
-                                //value={}
+                                value={valueName2}
+                                onChange={handleInputChangeUsername2}
                             ></input>
-                            <p className={cx('alert-name')}>
-                                Your nickname can only be changed once every 7
-                                days.
-                            </p>
+                            {valueName2.length <= 30 ? (
+                                <p className={cx('alert-name')}>
+                                    Your nickname can only be changed once every
+                                    7 days.
+                                </p>
+                            ) : (
+                                <p className={cx('input-type-warn')}>
+                                    Maximum 30 characters
+                                </p>
+                            )}
                         </div>
                         <div className={cx('bio')}>
                             <span className={cx('title-bio')}>Bio</span>
                             <textarea
-                                className={cx('textarea-bio')}
+                                className={conditionBio}
                                 placeholder={'Bio'}
+                                value={valueBio}
+                                onChange={handleInputChangeBio}
                             ></textarea>
-                            <p className={cx('number-charater')}>0/80</p>
+                            <p className={cx('number-charater')}>
+                                <span className={conditionBioLength}>
+                                    {valueBio.length}/
+                                </span>
+                                80
+                            </p>
                         </div>
                     </div>
                     <div className={cx('footer-popup')}>
-                        <Button text className={cx('button-interact')}>
+                        <Button
+                            text
+                            className={cx('button-interact')}
+                            onClick={togglePopup}
+                        >
                             Cancel
                         </Button>
-                        <Button className={cx('button-interact')} text disable>
+                        <Button
+                            
+                            primary
+                            disable={
+                                valueName.length < 6 ||
+                                valueName.length > 24 ||
+                                valueName.indexOf(' ') !== -1 ||
+                                valueName2.length > 30 ||
+                                valueBio.length > 80
+                            }
+                        >
                             Save
                         </Button>
                     </div>

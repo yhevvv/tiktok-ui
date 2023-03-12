@@ -129,7 +129,8 @@
 .input-type-name {
     padding-right: 50px;
 }
-.input-type-nameWarn{
+.input-type-nameWarn,
+.input-type-name2Warn {
     width: 360px;
     height: 38px;
     border-radius: 4px;
@@ -195,6 +196,10 @@
     position: relative;
     left: 12%;
 }
+
+.input-type-name2Warn {
+    left: 12%;
+}
 .alert-name {
     font-size: 12px;
     color: rgba(22, 24, 35, 0.75);
@@ -212,7 +217,8 @@
 .title-bio {
     position: absolute;
 }
-.textarea-bio {
+.textarea-bio,
+.textarea-bio-warning {
     font-family: var(--default-font-family);
     width: 360px;
     border-radius: 4px;
@@ -234,6 +240,15 @@
         outline: rgba(22, 24, 35, 0.2) solid 1.5px;
     }
 }
+
+.textarea-bio-warning {
+    outline: rgb(255, 76, 58) solid 1.5px;
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgb(255, 76, 58) solid 1.5px;
+    }
+}
+
 .number-charater {
     color: rgba(22, 24, 35, 0.75);
     font-size: 12px;
@@ -279,4 +294,7 @@
     min-width: 96px;
     height: 36px;
     margin-left: 16px;
+}
+.bioLength-warn {
+    color: rgb(255, 76, 58);
 }
