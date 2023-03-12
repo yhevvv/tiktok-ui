@@ -75,9 +75,11 @@ function Profile() {
                 ></img>
                 <div className={cx('title-container')}>
                     <h1 className={cx('name')}>
-                        {profileUser.first_name + ' ' + profileUser.last_name}
+                        {profileUser.nickname}
                     </h1>
-                    <h3 className={cx('nickname')}>{profileUser.nickname}</h3>
+                    <h3 className={cx('nickname')}>
+                        {profileUser.first_name + ' ' + profileUser.last_name}
+                    </h3>
                     <div className={cx('outline-editProfile')}>
                         <PopupEdit title={'Edit profile'}></PopupEdit>
                     </div>

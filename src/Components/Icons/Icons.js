@@ -648,7 +648,6 @@ export const TickCheck = ({
     height = '1.6rem',
 }) => (
     <svg
-        class="tiktok-1y9z3gx-StyledTickBold e13yu7jj23"
         className={className}
         width={width}
         height={height}

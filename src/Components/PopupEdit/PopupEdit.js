@@ -9,6 +9,8 @@ import images from '~/assets/images';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import * as meProfileService from '~/Service/meProfileService';
+import Cookies from 'js-cookie';
 
 function PopupEdit({ title }) {
     const [click, setClick] = useState(false);
@@ -20,6 +22,8 @@ function PopupEdit({ title }) {
     const [showTick, setShowTick] = useState(false);
     const [showSpinner, setShowSpinner] = useState(true);
     const prevValueNameRef = useRef('');
+
+    const [meProfile, setMeProfile] = useState([]);
 
     useEffect(() => {
         if (valueName.length < 6) {
@@ -44,6 +48,16 @@ function PopupEdit({ title }) {
 
         return () => clearTimeout(timer);
     }, [valueName]);
+
+    //api get meProfile
+    useEffect(() => {
+        const isToken = Cookies.get('isToken');
+        meProfileService
+            .meProfile({ token: isToken })
+            .then((data) => setMeProfile(data))
+            .catch((error) => console.log(error));
+    });
+
     //set value name
     function handleInputChangeUsername(event) {
         setValueName(event.target.value);
@@ -59,6 +73,9 @@ function PopupEdit({ title }) {
 
     const togglePopup = () => {
         setClick(!click);
+        setValueName(meProfile.nickname);
+        setValueName2(meProfile.first_name + ' ' + meProfile.last_name);
+        setValueBio(meProfile.bio);
     };
 
     const cx = classNames.bind(Style);
@@ -243,7 +260,6 @@ function PopupEdit({ title }) {
                             Cancel
                         </Button>
                         <Button
-                            
                             primary
                             disable={
                                 valueName.length < 6 ||
