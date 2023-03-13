@@ -78,7 +78,7 @@ function Profile() {
                         {profileUser.nickname}
                     </h1>
                     <h3 className={cx('nickname')}>
-                        {profileUser.first_name + ' ' + profileUser.last_name}
+                        {profileUser.last_name}
                     </h3>
                     <div className={cx('outline-editProfile')}>
                         <PopupEdit title={'Edit profile'}></PopupEdit>

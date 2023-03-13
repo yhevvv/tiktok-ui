@@ -5,7 +5,6 @@ import { Write, IconX, WriteEdit, TickCheck } from '../Icons';
 import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import Popup from 'reactjs-popup';
-import images from '~/assets/images';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +15,8 @@ import Cookies from 'js-cookie';
 function PopupEdit({ title }) {
     const [click, setClick] = useState(false);
 
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [preview, setPreview] = useState(null);
     const [valueName, setValueName] = useState('');
     const [valueName2, setValueName2] = useState('');
     const [valueBio, setValueBio] = useState('');
@@ -25,7 +26,6 @@ function PopupEdit({ title }) {
     const prevValueNameRef = useRef('');
 
     const [meProfile, setMeProfile] = useState([]);
-    const [editProfile, setEditProfile] = useState([]);
 
     useEffect(() => {
         if (valueName.length < 6) {
@@ -51,31 +51,6 @@ function PopupEdit({ title }) {
         return () => clearTimeout(timer);
     }, [valueName]);
 
-    //api get meProfile
-    useEffect(() => {
-        const isToken = Cookies.get('isToken');
-        meProfileService
-            .meProfile({ token: isToken })
-            .then((data) => setMeProfile(data))
-            .catch((error) => console.log(error));
-    });
-
-    //api post meProfile
-    const handleEdit = async (event) => {
-        const isToken = Cookies.get('isToken');
-        event.preventDefault();
-        try {
-            const editData = await editProfileService.editProfile({
-                _method: 'PATCH',
-                token: isToken,
-            });
-            setEditProfile(editData);
-            // await new Promise((resolve, reject) => setTimeout(resolve, 2500))
-            // window.location.reload();
-        } catch (error) {}
-        
-        console.log(editProfile);
-    };
     //set value name
     function handleInputChangeUsername(event) {
         setValueName(event.target.value);
@@ -92,11 +67,46 @@ function PopupEdit({ title }) {
     const togglePopup = () => {
         setClick(!click);
         setValueName(meProfile.nickname);
-        setValueName2(meProfile.first_name + ' ' + meProfile.last_name);
+        setValueName2(meProfile.last_name);
         setValueBio(meProfile.bio);
     };
 
     const cx = classNames.bind(Style);
+    //api get meProfile
+    useEffect(() => {
+        const isToken = Cookies.get('isToken');
+        meProfileService
+            .meProfile({ token: isToken })
+            .then((data) => setMeProfile(data))
+            .catch((error) => console.log(error));
+    });
+
+    //set avatar
+    function handleSelectedHandler(event) {
+        setSelectedFile(event.target.files[0]);
+        setPreview(URL.createObjectURL(event.target.files[0]));
+    }
+    //api post meProfile
+    const handleEdit = async (event) => {
+        event.preventDefault();
+        const isToken = Cookies.get('isToken');
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        try {
+            await editProfileService.editProfile({
+                _method: 'PATCH',
+                token: isToken,
+                nickname: valueName,
+                last_name: valueName2,
+                bio: valueBio,
+                avatar: selectedFile,
+            });
+            // await new Promise((resolve) => setTimeout(resolve, 2500));
+            // window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     //shortenedValueName
     const shortenedValueName =
@@ -156,16 +166,25 @@ function PopupEdit({ title }) {
                             <span className={cx('title')}>Profile photo</span>
                             <div className={cx('upload-avatar')}>
                                 <label className={cx('file-input-icon')}>
-                                    <img
-                                        src={images.avatar1}
-                                        alt=""
-                                        className={cx('avatar')}
-                                    ></img>
+                                    {preview ? (
+                                        <img
+                                            src={preview}
+                                            alt=""
+                                            className={cx('avatar')}
+                                        ></img>
+                                    ) : (
+                                        <img
+                                            src={meProfile.avatar}
+                                            alt=""
+                                            className={cx('avatar')}
+                                        ></img>
+                                    )}
                                     <div className={cx('icon-upload')}>
                                         <WriteEdit></WriteEdit>
                                         <input
                                             type={'file'}
                                             className={cx('file-input')}
+                                            onChange={handleSelectedHandler}
                                         ></input>
                                     </div>
                                 </label>
