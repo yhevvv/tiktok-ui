@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo } from 'react';
-import * as ProfileService from '~/Service/ProfileService';
 import Style from './MeVideos.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import * as ProfileService from '~/Service/profileService'
 
 function MeVideos({ nickname }) {
     const cx = classNames.bind(Style);

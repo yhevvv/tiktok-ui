@@ -35,10 +35,13 @@ my profile: /me/:nickname ok
     neu href duoc nhap vao khac @phamanhtuan2208 thi se tra ve 404 error: ok
     popup-editprofile: ok
     
+    
     call API editprofile{
     get api me: ok
-    post api update:
+    PATCH api update: 
     }
+
+    fix re-render router Fetch/xml:
 
 friend profile: /:nickname ok
     giu nguyen header: ok

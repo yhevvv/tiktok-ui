@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import * as meProfileService from '~/Service/meProfileService';
+import * as editProfileService from '~/Service/editProfileService';
 import Cookies from 'js-cookie';
 
 function PopupEdit({ title }) {
@@ -24,6 +25,7 @@ function PopupEdit({ title }) {
     const prevValueNameRef = useRef('');
 
     const [meProfile, setMeProfile] = useState([]);
+    const [editProfile, setEditProfile] = useState([]);
 
     useEffect(() => {
         if (valueName.length < 6) {
@@ -58,6 +60,22 @@ function PopupEdit({ title }) {
             .catch((error) => console.log(error));
     });
 
+    //api post meProfile
+    const handleEdit = async (event) => {
+        const isToken = Cookies.get('isToken');
+        event.preventDefault();
+        try {
+            const editData = await editProfileService.editProfile({
+                _method: 'PATCH',
+                token: isToken,
+            });
+            setEditProfile(editData);
+            // await new Promise((resolve, reject) => setTimeout(resolve, 2500))
+            // window.location.reload();
+        } catch (error) {}
+        
+        console.log(editProfile);
+    };
     //set value name
     function handleInputChangeUsername(event) {
         setValueName(event.target.value);
@@ -260,6 +278,7 @@ function PopupEdit({ title }) {
                             Cancel
                         </Button>
                         <Button
+                            onClick={handleEdit}
                             primary
                             disable={
                                 valueName.length < 6 ||
