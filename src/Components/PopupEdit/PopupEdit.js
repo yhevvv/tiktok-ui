@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import * as meProfileService from '~/Service/meProfileService';
-import * as editProfileService from '~/Service/editProfileService';
+import * as editProfileService from '~/Service/editProfileService/editProfileService';
+import * as imageProfileService from '~/Service/editProfileService/imageProfileService';
 import Cookies from 'js-cookie';
 
 function PopupEdit({ title }) {
@@ -90,8 +91,6 @@ function PopupEdit({ title }) {
     const handleEdit = async (event) => {
         event.preventDefault();
         const isToken = Cookies.get('isToken');
-        const formData = new FormData();
-        formData.append('image', selectedFile);
         try {
             await editProfileService.editProfile({
                 _method: 'PATCH',
@@ -101,8 +100,14 @@ function PopupEdit({ title }) {
                 bio: valueBio,
                 avatar: selectedFile,
             });
-            // await new Promise((resolve) => setTimeout(resolve, 2500));
-            // window.location.reload();
+            await imageProfileService.imageProfile({
+                _method: 'PATCH',
+                token: isToken,
+                avatar: selectedFile,
+                nickname: valueName,
+            });
+            await new Promise((resolve) => setTimeout(resolve, 2500));
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

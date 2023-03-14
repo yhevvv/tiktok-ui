@@ -38,10 +38,11 @@ my profile: /me/:nickname ok
     
     call API editprofile{
     get api me: ok
-    PATCH api update: 
+    PATCH api update: ok (but bug api, when change image and nickname a same time, nickname go back is email)
+    (nen la sua anh rieng, xong roi sua nickname de tranh tinh trang do)
     }
 
-    fix re-render router Fetch/xml:
+    fix re-render router Fetch/xml: 
 
 friend profile: /:nickname ok
     giu nguyen header: ok
