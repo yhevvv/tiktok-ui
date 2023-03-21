@@ -5,7 +5,7 @@ import FullLayout from '~/Layouts/FullLayout';
 
 import Home from '~/Pages/Home';
 import Following from '~/Pages/Following';
-import Profile from '~/Pages/Profiles';
+import Profile from '~/Pages/unFollowingProfile';
 import meProfile from '~/Pages/meProfile';
 import Upload from '~/Pages/Upload';
 import Search from '~/Pages/Search';

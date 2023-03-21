@@ -42,7 +42,7 @@ my profile: /me/:nickname ok
     (nen la sua anh rieng, xong roi sua nickname de tranh tinh trang do)
     }
 
-    fix re-render router Fetch/xml: 
+    fix re-render router Fetch/xml: ????
 
 friend profile: /:nickname ok
     giu nguyen header: ok
@@ -50,8 +50,8 @@ friend profile: /:nickname ok
     sidebar bo phan suggest: ok
     giao dien: ok
     menu share: ok
-    neu href duoc nhap vao khac @profilefrien thi se tra ve 404 error:
     call API friend profile:
+    neu href duoc nhap vao khac @profilefrien thi se tra ve 404 error: 
 
 unfollowing profile: 
     giu nguyen header: ok

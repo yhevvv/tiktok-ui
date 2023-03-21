@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie';
 
-
 const routes = {
     root: '/',
     following: '/following',
@@ -10,9 +9,12 @@ const routes = {
     live: '/live',
 };
 
-if (JSON.parse(Cookies.get('dataUser') !== undefined)){
-    const dataNickname = Cookies.get('dataUser') === '' ?  '': JSON.parse(Cookies.get('dataUser'));
-    routes.meProfile = `/me/@${dataNickname?.data?.nickname}`
+if (JSON.parse(Cookies.get('dataUser') !== undefined)) {
+    const dataNickname =
+        Cookies.get('dataUser') === ''
+            ? ''
+            : JSON.parse(Cookies.get('dataUser'));
+    routes.meProfile = `/me/@${dataNickname?.data?.nickname}`;
 }
 
 export default routes;
