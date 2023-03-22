@@ -7,17 +7,15 @@ import PropTypes from 'prop-types';
 import Style from './AccountItem.module.scss';
 import Image from '../Image';
 import images from '~/assets/images';
-import Cookies from 'js-cookie';
 
 function AccountItem({ data }) {
     const cx = classNames.bind(Style);
 
     const handleClick = () => {
-        Cookies.set('DataNickName', data.nickname);
         setTimeout(() => {
             // eslint-disable-next-line no-restricted-globals
             location.reload();
-        }, 100);
+        }, 500);
     };
     return (
         <Link to={`/@${data.nickname}`} onClick={handleClick}>

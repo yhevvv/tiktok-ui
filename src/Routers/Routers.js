@@ -19,8 +19,13 @@ const PublicRouters = [
     { path: Config.routes.live, component: Live },
     { path: Config.routes.search, component: Search, layout: null },
     { path: Config.routes.upload, component: Upload, layout: HeaderOnly },
-    { path: Config.routes.Profile, component: Profile, layout: FullLayout },
-    { path:"*", component: NotFound, layout: null},
+    {
+        path: Config.routes.Profile,
+        component: Profile,
+        layout: FullLayout,
+        exact: true,
+    },
+    { path: '*', component: NotFound, layout: null },
 ];
 
 // Từ react-router-dom 6.6.0 pattern chứa @ không còn dùng được nữa
@@ -33,8 +38,7 @@ const PublicRouters = [
 //private Routers
 const PrivateRouters = [
     { path: Config.routes.meProfile, component: meProfile, layout: FullLayout },
-    { path:"*", component: NotFound, layout: null},
+    { path: '*', component: NotFound, layout: null },
 ];
-
 
 export { PublicRouters, PrivateRouters };
