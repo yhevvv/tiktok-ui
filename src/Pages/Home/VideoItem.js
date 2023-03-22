@@ -71,7 +71,17 @@ function VideoItem({ data }) {
                         </Link>
                         <Link className={cx('id_nickname')}>
                             <h3 className={cx('id')}>
-                                {data.user.first_name} {data.user.last_name}
+                                {data.user.first_name} {data.user.last_name}{' '}
+                                {data.user.tick && (
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        style={{
+                                            color: '#20d5ec',
+                                            width: '14px',
+                                            height: '14px',
+                                        }}
+                                    ></FontAwesomeIcon>
+                                )}
                             </h3>
                             {data.user.tick && (
                                 <FontAwesomeIcon
@@ -135,7 +145,7 @@ function VideoItem({ data }) {
                     </Button>
                 </div>
             </div>
-            <hr className={cx('hr-item')} ></hr>
+            <hr className={cx('hr-item')}></hr>
         </div>
     );
 }

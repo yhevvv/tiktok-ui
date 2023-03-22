@@ -50,7 +50,8 @@ friend profile: /:nickname ok
     sidebar bo phan suggest: ok
     giao dien: ok
     menu share: ok
-    call API friend profile:
+    call API friend profile: ok
+    neu href duoc nhap vao dung @profilefrien thi tra ve trang nguoi do: 
     neu href duoc nhap vao khac @profilefrien thi se tra ve 404 error: 
 
 unfollowing profile: 

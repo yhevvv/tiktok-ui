@@ -39,12 +39,10 @@ function Search() {
 
             const result = await searchService.search(debouncedValue);
             setSearchResult(result);
-
             setLoading(false);
         };
-
         fetchApi();
-    }, [debouncedValue]);
+    }, [debouncedValue, searchResult.nickname]);
 
     const inputRef = useRef();
 
@@ -79,6 +77,7 @@ function Search() {
                             <span className={cx('search-title')}>
                                 Accounts
                                 {searchResult.map((result) => (
+                                    // eslint-disable-next-line no-sequences
                                     <AccountItem
                                         key={result.id}
                                         data={result}

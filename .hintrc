@@ -13,6 +13,7 @@
           "display: flow-root"
         ]
       }
-    ]
+    ],
+    "detect-css-reflows/layout": "off"
   }
 }

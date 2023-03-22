@@ -2,17 +2,25 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import Style from './AccountItem.module.scss';
 import Image from '../Image';
 import images from '~/assets/images';
-
-const cx = classNames.bind(Style);
+import Cookies from 'js-cookie';
 
 function AccountItem({ data }) {
+    const cx = classNames.bind(Style);
+
+    const handleClick = () => {
+        Cookies.set('DataNickName', data.nickname);
+        setTimeout(() => {
+            // eslint-disable-next-line no-restricted-globals
+            location.reload();
+        }, 100);
+    };
     return (
-        <Link to={`/@${data.nickname}`}>
+        <Link to={`/@${data.nickname}`} onClick={handleClick}>
             <div className={cx('wrapper')}>
                 <Image
                     src={data.avatar}

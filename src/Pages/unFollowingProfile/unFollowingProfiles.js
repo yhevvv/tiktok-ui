@@ -1,14 +1,15 @@
-import Style from './meProfile.module.scss';
+import Style from './unFollowingProfiles.module.scss';
 import classNames from 'classnames/bind';
 import GetApp from '~/Components/GetApp';
+import Button from '~/Components/Button';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Share, Lock, UserIconLager } from '~/Components/Icons';
+import { Share, Dot, Lock, UserIconLager } from '~/Components/Icons';
 import MenuShare from '~/Components/MenuShare';
-import * as meProfileService from '~/Service/meProfileService';
+import MenuReport from '~/Components/MenuReport';
+import * as profileService from '~/Service/profileService';
+import MeVideos from './unFollowingVideo/unFollowingVideo';
 import Cookies from 'js-cookie';
-import MeVideos from './MeVideo/MeVideos';
-import PopupEdit from '~/Components/PopupEdit';
 import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,7 @@ function Profile() {
     const [isHovering, setIsHovering] = useState(0);
     const [isSwitch, setIsSwitch] = useState(true);
 
-    const [profileUser, setProfileUser] = useState([]);
+    const [nickNameFriend, setNickNameFriend] = useState([]);
 
     const handleNoClick = () => {
         setNoClick('tab-noClick');
@@ -53,12 +54,14 @@ function Profile() {
     };
 
     useEffect(() => {
-        const token = Cookies.get('isToken');
-        if (token) {
-            meProfileService.meProfile({ token: token }).then((data) => {
-                setProfileUser(data);
+        profileService
+            .Profile({ nickname: Cookies.get('DataNickName') })
+            .then((data) => {
+                setNickNameFriend(data);
+            })
+            .catch((error) => {
+                console.log(error);
             });
-        }
     }, []);
 
     return (
@@ -67,18 +70,19 @@ function Profile() {
                 <img
                     className={cx('avatar')}
                     src={
-                        profileUser.avatar ===
+                        nickNameFriend.avatar ===
                         'https://files.fullstack.edu.vn/f8-tiktok/'
                             ? images.NoImage
-                            : profileUser.avatar
+                            : nickNameFriend.avatar
                     }
                     alt=""
                 ></img>
                 <div className={cx('title-container')}>
-                    <h1 className={cx('name')}>{profileUser.nickname}</h1>
-                    <h3 className={cx('nickname')}>
-                        {profileUser.last_name}{' '}
-                        {profileUser.tick && (
+                    <h1 className={cx('name')}>
+                        {nickNameFriend.first_name +
+                            ' ' +
+                            nickNameFriend.last_name}{' '}
+                        {nickNameFriend.tick && (
                             <FontAwesomeIcon
                                 style={{
                                     color: '#20d5ec',
@@ -88,41 +92,49 @@ function Profile() {
                                 icon={faCircleCheck}
                             ></FontAwesomeIcon>
                         )}
+                    </h1>
+                    <h3 className={cx('nickname')}>
+                        {nickNameFriend.nickname}
                     </h3>
                     <div className={cx('outline-editProfile')}>
-                        <PopupEdit title={'Edit profile'}></PopupEdit>
+                        <Button primary className={cx('btn-editProfile')}>
+                            <strong className={cx('btn-text')}>Follow</strong>
+                        </Button>
                     </div>
                 </div>
                 <br></br>
                 <div className={cx('btn-share')}>
                     <MenuShare icon={<Share></Share>}></MenuShare>
+                    <MenuReport icon={<Dot></Dot>}></MenuReport>
                 </div>
             </div>
             <h2 className={cx('statistical')}>
                 <div className={cx('statistical-item')}>
                     <strong className={cx('number-following')}>
-                        {profileUser.followings_count == null
+                        {nickNameFriend.followings_count === null
                             ? '0'
-                            : profileUser.followings_count}
+                            : nickNameFriend.followings_count}
                     </strong>
                     <span className={cx('following')}>Following</span>
                 </div>
                 <div className={cx('statistical-item')}>
                     <strong className={cx('number-followers')}>
-                        {profileUser.followers_count == null
+                        {nickNameFriend.followers_count === null
                             ? '0'
-                            : profileUser.followers_count}
+                            : nickNameFriend.followers_count}
                     </strong>
-                    <span className={cx('followers')}>followers</span>
+                    <span className={cx('followers')}>Followers</span>
                 </div>
                 <div className={cx('statistical-item')}>
                     <strong className={cx('number-like')}>
-                        {profileUser.likes_count}
+                        {nickNameFriend.likes_count === null
+                            ? '0'
+                            : nickNameFriend.likes_count}
                     </strong>
                     <span className={cx('like')}>likes</span>
                 </div>
             </h2>
-            <h2 className={cx('bio')}>{profileUser.bio}</h2>
+            <h2 className={cx('bio')}>{nickNameFriend.bio}</h2>
             <div className={cx('videos-user')}>
                 <div className={cx('tab')}>
                     <p
@@ -152,10 +164,10 @@ function Profile() {
                 {/* code hoi ngu xiu nhung luoi qua */}
                 {isSwitch ? (
                     <>
-                        {Cookies.get('userVideo') ? (
+                        {Cookies.get('unFollowVideo') ? (
                             <div className={cx('meVideo')}>
                                 <MeVideos
-                                    nickname={profileUser.nickname}
+                                    nickname={nickNameFriend.nickname}
                                 ></MeVideos>
                             </div>
                         ) : (
