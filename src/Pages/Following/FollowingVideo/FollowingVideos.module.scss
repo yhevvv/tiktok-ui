@@ -1,0 +1,70 @@
+.wrapper-all {
+    height: calc(100vh);
+    top: 44px;
+}
+.wrapper {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.video-item {
+    height: 302px;
+    width: 226px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.profile-wrapper {
+    background: transparent;
+    bottom: 0px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 12px 20px;
+    text-align: center;
+    margin-top: -83%;
+    padding-bottom: 38px;
+}
+.image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.username {
+    color: rgb(255, 255, 255);
+    font-family: var(--default-font-family);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25px;
+    width: 100%;
+    margin: 0px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nickname {
+    color: rgb(255, 255, 255);
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 180px;
+    margin: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-follow {
+    padding: 18px 81px;
+}

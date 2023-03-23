@@ -1,7 +1,16 @@
-function Following () {
-    return ( 
-        <h1>Following Page</h1>
-     );
+import classNames from "classnames/bind";
+import Style from "./Following.module.scss";
+import FollowingVideos from "./FollowingVideo/FollowingVideos";
+
+function Following() {
+
+    const cx = classNames.bind(Style)
+
+    return (
+        <div className={cx('wrapper')}>
+            <FollowingVideos nickname={'@baby4ever11'}></FollowingVideos>
+        </div>
+    );
 }
 
 export default Following;

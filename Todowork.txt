@@ -16,8 +16,6 @@ login:
 signup:
     giao dien signup: ok
     logic signup: ok
-    
-like, comment, share (optional):
 
 
 page profile: 
@@ -44,7 +42,7 @@ my profile: /me/:nickname ok
 
     fix re-render router Fetch/xml: ????
 
-unfollowing, friend profile: /:nickname ok
+unfollowing profile, friend profile: /:nickname ok
     giu nguyen header: ok
     giu lai get app: ok
     sidebar bo phan suggest: ok
@@ -55,13 +53,18 @@ unfollowing, friend profile: /:nickname ok
     neu href duoc nhap vao khac @profilefrien thi se tra ve giao dien khong tim thay: 
     search friend profile: ok
     suggest friend profile: ok
+    suggest following profile: ok
 
-page following: not overview
-
-     suggest following profile: ok
-
+page following: 
+    giao dien: ok
+    API:
 
 page live: not overview
 
-
 upload: not overview
+
+like, comment, share (optional): not overview
+
+chuc nang follow: not overview
+
+chuc nang coi video chi tiet: not overview
