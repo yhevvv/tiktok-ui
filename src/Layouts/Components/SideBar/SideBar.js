@@ -34,7 +34,6 @@ function Sidebar() {
 
     const INIT_PAGE_SUGGEST = getRandomInt(20);
     const INIT_FOLLOWING = getRandomInt(4);
-    const PER_PAGE = 5;
 
     const [pageFollowing, setPageFollowing] = useState(INIT_FOLLOWING);
     const [pageSuggest, setPageSuggest] = useState(INIT_PAGE_SUGGEST);
@@ -46,7 +45,7 @@ function Sidebar() {
 
     useLayoutEffect(() => {
         userService
-            .getSuggested({ page: pageSuggest, perPage: PER_PAGE })
+            .getSuggested({ page: pageSuggest, per_page: 5 })
             .then((data) => {
                 setSuggestUsers((prevUsers) => [...prevUsers, ...data]); //lay du lieu cu va them du lieu
             })
@@ -61,7 +60,7 @@ function Sidebar() {
                 const parsedData = JSON.parse(dataCookie);
                 setisCheckUser(parsedData);
                 const isToken = parsedData.meta.token;
-                Cookies.set('isToken', isToken)
+                Cookies.set('isToken', isToken);
                 followingAccountsService
                     .followingAccount({ page: pageFollowing, token: isToken })
                     .then((data2) => {
@@ -78,7 +77,7 @@ function Sidebar() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageSuggest]);
 
-    const getSuggestedHandleSeeAll = (moreItem) => {
+    const getSuggestedHandleSeeAll = () => {
         setPageSuggest(pageSuggest + 1);
         setPageFollowing(pageFollowing + 1);
     };
@@ -116,7 +115,10 @@ function Sidebar() {
                             Log in to follow creators, like videos, and view
                             comments.
                         </p>
-                        <PopupSign className={'btn-loginSidebar'} title = {'Log in'}></PopupSign>
+                        <PopupSign
+                            className={'btn-loginSidebar'}
+                            title={'Log in'}
+                        ></PopupSign>
                         <hr className={cx('hr-item')}></hr>
                     </div>
                 )}

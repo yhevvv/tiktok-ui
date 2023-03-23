@@ -57,7 +57,7 @@ unfollowing profile, friend profile: /:nickname ok
 
 page following: 
     giao dien: ok
-    API:
+    API: ok
 
 page live: not overview
 

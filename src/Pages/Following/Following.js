@@ -8,7 +8,7 @@ function Following() {
 
     return (
         <div className={cx('wrapper')}>
-            <FollowingVideos nickname={'@baby4ever11'}></FollowingVideos>
+            <FollowingVideos></FollowingVideos>
         </div>
     );
 }
