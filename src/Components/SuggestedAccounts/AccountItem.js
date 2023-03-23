@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import AccountPreview from './AccountPreview';
+import { Link } from 'react-router-dom';
 
 function AccountItem({ data }) {
     const cx = classNames.bind(Style);
@@ -32,27 +33,29 @@ function AccountItem({ data }) {
                 placement="bottom-start"
                 offset={[0, -10]}
             >
-                <div className={cx('account-item')}>
-                    <Images
-                        className={cx('avatar')}
-                        src={data.avatar}
-                        alt={images.NoImage}
-                    ></Images>
-                    <div className={cx('item-info')}>
-                        <span className={cx('nickname')}>
-                            {data.first_name} {data.last_name}
-                            {data.tick ? (
-                                <FontAwesomeIcon
-                                    className={cx('check')}
-                                    icon={faCheckCircle}
-                                ></FontAwesomeIcon>
-                            ) : (
-                                <></>
-                            )}
-                        </span>
-                        <p className={cx('name')}>{data.nickname}</p>
+                <Link to={`/@${data.nickname}`}>
+                    <div className={cx('account-item')}>
+                        <Images
+                            className={cx('avatar')}
+                            src={data.avatar}
+                            alt={images.NoImage}
+                        ></Images>
+                        <div className={cx('item-info')}>
+                            <span className={cx('nickname')}>
+                                {data.first_name} {data.last_name}
+                                {data.tick ? (
+                                    <FontAwesomeIcon
+                                        className={cx('check')}
+                                        icon={faCheckCircle}
+                                    ></FontAwesomeIcon>
+                                ) : (
+                                    <></>
+                                )}
+                            </span>
+                            <p className={cx('name')}>{data.nickname}</p>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </Tippy>
         </div>
     );

@@ -7,16 +7,16 @@ function SuggestedAccounts({ label, more, data = [], onClick }) {
     const cx = classNames.bind(Style);
 
     return (
-        <div className={cx('wrapper')}>
-            <p className={cx('label')}>{label}</p>
+            <div className={cx('wrapper')}>
+                <p className={cx('label')}>{label}</p>
 
-            {data.map((account) => (
-                <AccountItem key={account.id} data={account}></AccountItem>
-            ))}
-            <p className={cx('more-item')} onClick={onClick}>
-                {more}
-            </p>
-        </div>
+                {data.map((account) => (
+                    <AccountItem key={account.id} data={account}></AccountItem>
+                ))}
+                <p className={cx('more-item')} onClick={onClick}>
+                    {more}
+                </p>
+            </div>
     );
 }
 

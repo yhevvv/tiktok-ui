@@ -44,7 +44,7 @@ my profile: /me/:nickname ok
 
     fix re-render router Fetch/xml: ????
 
-unfollowing profile: /:nickname ok
+unfollowing, friend profile: /:nickname ok
     giu nguyen header: ok
     giu lai get app: ok
     sidebar bo phan suggest: ok
@@ -54,18 +54,11 @@ unfollowing profile: /:nickname ok
     neu href duoc nhap vao dung @profilefrien thi tra ve trang nguoi do: ok
     neu href duoc nhap vao khac @profilefrien thi se tra ve giao dien khong tim thay: 
     search friend profile: ok
-    suggest friend profile: 
-
-
-friend profile: 
-    giu nguyen header: ok
-    giu lai get app:
-    sidebar giu lai: ok
-    giao dien:
-    call API: 
-
+    suggest friend profile: ok
 
 page following: not overview
+
+     suggest following profile: ok
 
 
 page live: not overview
