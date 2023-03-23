@@ -193,18 +193,26 @@
     margin-top: 70px;
     margin-left: 10px;
 }
-.line-1 {
+.line-1, .lineNotFound-1 {
     font-size: 24px;
     line-height: 28px;
     font-family: var(--name-font-family);
     font-weight: 700;
     color: rgb(22, 24, 35);
 }
-.line-2 {
+.line-2, .lineNotFound-2 {
     font-size: 16px;
     line-height: 22px;
     font-family: var(--default-font-family);
     font-weight: 400;
     color: rgba(22, 24, 35, 0.75);
     margin-top: 8px;
+}
+.obtainer-notFound{
+    display: flow-root;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    left: 20%;
+    margin-left: 80px;
 }

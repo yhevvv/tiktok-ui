@@ -13,8 +13,6 @@ import Cookies from 'js-cookie';
 import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 function Profile() {
     const cx = classNames.bind(Style);
@@ -70,156 +68,181 @@ function Profile() {
             });
     }, [username]);
 
+    console.log(nickNameFriend);
+
     return (
-        <Link to={`/@${username}`}>
-            <div className={cx('wrapper')}>
-                <div className={cx('profile-item')}>
-                    <img
-                        className={cx('avatar')}
-                        src={
-                            nickNameFriend.avatar ===
-                            'https://files.fullstack.edu.vn/f8-tiktok/'
-                                ? images.NoImage
-                                : nickNameFriend.avatar
-                        }
-                        alt=""
-                    ></img>
-                    <div className={cx('title-container')}>
-                        <h1 className={cx('name')}>
-                            {nickNameFriend.first_name +
-                                ' ' +
-                                nickNameFriend.last_name}{' '}
-                            {nickNameFriend.tick && (
-                                <FontAwesomeIcon
-                                    style={{
-                                        color: '#20d5ec',
-                                        width: '20px',
-                                        height: '20px',
-                                    }}
-                                    icon={faCircleCheck}
-                                ></FontAwesomeIcon>
-                            )}
-                        </h1>
-                        <h3 className={cx('nickname')}>
-                            {nickNameFriend.nickname}
-                        </h3>
-                        <div className={cx('outline-editProfile')}>
-                            <Button primary className={cx('btn-editProfile')}>
-                                <strong className={cx('btn-text')}>
-                                    Follow
-                                </strong>
-                            </Button>
+        <>
+            {nickNameFriend ? (
+                <div className={cx('wrapper')}>
+                    <div className={cx('profile-item')}>
+                        <img
+                            className={cx('avatar')}
+                            src={
+                                nickNameFriend.avatar ===
+                                'https://files.fullstack.edu.vn/f8-tiktok/'
+                                    ? images.NoImage
+                                    : nickNameFriend.avatar
+                            }
+                            alt=""
+                        ></img>
+                        <div className={cx('title-container')}>
+                            <h1 className={cx('name')}>
+                                {nickNameFriend.first_name +
+                                    ' ' +
+                                    nickNameFriend.last_name}{' '}
+                                {nickNameFriend.tick && (
+                                    <FontAwesomeIcon
+                                        style={{
+                                            color: '#20d5ec',
+                                            width: '20px',
+                                            height: '20px',
+                                        }}
+                                        icon={faCircleCheck}
+                                    ></FontAwesomeIcon>
+                                )}
+                            </h1>
+                            <h3 className={cx('nickname')}>
+                                {nickNameFriend.nickname}
+                            </h3>
+                            <div className={cx('outline-editProfile')}>
+                                <Button
+                                    primary
+                                    className={cx('btn-editProfile')}
+                                >
+                                    <strong className={cx('btn-text')}>
+                                        Follow
+                                    </strong>
+                                </Button>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div className={cx('btn-share')}>
+                            <MenuShare icon={<Share></Share>}></MenuShare>
+                            <MenuReport icon={<Dot></Dot>}></MenuReport>
                         </div>
                     </div>
-                    <br></br>
-                    <div className={cx('btn-share')}>
-                        <MenuShare icon={<Share></Share>}></MenuShare>
-                        <MenuReport icon={<Dot></Dot>}></MenuReport>
-                    </div>
-                </div>
-                <h2 className={cx('statistical')}>
-                    <div className={cx('statistical-item')}>
-                        <strong className={cx('number-following')}>
-                            {nickNameFriend.followings_count === null
-                                ? '0'
-                                : nickNameFriend.followings_count}
-                        </strong>
-                        <span className={cx('following')}>Following</span>
-                    </div>
-                    <div className={cx('statistical-item')}>
-                        <strong className={cx('number-followers')}>
-                            {nickNameFriend.followers_count === null
-                                ? '0'
-                                : nickNameFriend.followers_count}
-                        </strong>
-                        <span className={cx('followers')}>Followers</span>
-                    </div>
-                    <div className={cx('statistical-item')}>
-                        <strong className={cx('number-like')}>
-                            {nickNameFriend.likes_count === null
-                                ? '0'
-                                : nickNameFriend.likes_count}
-                        </strong>
-                        <span className={cx('like')}>likes</span>
-                    </div>
-                </h2>
-                <h2 className={cx('bio')}>{nickNameFriend.bio}</h2>
-                <div className={cx('videos-user')}>
-                    <div className={cx('tab')}>
-                        <p
-                            className={cx(Click)}
-                            onClick={handleNoClick}
-                            onMouseOver={() => setIsHovering(0)}
-                            onMouseOut={onMouseVideos}
-                        >
-                            Videos
-                        </p>
-                        <p
-                            className={cx(noClick)}
-                            onClick={handleClick}
-                            onMouseOver={() => setIsHovering(230)}
-                            onMouseOut={onMouseLiked}
-                        >
-                            <Lock></Lock>Liked
-                        </p>
-                    </div>
-                    <motion.div
-                        className={cx('transform-animation')}
-                        animate={{ x: isHovering }}
-                    ></motion.div>
-                    <div style={{ display: 'none' }}>
-                        <MeVideos></MeVideos>{' '}
-                    </div>
-                    {/* code hoi ngu xiu nhung luoi qua */}
-                    {isSwitch ? (
-                        <>
-                            {Cookies.get('unFollowVideo') ? (
-                                <div className={cx('meVideo')}>
-                                    <MeVideos
-                                        nickname={nickNameFriend.nickname}
-                                    ></MeVideos>
-                                </div>
-                            ) : (
-                                <main className={cx('videos-item')}>
-                                    <div className={cx('obtainer')}>
-                                        <p>
-                                            <UserIconLager
-                                                width={'9rem'}
-                                                height={'9rem'}
-                                            ></UserIconLager>
-                                        </p>
-                                        <p className={cx('line-1')}>
-                                            Upload your first video
-                                        </p>
-                                        <p className={cx('line-2')}>
-                                            Your videos will appear here
-                                        </p>
+                    <h2 className={cx('statistical')}>
+                        <div className={cx('statistical-item')}>
+                            <strong className={cx('number-following')}>
+                                {nickNameFriend.followings_count === null
+                                    ? '0'
+                                    : nickNameFriend.followings_count}
+                            </strong>
+                            <span className={cx('following')}>Following</span>
+                        </div>
+                        <div className={cx('statistical-item')}>
+                            <strong className={cx('number-followers')}>
+                                {nickNameFriend.followers_count === null
+                                    ? '0'
+                                    : nickNameFriend.followers_count}
+                            </strong>
+                            <span className={cx('followers')}>Followers</span>
+                        </div>
+                        <div className={cx('statistical-item')}>
+                            <strong className={cx('number-like')}>
+                                {nickNameFriend.likes_count === null
+                                    ? '0'
+                                    : nickNameFriend.likes_count}
+                            </strong>
+                            <span className={cx('like')}>likes</span>
+                        </div>
+                    </h2>
+                    <h2 className={cx('bio')}>{nickNameFriend.bio}</h2>
+                    <div className={cx('videos-user')}>
+                        <div className={cx('tab')}>
+                            <p
+                                className={cx(Click)}
+                                onClick={handleNoClick}
+                                onMouseOver={() => setIsHovering(0)}
+                                onMouseOut={onMouseVideos}
+                            >
+                                Videos
+                            </p>
+                            <p
+                                className={cx(noClick)}
+                                onClick={handleClick}
+                                onMouseOver={() => setIsHovering(230)}
+                                onMouseOut={onMouseLiked}
+                            >
+                                <Lock></Lock>Liked
+                            </p>
+                        </div>
+                        <motion.div
+                            className={cx('transform-animation')}
+                            animate={{ x: isHovering }}
+                        ></motion.div>
+                        <div style={{ display: 'none' }}>
+                            <MeVideos></MeVideos>{' '}
+                        </div>
+                        {/* code hoi ngu xiu nhung luoi qua */}
+                        {isSwitch ? (
+                            <>
+                                {Cookies.get('unFollowVideo') ? (
+                                    <div className={cx('meVideo')}>
+                                        <MeVideos
+                                            nickname={nickNameFriend.nickname}
+                                        ></MeVideos>
                                     </div>
-                                </main>
-                            )}
-                        </>
-                    ) : (
-                        <main className={cx('videos-item')}>
-                            <div className={cx('obtainer')}>
-                                <p>
-                                    <UserIconLager
-                                        width={'9rem'}
-                                        height={'9rem'}
-                                    ></UserIconLager>
-                                </p>
-                                <p className={cx('line-1')}>
-                                    No liked videos yet
-                                </p>
-                                <p className={cx('line-2')}>
-                                    Videos you liked will appear here
-                                </p>
-                            </div>
-                        </main>
-                    )}
+                                ) : (
+                                    <main className={cx('videos-item')}>
+                                        <div className={cx('obtainer')}>
+                                            <p>
+                                                <UserIconLager
+                                                    width={'9rem'}
+                                                    height={'9rem'}
+                                                ></UserIconLager>
+                                            </p>
+                                            <p className={cx('line-1')}>
+                                                Upload your first video
+                                            </p>
+                                            <p className={cx('line-2')}>
+                                                Your videos will appear here
+                                            </p>
+                                        </div>
+                                    </main>
+                                )}
+                            </>
+                        ) : (
+                            <main className={cx('videos-item')}>
+                                <div className={cx('obtainer')}>
+                                    <p>
+                                        <UserIconLager
+                                            width={'9rem'}
+                                            height={'9rem'}
+                                        ></UserIconLager>
+                                    </p>
+                                    <p className={cx('line-1')}>
+                                        No liked videos yet
+                                    </p>
+                                    <p className={cx('line-2')}>
+                                        Videos you liked will appear here
+                                    </p>
+                                </div>
+                            </main>
+                        )}
+                    </div>
+                    <GetApp></GetApp>
                 </div>
-                <GetApp></GetApp>
-            </div>
-        </Link>
+            ) : (
+                <main className={cx('videos-item')}>
+                    <div className={cx('obtainer-notFound')}>
+                        <p>
+                            <UserIconLager
+                                width={'9rem'}
+                                height={'9rem'}
+                            ></UserIconLager>
+                        </p>
+                        <p className={cx('lineNotFound-1')}>
+                            Couldn't find this account
+                        </p>
+                        <p className={cx('lineNotFound-2')}>
+                            Looking for videos? Try browsing our trending
+                            creators, hashtags, and sounds.
+                        </p>
+                    </div>
+                </main>
+            )}
+        </>
     );
 }
 
