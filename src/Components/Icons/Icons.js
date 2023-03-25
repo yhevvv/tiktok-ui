@@ -733,3 +733,27 @@ export const Send = ({ className, width = '1.6rem', height = '1.6rem' }) => (
         ></path>
     </svg>
 );
+
+export const GroupIconLive = ({
+    className,
+    width = '1.6rem',
+    height = '1.6rem',
+}) => (
+    <svg
+        fill="currentColor"
+        fontSize="16px"
+        viewBox="0 0 48 48"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        width={width}
+        height={height}
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M17.05 22.41c4.75 0 8.6-3.9 8.6-8.7C25.65 8.9 21.8 5 17.05 5s-8.6 3.9-8.6 8.7c0 4.81 3.85 8.71 8.6 8.71zM32.1 39.82c0-8.41-6.74-15.23-15.05-15.23A15.14 15.14 0 002 39.82 2.16 2.16 0 004.21 42h25.74c1.19 0 2.15-.98 2.15-2.18zm2.9 0c0-3.64-1.07-7.03-2.9-9.88.44-.53 1.3-.83 2.76-.83C41 29.11 46 34.16 46 40.39a1.6 1.6 0 01-1.66 1.6H35v-2.17zm6.23-18.77a6.4 6.4 0 01-6.37 6.45 6.4 6.4 0 01-6.37-6.45 6.4 6.4 0 016.37-6.44 6.4 6.4 0 016.37 6.44z"
+        ></path>
+    </svg>
+);
+
+

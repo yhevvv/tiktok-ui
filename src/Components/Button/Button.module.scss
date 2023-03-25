@@ -69,15 +69,11 @@
         background-color: rgba(255, 255, 255, 1);
     }
 }
-
-.switchButton {
-}
-
 .primary {
     color: var(--white) !important;
     background-color: #fe2c55;
     border-color: var(--primary);
-    width: 0;
+    min-width: 30px;
 
     &:hover {
         background-color: linear-gradient(
@@ -103,6 +99,25 @@
     &:hover {
         background-color: rgba(22, 24, 35, 0.03);
         // text-decoration: underline;
+    }
+}
+.white {
+    font-weight: 500;
+    width: 24px;
+    height: 4px;
+    border-radius: 14px;
+    margin: 0 4px;
+    background-color: rgba(22, 24, 35, 0.06);
+    color: rgba(22, 24, 35, 1);
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    overflow: hidden;
+    box-sizing: border-box;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.1);
+        color: rgba(22, 24, 35, 1);
     }
 }
 

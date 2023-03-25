@@ -16,7 +16,7 @@ import NotFound from '~/Pages/404';
 const PublicRouters = [
     { path: Config.routes.root, component: Home },
     { path: Config.routes.following, component: Following },
-    { path: Config.routes.live, component: Live },
+    { path: Config.routes.live, component: Live, layout: FullLayout },
     { path: Config.routes.search, component: Search, layout: null },
     { path: Config.routes.upload, component: Upload, layout: HeaderOnly },
     {

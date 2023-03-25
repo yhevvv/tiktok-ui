@@ -13,8 +13,9 @@ function Button({
     href,
     children,
     primary = false,
+    white = false,
     outline = false,
-    noneBtn= false,
+    noneBtn = false,
     onClick,
     small = false,
     Large = false,
@@ -63,8 +64,9 @@ function Button({
         primary, //button style 1
         outline, //button style 2
         noneBtn, //button style 3
-        text, //button style 3
-        rounded, //button style 4
+        text, //button style 7
+        white, //button style 4
+        rounded, //button style 6
         small, //size small button
         Large, //size big button
         [className]: className,
@@ -91,6 +93,7 @@ Button.propTypes = {
     to: PropTypes.string,
     href: PropTypes.string,
     primary: PropTypes.bool,
+    white: PropTypes.bool,
     outline: PropTypes.bool,
     onClick: PropTypes.func,
     small: PropTypes.bool,
