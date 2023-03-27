@@ -7,7 +7,7 @@ scroll top: not work (retry later)
 menu get app: ok (con thieu click close)
 tippy for avata home: ok
 set default volume 0.2: ok
-login-signup:
+login-signup: 
 login:
     giao dien login: ok
     giao dien dang nhap o trong dang nhap email: ok
