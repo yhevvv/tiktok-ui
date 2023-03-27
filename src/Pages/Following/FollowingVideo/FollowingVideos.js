@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import GetApp from '~/Components/GetApp';
 import { useInView } from 'react-intersection-observer';
+import ScrollTopPage from '~/Components/ScrollTopPage';
 
 function MeVideos() {
     const cx = classNames.bind(Style);
@@ -51,8 +52,27 @@ function MeVideos() {
         video.pause();
     };
 
+    const [showButton, setShowButton] = useState(false);
+
+    const handleScroll = (event) => {
+        if (event.deltaY > 0) {
+            setShowButton(true);
+        }
+        if (window.scrollY === 0) {
+            setShowButton(false);
+        }
+    };
+
+    const handleClickTop = () => {
+        setShowButton(false);
+    };
+
     return (
-        <div className={cx('wrapper-all')}>
+        <div
+            className={cx('wrapper-all')}
+            onWheel={handleScroll}
+            onChange={() => {}}
+        >
             {videoUser.map((data, index) => (
                 <div className={cx('wrapper')} key={index}>
                     <video
@@ -101,6 +121,11 @@ function MeVideos() {
                 </div>
             ))}
             <GetApp></GetApp>
+            {showButton && (
+                <div onClick={handleClickTop}>
+                    <ScrollTopPage></ScrollTopPage>
+                </div>
+            )}
         </div>
     );
 }

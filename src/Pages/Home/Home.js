@@ -6,6 +6,7 @@ import * as homeService from '~/Service/homeService';
 import { useEffect, useState, memo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import GetApp from '~/Components/GetApp';
+import ScrollTopPage from '~/Components/ScrollTopPage';
 
 function Home() {
     function getRandomInt(max) {
@@ -37,11 +38,31 @@ function Home() {
         }
     }, [inView, initPage]);
 
-    console.clear()
+    const [showButton, setShowButton] = useState(false);
+
+    const handleScroll = (event) => {
+        if (event.deltaY > 0) {
+            setShowButton(true);
+        }
+        if (window.scrollY === 0) {
+            setShowButton(false);
+        }
+    };
+
+    const handleClickTop = () => {
+        setShowButton(false);
+    };
+
+    console.clear();
 
     return (
-        <div className={cx('wrapper-all')}>
+        <div className={cx('wrapper-all')} onWheel={handleScroll}>
             <GetApp></GetApp>
+            {showButton && (
+                <div onClick={handleClickTop}>
+                    <ScrollTopPage></ScrollTopPage>
+                </div>
+            )}
             {videos.map((data) => (
                 <VideoItem key={data.id} data={data}></VideoItem>
             ))}

@@ -1,8 +1,10 @@
 //home
 .wrapper-all {
-    height: 100vh;
+    height: 100%;
     position: relative;
     left: 37%;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     @media screen and (max-width: 768px) {
         left: 6%;
@@ -32,13 +34,16 @@
     border-radius: 50%;
     cursor: pointer;
     padding: 4px;
+    margin: 4px;
 }
 
 .content {
     display: flex;
+    overflow: hidden;
 }
 .id_nickname {
     display: inline-flex;
+    overflow: hidden;
     width: 510px;
     margin: -18px 8px;
 }
@@ -48,8 +53,9 @@
     font-size: 18px;
     line-height: 25px;
     display: inline-block;
-    margin-right: 4px;
+    margin-left: -4px;
     cursor: pointer;
+    overflow: hidden;
 
     &:hover {
         text-decoration: underline;

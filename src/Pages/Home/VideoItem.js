@@ -62,16 +62,19 @@ function VideoItem({ data }) {
                     hideOnClick={true}
                 >
                     <div className={cx('content')}>
-                        <Link>
+                        <Link to={`/@${data.user.nickname}`}>
                             <Image
                                 className={cx('avatar')}
                                 src={data.user.avatar}
                                 alt={images.NoImage}
                             ></Image>
                         </Link>
-                        <Link className={cx('id_nickname')}>
+                        <Link
+                            className={cx('id_nickname')}
+                            to={`/@${data.user.nickname}`}
+                        >
                             <h3 className={cx('id')}>
-                                {data.user.first_name} {data.user.last_name}{' '}
+                                {data.user.first_name} {data.user.last_name}
                                 {data.user.tick && (
                                     <FontAwesomeIcon
                                         icon={faCircleCheck}

@@ -16,7 +16,7 @@ login:
 signup:
     giao dien signup: ok
     logic signup: ok
-bug loi 2 tick:
+bug loi 2 tick: ok
 
 page profile: 
 
@@ -61,9 +61,10 @@ page following:
 
 page live: 
     giao dien all: ok 
-    tippy header:
-    scroll logic:
-    api:
+    tippy header: ok
+    scroll logic: ok
+    api: 
+    scroll top: ok
 
 upload: not overview
 

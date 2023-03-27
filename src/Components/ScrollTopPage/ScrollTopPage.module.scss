@@ -1,0 +1,15 @@
+.wrapper {
+    font-family: var(--default-font-family);
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    font-weight: 600 !important;
+    margin-bottom: 4px;
+    margin-right: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.button {
+    padding: 7px 7px;
+    border-radius: 50%;
+}

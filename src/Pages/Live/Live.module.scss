@@ -7,11 +7,16 @@
     background-color: rgb(255, 255, 255);
     margin-right: 25px;
     padding: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
-.btn-tab {
+.btn-tab,
+.btn-tab-click {
     padding: 14px 65px;
+}
+.btn-tab-click {
+    background-color: rgba(22, 24, 35, 1);
+    color: rgba(255, 255, 255, 1);
 }
 .wrapper-popup {
     width: calc(90% - 90px);
@@ -50,20 +55,27 @@
     flex-direction: row;
     left: 56%;
 }
-.line {
+.line,
+.line-click {
     font-weight: 600;
     width: 24px;
     height: 4px;
     border-radius: 14px;
     margin: 0 4px;
-    background-color: rgba(22, 24, 35, 1);
-    color: rgba(22, 24, 35, 1);
     font-size: 14px;
     line-height: 30px;
     cursor: pointer;
     overflow: hidden;
     box-sizing: border-box;
     margin-top: 10px;
+}
+.line {
+    background-color: rgba(22, 24, 35, 1);
+    color: rgba(22, 24, 35, 1);
+}
+.line-click {
+    background-color: #1618230f;
+    color: rgba(22, 24, 35, 1);
 }
 
 .btn-scroll {
@@ -151,7 +163,6 @@
     padding: 14px 6px;
     border-radius: 32px;
     margin-top: -30px;
-    //margin-top: -10px;
 
     &:hover {
         .popup-header {
