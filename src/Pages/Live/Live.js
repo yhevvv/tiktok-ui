@@ -6,15 +6,25 @@ import VideoLive from './VideoLive';
 import Button from '~/Components/Button';
 import { useState, useEffect } from 'react';
 import { animateScroll } from 'react-scroll';
+import * as suggestedService from '~/Service/suggestedService';
+import { useInView } from 'react-intersection-observer';
+import PopupSign from '~/Components/PopupSign';
+import Cookies from 'js-cookie';
 
 function Live() {
     const cx = classNames.bind(Style);
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max) + 1;
+    }
 
     const [noChangeTab, setNoChangeTab] = useState('btn-tab');
     const [changeTab, setChangeTab] = useState('btn-tab-click');
 
     const [noChangeLine, setNoChangeLine] = useState('line');
     const [changeLine, setChangeLine] = useState('line-click');
+
+    const [dataUser, setDataUser] = useState([]);
 
     function handleChangeTab() {
         const saveTab = noChangeTab;
@@ -32,31 +42,28 @@ function Live() {
         animateScroll.scrollMore(-window.innerHeight + 90);
     };
 
+    const [pageSuggest, setPageSuggest] = useState(getRandomInt(20));
+
     useEffect(() => {
-        function handleScroll(event) {
-            // Check if the scroll is up or down
-            const isScrollingUp = event.deltaY < 0;
+        suggestedService
+            .getSuggested({ page: pageSuggest, per_page: 5 })
+            .then((data) => {
+                setDataUser((prevUsers) => [...prevUsers, ...data]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
 
-            // Calculate the new scroll position
-            const newScrollTop = isScrollingUp
-                ? window.pageYOffset - window.innerHeight + 90
-                : window.pageYOffset + window.innerHeight - 90;
+    const { ref, inView } = useInView({
+        threshold: 0,
+    });
 
-            // Scroll the window to the new position
-            window.scrollTo({ top: newScrollTop, behavior: 'smooth' });
-
-            // Prevent the default scroll behavior
-            event.preventDefault();
+    useEffect(() => {
+        if (inView) {
+            setPageSuggest(pageSuggest + 1);
         }
-
-        // Attach the scroll event listener to the window
-        window.addEventListener('wheel', handleScroll);
-
-        // Remove the event listener when the component is unmounted
-        return () => {
-            window.removeEventListener('wheel', handleScroll);
-        };
-    }, []);
+    }, [inView, pageSuggest]);
 
     return (
         <div className={cx('wrapper')}>
@@ -72,13 +79,21 @@ function Live() {
                             >
                                 ForYou
                             </Button>
-                            <Button
-                                white
-                                className={cx(noChangeTab)}
-                                onClick={handleChangeTab}
-                            >
-                                Following
-                            </Button>
+                            {Cookies.get('isToken') === 'null' ? (
+                                <PopupSign
+                                    className={'btn-following'}
+                                    title={'Following'}
+                                ></PopupSign>
+                            ) : (
+                                <Button
+                                    white
+                                    className={cx(noChangeTab)}
+                                    onClick={handleChangeTab}
+                                >
+                                    {' '}
+                                    Following
+                                </Button>
+                            )}
                         </div>
                     )}
                     delay={[0, 700]}
@@ -112,12 +127,13 @@ function Live() {
                             <ScrollDown></ScrollDown>
                         </button>
                     </div>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
+                    <div className={cx('video-list')}>
+                        {dataUser.map((data, index) => (
+                            <VideoLive key={index} data={data}></VideoLive>
+                        ))}
+                    </div>
+
+                    <span ref={ref}></span>
                 </div>
             ) : (
                 <div>
@@ -135,10 +151,11 @@ function Live() {
                             <ScrollDown></ScrollDown>
                         </div>
                     </div>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
-                    <VideoLive></VideoLive>
+                    <div className={cx('video-list')}>
+                        {dataUser.map((data, index) => (
+                            <VideoLive key={index} data={data}></VideoLive>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

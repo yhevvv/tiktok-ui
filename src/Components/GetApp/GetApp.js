@@ -1,7 +1,7 @@
 import Style from './GetApp.module.scss';
 import classNames from 'classnames/bind';
 import Menu from '~/Pages/Home/Menu/Menu';
-import { Computer, IconX, MobilePhone } from '~/Components/Icons';
+import { Computer, MobilePhone } from '~/Components/Icons';
 
 const APP = [
     {

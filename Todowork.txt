@@ -63,8 +63,11 @@ page live:
     giao dien all: ok 
     tippy header: ok
     scroll logic: ok
-    api: 
+    api: ok
     scroll top: ok
+    logic scroll: fix sau
+    logic Following: ok
+    
 
 upload: not overview
 
