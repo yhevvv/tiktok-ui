@@ -1,0 +1,245 @@
+.wrapper-full {
+    width: 100%;
+}
+.wrapper {
+    position: fixed;
+    left: 23%;
+    top: 10%;
+    width: 1100px;
+    font-family: var(--default-font-family);
+}
+.title-1 {
+    color: #161823;
+    font-size: 24px;
+    font-weight: 700;
+}
+.title-2 {
+    color: #16182380;
+    line-height: 1.5;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+.display {
+    display: flex;
+    margin-top: 35px;
+}
+.video-upload {
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    padding-left: 35px;
+    padding-right: 35px;
+    border: 2px dashed rgba(22, 24, 35, 0.2);
+    box-sizing: border-box;
+    width: 260px;
+    height: 458px;
+    margin-top: 30px;
+}
+.icon-upload {
+    margin-bottom: 20px;
+}
+.title-video1 {
+    color: #161823;
+    font-weight: 600;
+    font-size: 18px;
+}
+.title-video2 {
+    color: #161823bf;
+    font-size: 14px;
+    margin-top: 6px;
+}
+.title-video3 {
+    color: #16182380;
+    font-size: 14px;
+}
+.btn-video-upload {
+    padding: 12px 54px;
+}
+.display-2 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    width: 736px;
+}
+.caption,
+.cover {
+    display: flex;
+    flex-direction: column;
+}
+.display-4 {
+    display: flex;
+    flex-direction: row;
+    width: 736px;
+}
+.count-item {
+    position: absolute;
+    right: 0;
+    font-size: 13px;
+    color: #16182380;
+    margin-right: 81px;
+    margin-top: 2px;
+    margin-top: 8px;
+}
+.title-caption,
+.title-cover,
+.title-mode,
+.title-allow,
+.title-copyright {
+    color: #161823;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.title-cover,
+.title-mode {
+    margin-top: 30px;
+}
+.input-caption {
+    min-height: 46px;
+    position: relative;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 4px;
+    width: calc(736px);
+    padding-left: 16px;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 400;
+    padding-right: 100px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    cursor: text;
+    overflow: auto;
+    max-height: 11em;
+    &:active {
+    }
+}
+.display-input-caption {
+    position: absolute;
+    right: 0;
+    margin-top: 43px;
+    margin-right: 90px;
+}
+.input-cover {
+    position: relative;
+    line-height: 0;
+    padding: 6px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 4px;
+    height: 168px;
+}
+.mode {
+    display: flex;
+    flex-direction: column;
+}
+.select-mode {
+    width: 300px;
+    height: 36px;
+    border: transparent;
+    background-color: rgb(255, 255, 255);
+}
+.allow {
+    margin-top: 20px;
+}
+.display-3 {
+    display: flex;
+    flex-direction: row;
+}
+//checkbox: start
+.container {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 1.5px solid rgba(22, 24, 35, 0.12);
+    margin-top: 3px;
+}
+.container:hover input ~ .checkmark {
+    box-shadow: 0 0 0 1px rgb(254, 44, 85);
+}
+
+.container input:checked ~ .checkmark {
+    background-color: rgb(254, 44, 85);
+}
+
+.checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 5px;
+    top: 0px;
+    width: 3px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    align-items: center;
+}
+//end
+
+.title-all {
+    line-height: 1.5;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+}
+
+.copyright {
+    margin-top: 10px;
+}
+
+.title-copyright-1 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.title-copyright-2 {
+    margin-top: -2px;
+}
+.descriptions-copyright-1 {
+    font-size: 12px;
+    color: #161823bf;
+}
+.descriptions-copyright-2 {
+    color: black !important;
+    cursor: pointer;
+}
+.btn-submit-discard {
+    padding: 23px 54px;
+}
+.btn-submit-post {
+    padding: 23px 54px;
+}

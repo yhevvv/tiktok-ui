@@ -1,0 +1,14 @@
+[
+    {
+        "value": "Public",
+        "label": "Public"
+    },
+    {
+        "value": "Friends",
+        "label": "Friends"
+    },
+    {
+        "value": "Private",
+        "label": "Private"
+    }
+]

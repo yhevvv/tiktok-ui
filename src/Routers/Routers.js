@@ -1,6 +1,5 @@
 import Config from '~/Config';
 //layout
-import { HeaderOnly } from '~/Layouts';
 import FullLayout from '~/Layouts/FullLayout';
 
 import Home from '~/Pages/Home';
@@ -18,7 +17,7 @@ const PublicRouters = [
     { path: Config.routes.following, component: Following },
     { path: Config.routes.live, component: Live, layout: FullLayout },
     { path: Config.routes.search, component: Search, layout: null },
-    { path: Config.routes.upload, component: Upload, layout: HeaderOnly },
+    { path: Config.routes.upload, component: Upload, layout: null },
     {
         path: Config.routes.Profile,
         component: Profile,

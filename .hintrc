@@ -10,7 +10,9 @@
         "ignore": [
           "user-select",
           "overflow-x: clip",
-          "display: flow-root"
+          "display: flow-root",
+          "appearance",
+          "accent-color"
         ]
       }
     ],
