@@ -81,3 +81,7 @@ like, comment, share (optional): not overview
 chuc nang follow: not overview
 
 chuc nang coi video chi tiet: not overview
+
+
+bug:
+check href not reload page (bug):

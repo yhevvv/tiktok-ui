@@ -68,8 +68,6 @@ function Profile() {
             });
     }, [username]);
 
-    console.log(nickNameFriend);
-
     return (
         <>
             {nickNameFriend ? (

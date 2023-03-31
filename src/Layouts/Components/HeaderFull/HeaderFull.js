@@ -63,17 +63,16 @@ const MENU_ITEM = [
 ];
 
 function Header() {
-
-        const [hrefNickName, setHrefNickName] = useState('');
-        useLayoutEffect(() => {
-            if (JSON.parse(Cookies.get('dataUser') !== undefined)) {
-                setHrefNickName(
-                    Cookies.get('dataUser') === ''
-                        ? ''
-                        : JSON.parse(Cookies.get('dataUser')),
-                );
-            }
-        }, []);
+    const [hrefNickName, setHrefNickName] = useState('');
+    useLayoutEffect(() => {
+        if (JSON.parse(Cookies.get('dataUser') !== undefined)) {
+            setHrefNickName(
+                Cookies.get('dataUser') === ''
+                    ? ''
+                    : JSON.parse(Cookies.get('dataUser')),
+            );
+        }
+    }, []);
 
     const USER_MENU = [
         {
@@ -178,7 +177,9 @@ function Header() {
                 <div className={cx('action')}>
                     {currentUser ? (
                         <>
-                            <Button text>+ Upload</Button>
+                            <Link to={`/upload`}>
+                                <Button text>+ Upload</Button>
+                            </Link>
                             <Tippy
                                 delay={[0, 100]}
                                 offset={[12, 8]}

@@ -6,17 +6,23 @@ import AccountItem from './AccountItem';
 function SuggestedAccounts({ label, more, data = [], onClick }) {
     const cx = classNames.bind(Style);
 
-    return (
-            <div className={cx('wrapper')}>
-                <p className={cx('label')}>{label}</p>
+    const ReloadPage = () => {
+        window.location.reload();
+    };
 
+    return (
+        <div className={cx('wrapper')}>
+            <p className={cx('label')}>{label}</p>
+
+            <div onClick={ReloadPage}>
                 {data.map((account) => (
                     <AccountItem key={account.id} data={account}></AccountItem>
                 ))}
-                <p className={cx('more-item')} onClick={onClick}>
-                    {more}
-                </p>
             </div>
+            <p className={cx('more-item')} onClick={onClick}>
+                {more}
+            </p>
+        </div>
     );
 }
 

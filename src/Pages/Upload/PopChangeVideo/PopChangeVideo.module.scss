@@ -1,0 +1,52 @@
+.change-video {
+    display: flex;
+    flex-direction: row;
+    margin-top: 11px;
+    color: #161823;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.popup-wrapper {
+    background-color: white;
+    width: 310px;
+    text-align: center;
+    padding: 35px 32px 0px;
+    font-family: var(--default-font-family);
+    border-radius: 5px;
+}
+.title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.description {
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    word-break: break-word;
+    text-align: center;
+    color: rgba(22, 24, 35, 0.5);
+}
+.replace {
+    padding: 16.5px 16px 17px;
+    margin: 0 -34px;
+    font-weight: 600;
+    color: rgb(254, 44, 85);
+    font-size: 15px;
+    line-height: 18px;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    word-break: break-word;
+    cursor: pointer;
+}
+.continue-editing {
+    padding: 16.5px 16px 17px;
+    margin: 0 -34px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    word-break: break-word;
+    cursor: pointer;
+}

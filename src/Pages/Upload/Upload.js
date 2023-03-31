@@ -8,10 +8,101 @@ import mode_upload from './mode_upload.json';
 import logoUpload from '~/assets/images/Logo/logoUpload.svg';
 import hashTag from '~/assets/images/Logo/HashTag.svg';
 import AtTag from '~/assets/images/Logo/AtTag.svg';
+import LogoCheck from '~/assets/images/Logo/check.svg';
+import { useState, memo, useEffect, useRef } from 'react';
+import PopChangeVideo from './PopChangeVideo';
 
 function Upload() {
     const cx = classNames.bind(Style);
 
+    //logic checkbox
+    const [isCheckedComment, setisCheckedComment] = useState(true);
+
+    const handleisCheckedComment = () => {
+        setisCheckedComment(!isCheckedComment);
+    };
+
+    const [isCheckedDuet, setisCheckedDuet] = useState(true);
+
+    const handleisCheckedDuet = () => {
+        setisCheckedDuet(!isCheckedDuet);
+    };
+
+    const [isCheckedStitch, setisCheckedStitch] = useState(true);
+
+    const handleisCheckedStitch = () => {
+        setisCheckedStitch(!isCheckedStitch);
+    };
+
+    //alert reload page when file existed
+    const [fileInputValue, setFileInputValue] = useState('');
+
+    useEffect(() => {
+        if (fileInputValue !== '') {
+            const handleBeforeUnload = (event) => {
+                event.returnValue = '';
+            };
+            window.addEventListener('beforeunload', handleBeforeUnload);
+            return () => {
+                window.removeEventListener('beforeunload', handleBeforeUnload);
+            };
+        }
+    }, [fileInputValue]);
+
+    //timeline video
+    const [videoFile, setVideoFile] = useState(null);
+    const [videoUrl, setVideoUrl] = useState('');
+
+    function handleVideoSelect(event) {
+        const selectFile = event.target.files[0];
+        setVideoFile(selectFile);
+        setVideoUrl(URL.createObjectURL(selectFile));
+        setFileInputValue(event.target.value);
+    }
+
+    //caption
+    const [text, setText] = useState('');
+
+    const handleChange = (event) => {
+        const inputText = event.target.innerText;
+        if (inputText.length <= 2200) {
+            setText(inputText);
+        } else {
+            event.target.textContent = inputText.substring(0, 2200);
+            setText(inputText.substring(0, 2200));
+            alert('Maximum 2200 Characters');
+        }
+    };
+
+    //hashTag click
+    const HashTagRef = useRef(null);
+    const handleHashTag = () => {
+        // get a reference to the contentEditable span
+        const inputCaption = HashTagRef.current;
+
+        // execute the "insertHTML" command to insert the "#" character at the current cursor position
+        document.execCommand('insertHTML', false, '#');
+
+        // set the focus back to the contentEditable span
+        inputCaption.focus();
+    };
+    //At click
+    const RefAT = useRef(null);
+    const handleAt = () => {
+        // get a reference to the contentEditable span
+        const inputCaption = RefAT.current;
+
+        // execute the "insertHTML" command to insert the "#" character at the current cursor position
+        document.execCommand('insertHTML', false, '@');
+
+        // set the focus back to the contentEditable span
+        inputCaption.focus();
+    };
+
+    console.clear();
+    //console.log(text);
+
+    //css Select
     const customStyles = {
         control: (provider) => ({
             ...provider,
@@ -49,47 +140,98 @@ function Upload() {
                     </span>
                 </div>
                 <div className={cx('display')}>
-                    <div className={cx('video-upload')}>
-                        <img
-                            src={logoUpload}
-                            alt=""
-                            className={cx('icon-upload')}
-                        ></img>
-                        <span className={cx('title-video1')}>
-                            Select video to upload
-                        </span>
-                        <span className={cx('title-video2')}>
-                            Or drag and drop a file
-                        </span>
-                        <br></br>
-                        <p className={cx('title-video3')}>MP4 or WEBM</p>
-                        <span className={cx('title-video3')}>
-                            720x1280 resolution or higher
-                        </span>
-                        <p className={cx('title-video3')}>Up to 30 minutes</p>
-                        <span className={cx('title-video3')}>
-                            Less than 2GB
-                        </span>
-                        <input type={'file'}></input>
-                        <br></br>
-                        <Button primary className={cx('btn-video-upload')}>
-                            Select File
-                        </Button>
-                    </div>
+                    {videoUrl === '' ? (
+                        <div>
+                            <label
+                                htmlFor={'input-file'}
+                                className={cx('video-upload')}
+                            >
+                                <img
+                                    src={logoUpload}
+                                    alt=""
+                                    className={cx('icon-upload')}
+                                ></img>
+                                <span className={cx('title-video1')}>
+                                    Select video to upload
+                                </span>
+                                <span className={cx('title-video2')}>
+                                    Or drag and drop a file
+                                </span>
+                                <br></br>
+                                <p className={cx('title-video3')}>
+                                    MP4 or WEBM
+                                </p>
+                                <span className={cx('title-video3')}>
+                                    720x1280 resolution or higher
+                                </span>
+                                <p className={cx('title-video3')}>
+                                    Up to 30 minutes
+                                </p>
+                                <span className={cx('title-video3')}>
+                                    Less than 2GB
+                                </span>
+                                <br></br>
+                                <div className={cx('btn-video-upload')}>
+                                    Select File
+                                </div>
+                            </label>
+                            <input
+                                type={'file'}
+                                style={{ display: 'none' }}
+                                id={'input-file'}
+                                onChange={handleVideoSelect}
+                            ></input>
+                        </div>
+                    ) : (
+                        <div className={cx('wrapper-video')}>
+                            <video
+                                src={videoUrl}
+                                controls
+                                style={{
+                                    width: '260px',
+                                    height: '458px',
+                                    borderRadius: '25px',
+                                }}
+                            ></video>
+                            <div className={cx('info-video')}>
+                                <img
+                                    src={LogoCheck}
+                                    alt=""
+                                    style={{
+                                        width: '16px',
+                                        height: '16px',
+                                        marginTop: '11px',
+                                    }}
+                                ></img>
+                                <span className={cx('file-name')}>
+                                    {videoFile.name}
+                                </span>
+                                <PopChangeVideo></PopChangeVideo>
+                            </div>
+                        </div>
+                    )}
+
                     <div className={cx('display-2')}>
                         <div className={cx('caption')}>
                             <div className={cx('display-4')}>
                                 <span className={cx('title-caption')}>
                                     Caption
                                 </span>
-                                <span className={cx('count-item')}>
-                                    0 / 2200
-                                </span>
                             </div>
+
+                            <span className={cx('count-item')}>
+                                {text?.length} / 2200
+                            </span>
                             <span
                                 className={cx('input-caption')}
-                                contentEditable="true"
-                            ></span>
+                                contentEditable={'true'}
+                                onInput={handleChange}
+                                key="input-caption"
+                            >
+                                {videoFile?.name}
+                                {/* active when click At or Hash */}
+                            </span>
+
                             <span className={cx('display-input-caption')}>
                                 <img
                                     src={AtTag}
@@ -100,6 +242,7 @@ function Upload() {
                                         cursor: 'pointer',
                                         marginRight: '5px',
                                     }}
+                                    onClick={handleAt}
                                 ></img>
                                 <img
                                     src={hashTag}
@@ -109,6 +252,7 @@ function Upload() {
                                         height: '20px',
                                         cursor: 'pointer',
                                     }}
+                                    onClick={handleHashTag}
                                 ></img>
                             </span>
                         </div>
@@ -140,6 +284,8 @@ function Upload() {
                                     <input
                                         type={'checkbox'}
                                         className={cx('title-ck-comment')}
+                                        checked={isCheckedComment}
+                                        onChange={handleisCheckedComment}
                                     ></input>
                                     <span className={cx('title-all')}>
                                         Comment
@@ -150,6 +296,8 @@ function Upload() {
                                     <input
                                         type={'checkbox'}
                                         className={cx('title-ck-duet')}
+                                        checked={isCheckedDuet}
+                                        onChange={handleisCheckedDuet}
                                     ></input>
                                     <span className={cx('title-all')}>
                                         Duet
@@ -160,6 +308,8 @@ function Upload() {
                                     <input
                                         type={'checkbox'}
                                         className={cx('title-ck-stitch')}
+                                        checked={isCheckedStitch}
+                                        onChange={handleisCheckedStitch}
                                     ></input>
                                     <span className={cx('title-all')}>
                                         Stitch
@@ -208,4 +358,4 @@ function Upload() {
     );
 }
 
-export default Upload;
+export default memo(Upload);

@@ -177,7 +177,7 @@ function Header() {
                 <div className={cx('action')}>
                     {currentUser ? (
                         <>
-                            <Button text>+ Upload</Button>
+                            <Link to={`/upload`}><Button text>+ Upload</Button></Link>
                             <Tippy
                                 delay={[0, 100]}
                                 offset={[12, 8]}

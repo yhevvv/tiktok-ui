@@ -56,7 +56,13 @@
     font-size: 14px;
 }
 .btn-video-upload {
-    padding: 12px 54px;
+    padding: 6px 55px;
+    color: var(--white) !important;
+    background-color: #fe2c55;
+    border-color: var(--primary);
+    min-width: 30px;
+    font-size: 16px;
+    font-weight: 600;
 }
 .display-2 {
     display: flex;
@@ -242,4 +248,24 @@
 }
 .btn-submit-post {
     padding: 23px 54px;
+}
+
+//video preview
+
+.info-video {
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    width: 270px;
+    height: 43px;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+}
+.file-name {
+    margin-top: 11px;
+    padding-right: 35px;
+    margin-left: 4px;
+    width: 163px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
