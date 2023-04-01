@@ -1,8 +1,10 @@
 .wrapper-full {
     width: 100%;
+    overflow-y: scroll;
 }
 .wrapper {
-    position: fixed;
+    height: calc(100%);
+    position: absolute;
     left: 23%;
     top: 10%;
     width: 1100px;
@@ -250,8 +252,10 @@
     color: black !important;
     cursor: pointer;
 }
-.btn-submit-discard {
-    padding: 23px 54px;
+.descriptions-copyright-3 {
+    box-sizing: border-box;
+    color: #161823bf;
+    font-size: 14px;
 }
 .btn-submit-post {
     padding: 23px 54px;

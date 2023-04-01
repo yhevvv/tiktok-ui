@@ -1,0 +1,28 @@
+.wrapper {
+    width: 700px;
+    height: 366px;
+    background-color: white;
+    padding: 1px 0 0 25px;
+    border-radius: 15px;
+}
+.title {
+    font-size: 24px;
+    color: #161823;
+    font-weight: 700;
+}
+.line {
+    height: 1px;
+    transform: scaleY(0.5);
+    width: 100%;
+    margin-left: -25px;
+    background-color: rgba(22, 24, 35, 0.2);
+}
+.text {
+    padding: 0 24px 0 0;
+    color: #161823bf;
+}
+.btn {
+    position: absolute;
+    right: 24px;
+    padding: 17px 39px;
+}

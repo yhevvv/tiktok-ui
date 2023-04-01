@@ -215,7 +215,12 @@ function PopupEdit({ title }) {
                                                 icon={faSpinner}
                                             ></FontAwesomeIcon>
                                         )}
-                                        {showTick && <TickCheck />}
+                                        {showTick && (
+                                            <TickCheck
+                                                width={'1.6rem'}
+                                                height={'1.6rem'}
+                                            />
+                                        )}
                                     </div>
                                 )}
                             <br></br>

@@ -1,0 +1,78 @@
+.wrapper {
+    margin-top: 974px;
+    height: 356px;
+    width: calc(100%);
+    background-color: #000000;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.logo {
+    position: relative;
+    margin-left: 144px;
+}
+.LogoIcon {
+    margin-top: 43px;
+}
+.LogoText {
+    margin-left: 7px;
+}
+.company {
+    margin-top: 43px;
+    display: flex;
+    flex-direction: column;
+}
+.company,
+.program,
+.support,
+.legal {
+    margin-top: 43px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+}
+.title {
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    font-size: 14px;
+    line-height: 28px;
+    font-family: var(--name-font-family);
+}
+.href {
+    color: #ccc;
+    display: inline;
+    font-family: var(--name-font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 28px;
+    position: relative;
+    &:hover {
+        text-decoration: underline 2px;
+    }
+}
+.program {
+}
+.support {
+}
+.legal {
+}
+.endFooter {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-top: 300px;
+    margin-left: 140px;
+}
+.language {
+}
+.copyright {
+    color: #fff;
+    margin-left: 1100px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 28px;
+    line-height: 24px;
+    color: #8a8b91;
+    font-family: var(--name-font-family);
+}

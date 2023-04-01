@@ -70,8 +70,9 @@ page live:
 
 upload: 
     giao dien: ok
-    logic page: 
+    logic page: ok
     alert reload page: ok
+    add footer: ok
     logic href: ghi href thi se bat dang nhap hoac dang ki, con khi dang nhap roi vo binh thuong: 
     api:
 

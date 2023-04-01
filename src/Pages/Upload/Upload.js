@@ -12,6 +12,10 @@ import LogoCheck from '~/assets/images/Logo/check.svg';
 import { useState, memo, useEffect, useRef } from 'react';
 import PopChangeVideo from './PopChangeVideo';
 import VideoThumbnail from 'react-video-thumbnail';
+import PopLearnMore from './PopLearnMore';
+import { ICircle, TickCheck } from '~/Components/Icons';
+import Footer from '~/Layouts/Components/Footer';
+import PopDiscard from './PopDiscard';
 
 function Upload() {
     const cx = classNames.bind(Style);
@@ -171,7 +175,7 @@ function Upload() {
     //timeline image cut from video upload
     const [duration, setDuration] = useState(null);
 
-    const generateThumbnails = (videoFile, event) => {
+    const generateThumbnails = (videoFile) => {
         const video = document.createElement('video');
 
         video.addEventListener('loadedmetadata', () => {
@@ -194,6 +198,12 @@ function Upload() {
         }
 
         return thumbnailList;
+    };
+
+    //ios touch
+    const [touch, setTouch] = useState(false);
+    const handleTouch = () => {
+        setTouch(!touch);
     };
 
     //css Select
@@ -224,8 +234,8 @@ function Upload() {
 
     return (
         <div className={cx('wrapper-full')}>
-            <HeaderFull></HeaderFull>
             <div className={cx('wrapper')}>
+                <HeaderFull></HeaderFull>
                 <div className={cx('title')}>
                     <span className={cx('title-1')}>Upload video</span>
                     <br></br>
@@ -429,36 +439,83 @@ function Upload() {
                                     <span className={cx('title-copyright-2')}>
                                         Run a copy check
                                     </span>
-                                    <IOSTouch></IOSTouch>
+                                    <IOSTouch onChange={handleTouch}></IOSTouch>
                                 </span>
                             </div>
-                            <div className={cx('descriptions-copyright')}>
-                                <p className={cx('descriptions-copyright-1')}>
-                                    We'll check your video for potential
-                                    copyright infringements on used sounds. If
-                                    infringements are found, you can edit the
-                                    video before posting.{' '}
-                                    <span
+                            {touch === false ? (
+                                <div className={cx('descriptions-copyright')}>
+                                    <p
                                         className={cx(
-                                            'descriptions-copyright-2',
+                                            'descriptions-copyright-1',
                                         )}
                                     >
-                                        Learn more
-                                    </span>
+                                        We'll check your video for potential
+                                        copyright infringements on used sounds.
+                                        If infringements are found, you can edit
+                                        the video before posting.{' '}
+                                        <span
+                                            className={cx(
+                                                'descriptions-copyright-2',
+                                            )}
+                                        >
+                                            <PopLearnMore></PopLearnMore>
+                                        </span>
+                                    </p>
+                                </div>
+                            ) : (
+                                <p className={cx('descriptions-copyright-3')}>
+                                    {videoFile === null ? (
+                                        <>
+                                            <ICircle></ICircle> 'Copyright check
+                                            will not begin until your video is
+                                            uploaded.'
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TickCheck
+                                                width={'1.2rem'}
+                                                height={'1.2rem'}
+                                            ></TickCheck>{' '}
+                                            No issues detected.
+                                            <p
+                                                className={cx(
+                                                    'descriptions-copyright-1',
+                                                )}
+                                            >
+                                                Note: Results of copyright
+                                                checks aren't final. For
+                                                instance, future changes of the
+                                                copyright holder's authorization
+                                                to the sound may impact your
+                                                video may impact your video.{' '}
+                                                <span
+                                                    className={cx(
+                                                        'descriptions-copyright-2',
+                                                    )}
+                                                >
+                                                    <br></br>
+                                                    <PopLearnMore></PopLearnMore>
+                                                </span>
+                                            </p>
+                                        </>
+                                    )}
                                 </p>
-                            </div>
+                            )}
                         </div>
                         <div className={cx('btn-submit')}>
-                            <Button text className={cx('btn-submit-discard')}>
-                                Discard
-                            </Button>
-                            <Button primary className={cx('btn-submit-post')}>
+                            <PopDiscard></PopDiscard>
+                            <Button
+                                primary
+                                className={cx('btn-submit-post')}
+                                disable={videoFile === null}
+                            >
                                 Post
                             </Button>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }
