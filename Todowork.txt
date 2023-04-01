@@ -65,15 +65,14 @@ page live:
     scroll logic: ok
     api: ok
     scroll top: ok
-    logic scroll: fix sau
     logic Following: ok
     
 
 upload: 
     giao dien: ok
     logic page: 
-    alert reload page:
-    logic href: ghi href thi se bat dang nhap hoac dang ki, con khi dang nhap roi vo binh thuong
+    alert reload page: ok
+    logic href: ghi href thi se bat dang nhap hoac dang ki, con khi dang nhap roi vo binh thuong: 
     api:
 
 like, comment, share (optional): not overview
@@ -85,3 +84,7 @@ chuc nang coi video chi tiet: not overview
 
 bug:
 check href not reload page (bug):
+
+nhung thu chua lam duoc:
+1. search @:nickname gan vao caption trong trang /upload, va phai bao luu gia tri + nickname vua them
+2. logic scroll page /live

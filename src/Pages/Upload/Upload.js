@@ -11,6 +11,7 @@ import AtTag from '~/assets/images/Logo/AtTag.svg';
 import LogoCheck from '~/assets/images/Logo/check.svg';
 import { useState, memo, useEffect, useRef } from 'react';
 import PopChangeVideo from './PopChangeVideo';
+import VideoThumbnail from 'react-video-thumbnail';
 
 function Upload() {
     const cx = classNames.bind(Style);
@@ -75,8 +76,39 @@ function Upload() {
     };
 
     //hashTag click
+    const [isActive, setIsActive] = useState(true);
+    const inputRef = useRef(null);
     const HashTagRef = useRef(null);
+
     const handleHashTag = () => {
+        //focus on span
+        setIsActive(!isActive);
+        inputRef.current.focus();
+
+        const range = document.createRange();
+        const sel = window.getSelection();
+
+        // Check if the span element is empty
+        if (inputRef.current.textContent === '') {
+            // Create a new text node and insert it at the beginning of the span element
+            const textNode = document.createTextNode('');
+            inputRef.current.appendChild(textNode);
+
+            // Set the range to the beginning of the text node
+            range.setStart(textNode, 0);
+            range.collapse(true);
+        } else {
+            // Set the range to the end of the span element's text content
+            range.setStart(
+                inputRef.current.childNodes[0],
+                inputRef.current.textContent.length,
+            );
+            range.collapse(true);
+        }
+
+        sel.removeAllRanges();
+        sel.addRange(range);
+
         // get a reference to the contentEditable span
         const inputCaption = HashTagRef.current;
 
@@ -86,9 +118,43 @@ function Upload() {
         // set the focus back to the contentEditable span
         inputCaption.focus();
     };
+
+    // //Friend Following when click At Icon
+
     //At click
     const RefAT = useRef(null);
     const handleAt = () => {
+        // //change display following
+        // setAfterClickAT(!afterClickAT);
+
+        //focus on span
+        setIsActive(!isActive);
+        inputRef.current.focus();
+
+        const range = document.createRange();
+        const sel = window.getSelection();
+
+        // Check if the span element is empty
+        if (inputRef.current.textContent === '') {
+            // Create a new text node and insert it at the beginning of the span element
+            const textNode = document.createTextNode('');
+            inputRef.current.appendChild(textNode);
+
+            // Set the range to the beginning of the text node
+            range.setStart(textNode, 0);
+            range.collapse(true);
+        } else {
+            // Set the range to the end of the span element's text content
+            range.setStart(
+                inputRef.current.childNodes[0],
+                inputRef.current.textContent.length,
+            );
+            range.collapse(true);
+        }
+
+        sel.removeAllRanges();
+        sel.addRange(range);
+
         // get a reference to the contentEditable span
         const inputCaption = RefAT.current;
 
@@ -101,6 +167,34 @@ function Upload() {
 
     console.clear();
     //console.log(text);
+
+    //timeline image cut from video upload
+    const [duration, setDuration] = useState(null);
+
+    const generateThumbnails = (videoFile, event) => {
+        const video = document.createElement('video');
+
+        video.addEventListener('loadedmetadata', () => {
+            setDuration(Math.round(video.duration));
+        });
+
+        video.src = URL.createObjectURL(videoFile);
+
+        const thumbnailList = [];
+        for (let i = 0; i < Math.floor(duration / 5); i++) {
+            const time = i * 0.5 * 10;
+            const thumbnail = (
+                <VideoThumbnail
+                    videoUrl={URL.createObjectURL(videoFile)}
+                    snapshotAtTime={time}
+                    key={i}
+                />
+            );
+            thumbnailList.push(thumbnail);
+        }
+
+        return thumbnailList;
+    };
 
     //css Select
     const customStyles = {
@@ -180,6 +274,8 @@ function Upload() {
                                 style={{ display: 'none' }}
                                 id={'input-file'}
                                 onChange={handleVideoSelect}
+                                onDrop={handleVideoSelect}
+                                accept="video/*"
                             ></input>
                         </div>
                     ) : (
@@ -218,20 +314,18 @@ function Upload() {
                                     Caption
                                 </span>
                             </div>
-
                             <span className={cx('count-item')}>
                                 {text?.length} / 2200
                             </span>
                             <span
+                                ref={inputRef}
                                 className={cx('input-caption')}
                                 contentEditable={'true'}
                                 onInput={handleChange}
                                 key="input-caption"
                             >
                                 {videoFile?.name}
-                                {/* active when click At or Hash */}
                             </span>
-
                             <span className={cx('display-input-caption')}>
                                 <img
                                     src={AtTag}
@@ -258,7 +352,18 @@ function Upload() {
                         </div>
                         <div className={cx('cover')}>
                             <span className={cx('title-cover')}>Cover</span>
-                            <div className={cx('input-cover')}></div>
+                            <div className={cx('input-cover')}>
+                                {videoFile && (
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                        }}
+                                    >
+                                        {generateThumbnails(videoFile)}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className={cx('mode')}>
                             <span className={cx('title-mode')}>

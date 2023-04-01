@@ -120,8 +120,9 @@
     cursor: text;
     overflow: auto;
     max-height: 11em;
-    &:active {
-    }
+}
+.active {
+    cursor: text;
 }
 .display-input-caption {
     position: absolute;
@@ -136,6 +137,12 @@
     border: 1px solid rgba(22, 24, 35, 0.12);
     border-radius: 4px;
     height: 168px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.input-cover img {
+    width: 85.75px;
+    height: 150px;
 }
 .mode {
     display: flex;
