@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Style from './Button.module.scss';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 import IOSTouch from '~/Components/Button/IOSTouch';
 
@@ -28,13 +27,6 @@ function Button({
     switchButton,
     ...passProps
 }) {
-    const [isDarkMode, setIsDarkMode] = useState('light');
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    };
-
-    const classMode = isDarkMode ? 'light' : 'dark';
 
     let Comp = 'button';
 
@@ -79,8 +71,6 @@ function Button({
             <span className={cx('title')}>{children}</span>
             {switchButton && (
                 <IOSTouch
-                    classMode={classMode}
-                    onChange={toggleDarkMode}
                 ></IOSTouch>
             )}
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}

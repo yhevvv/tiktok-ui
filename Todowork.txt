@@ -90,3 +90,4 @@ nhung thu chua lam duoc:
 1. search @:nickname gan vao caption trong trang /upload, va phai bao luu gia tri + nickname vua them
 2. logic scroll page /live
 3. toi uu trang for you
+4. dark mode
