@@ -16,6 +16,9 @@ import PopLearnMore from './PopLearnMore';
 import { ICircle, TickCheck } from '~/Components/Icons';
 import Footer from '~/Layouts/Components/Footer';
 import PopDiscard from './PopDiscard';
+import * as CreateVideoService from '~/Service/Video/CreateVideoService';
+import Cookies from 'js-cookie';
+import PopPost from './PopPost';
 
 function Upload() {
     const cx = classNames.bind(Style);
@@ -232,291 +235,372 @@ function Upload() {
         }),
     };
 
+    //get value selected
+    const [select, setSeleted] = useState({
+        value: 'public',
+        label: 'Public',
+    });
+
+    const handleSelect = (option) => {
+        setSeleted(option);
+    };
+
+    //api && popup
+    const [openPop, setOpenPop] = useState(false);
+    const HandleUpload = async () => {
+        try {
+            await CreateVideoService.VideoService({
+                description: inputRef.current.outerText,
+                upload_file: videoFile,
+                thumbnail_time: 1,
+                viewable: select.value,
+                token: Cookies.get('isToken'),
+                comment: isCheckedComment ? 'comment' : null,
+                duet: isCheckedDuet ? 'duet' : null,
+                stitch: isCheckedStitch ? 'stitch' : null,
+            });
+        } catch (error) {
+            console.log(error.response.data);
+        }
+        setOpenPop(!openPop);
+    };
+
     return (
-        <div className={cx('wrapper-full')}>
-            <div className={cx('wrapper')}>
-                <HeaderFull></HeaderFull>
-                <div className={cx('title')}>
-                    <span className={cx('title-1')}>Upload video</span>
-                    <br></br>
-                    <span className={cx('title-2')}>
-                        Post a video your account
-                    </span>
-                </div>
-                <div className={cx('display')}>
-                    {videoUrl === '' ? (
-                        <div>
-                            <label
-                                htmlFor={'input-file'}
-                                className={cx('video-upload')}
-                            >
-                                <img
-                                    src={logoUpload}
-                                    alt=""
-                                    className={cx('icon-upload')}
-                                ></img>
-                                <span className={cx('title-video1')}>
-                                    Select video to upload
-                                </span>
-                                <span className={cx('title-video2')}>
-                                    Or drag and drop a file
-                                </span>
-                                <br></br>
-                                <p className={cx('title-video3')}>
-                                    MP4 or WEBM
-                                </p>
-                                <span className={cx('title-video3')}>
-                                    720x1280 resolution or higher
-                                </span>
-                                <p className={cx('title-video3')}>
-                                    Up to 30 minutes
-                                </p>
-                                <span className={cx('title-video3')}>
-                                    Less than 2GB
-                                </span>
-                                <br></br>
-                                <div className={cx('btn-video-upload')}>
-                                    Select File
-                                </div>
-                            </label>
-                            <input
-                                type={'file'}
-                                style={{ display: 'none' }}
-                                id={'input-file'}
-                                onChange={handleVideoSelect}
-                                onDrop={handleVideoSelect}
-                                accept="video/*"
-                            ></input>
-                        </div>
-                    ) : (
-                        <div className={cx('wrapper-video')}>
-                            <video
-                                src={videoUrl}
-                                controls
-                                style={{
-                                    width: '260px',
-                                    height: '458px',
-                                    borderRadius: '25px',
-                                }}
-                            ></video>
-                            <div className={cx('info-video')}>
-                                <img
-                                    src={LogoCheck}
-                                    alt=""
-                                    style={{
-                                        width: '16px',
-                                        height: '16px',
-                                        marginTop: '11px',
-                                    }}
-                                ></img>
-                                <span className={cx('file-name')}>
-                                    {videoFile.name}
-                                </span>
-                                <PopChangeVideo></PopChangeVideo>
-                            </div>
-                        </div>
-                    )}
-
-                    <div className={cx('display-2')}>
-                        <div className={cx('caption')}>
-                            <div className={cx('display-4')}>
-                                <span className={cx('title-caption')}>
-                                    Caption
-                                </span>
-                            </div>
-                            <span className={cx('count-item')}>
-                                {text?.length} / 2200
-                            </span>
-                            <span
-                                ref={inputRef}
-                                className={cx('input-caption')}
-                                contentEditable={'true'}
-                                onInput={handleChange}
-                                key="input-caption"
-                            >
-                                {videoFile?.name}
-                            </span>
-                            <span className={cx('display-input-caption')}>
-                                <img
-                                    src={AtTag}
-                                    alt=""
-                                    style={{
-                                        width: '20px',
-                                        height: '20px',
-                                        cursor: 'pointer',
-                                        marginRight: '5px',
-                                    }}
-                                    onClick={handleAt}
-                                ></img>
-                                <img
-                                    src={hashTag}
-                                    alt=""
-                                    style={{
-                                        width: '20px',
-                                        height: '20px',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={handleHashTag}
-                                ></img>
+        <>
+            {Cookies.get('dataUser') !== 'null' ? (
+                <div className={cx('wrapper-full')}>
+                    <div className={cx('wrapper')}>
+                        <HeaderFull></HeaderFull>
+                        <div className={cx('title')}>
+                            <span className={cx('title-1')}>Upload video</span>
+                            <br></br>
+                            <span className={cx('title-2')}>
+                                Post a video your account
                             </span>
                         </div>
-                        <div className={cx('cover')}>
-                            <span className={cx('title-cover')}>Cover</span>
-                            <div className={cx('input-cover')}>
-                                {videoFile && (
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                        }}
+                        <div className={cx('display')}>
+                            {videoUrl === '' ? (
+                                <div>
+                                    <label
+                                        htmlFor={'input-file'}
+                                        className={cx('video-upload')}
                                     >
-                                        {generateThumbnails(videoFile)}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div className={cx('mode')}>
-                            <span className={cx('title-mode')}>
-                                Who can watch this video
-                            </span>
-                            {/* <select className={cx('select-mode')}>
-                                <option value="Public">Public</option>
-                                <option value="Friends">Friends</option>
-                                <option value="Private">Private</option>
-                            </select> */}
-                            <Select
-                                className={cx('select-mode')}
-                                options={mode_upload}
-                                defaultValue={mode_upload[0]}
-                                styles={customStyles}
-                            ></Select>
-                        </div>
-                        <div className={cx('allow')}>
-                            <p className={cx('title-allow')}>Allow user to:</p>
-
-                            <div className={cx('display-3')}>
-                                <label className={cx('container')}>
-                                    <input
-                                        type={'checkbox'}
-                                        className={cx('title-ck-comment')}
-                                        checked={isCheckedComment}
-                                        onChange={handleisCheckedComment}
-                                    ></input>
-                                    <span className={cx('title-all')}>
-                                        Comment
-                                    </span>
-                                    <span className={cx('checkmark')}></span>
-                                </label>
-                                <label className={cx('container')}>
-                                    <input
-                                        type={'checkbox'}
-                                        className={cx('title-ck-duet')}
-                                        checked={isCheckedDuet}
-                                        onChange={handleisCheckedDuet}
-                                    ></input>
-                                    <span className={cx('title-all')}>
-                                        Duet
-                                    </span>
-                                    <span className={cx('checkmark')}></span>
-                                </label>
-                                <label className={cx('container')}>
-                                    <input
-                                        type={'checkbox'}
-                                        className={cx('title-ck-stitch')}
-                                        checked={isCheckedStitch}
-                                        onChange={handleisCheckedStitch}
-                                    ></input>
-                                    <span className={cx('title-all')}>
-                                        Stitch
-                                    </span>
-                                    <span className={cx('checkmark')}></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div className={cx('copyright')}>
-                            <div className={cx('title-copyright')}>
-                                <span className={cx('title-copyright-1')}>
-                                    <span className={cx('title-copyright-2')}>
-                                        Run a copy check
-                                    </span>
-                                    <IOSTouch onChange={handleTouch}></IOSTouch>
-                                </span>
-                            </div>
-                            {touch === false ? (
-                                <div className={cx('descriptions-copyright')}>
-                                    <p
-                                        className={cx(
-                                            'descriptions-copyright-1',
-                                        )}
-                                    >
-                                        We'll check your video for potential
-                                        copyright infringements on used sounds.
-                                        If infringements are found, you can edit
-                                        the video before posting.{' '}
-                                        <span
-                                            className={cx(
-                                                'descriptions-copyright-2',
-                                            )}
-                                        >
-                                            <PopLearnMore></PopLearnMore>
+                                        <img
+                                            src={logoUpload}
+                                            alt=""
+                                            className={cx('icon-upload')}
+                                        ></img>
+                                        <span className={cx('title-video1')}>
+                                            Select video to upload
                                         </span>
-                                    </p>
+                                        <span className={cx('title-video2')}>
+                                            Or drag and drop a file
+                                        </span>
+                                        <br></br>
+                                        <p className={cx('title-video3')}>
+                                            MP4 or WEBM
+                                        </p>
+                                        <span className={cx('title-video3')}>
+                                            720x1280 resolution or higher
+                                        </span>
+                                        <p className={cx('title-video3')}>
+                                            Up to 30 minutes
+                                        </p>
+                                        <span className={cx('title-video3')}>
+                                            Less than 2GB
+                                        </span>
+                                        <br></br>
+                                        <div className={cx('btn-video-upload')}>
+                                            Select File
+                                        </div>
+                                    </label>
+                                    <input
+                                        type={'file'}
+                                        style={{ display: 'none' }}
+                                        id={'input-file'}
+                                        onChange={handleVideoSelect}
+                                        onDrop={handleVideoSelect}
+                                        accept="video/*"
+                                    ></input>
                                 </div>
                             ) : (
-                                <p className={cx('descriptions-copyright-3')}>
-                                    {videoFile === null ? (
-                                        <>
-                                            <ICircle></ICircle> 'Copyright check
-                                            will not begin until your video is
-                                            uploaded.'
-                                        </>
-                                    ) : (
-                                        <>
-                                            <TickCheck
-                                                width={'1.2rem'}
-                                                height={'1.2rem'}
-                                            ></TickCheck>{' '}
-                                            No issues detected.
+                                <div className={cx('wrapper-video')}>
+                                    <video
+                                        src={videoUrl}
+                                        controls
+                                        style={{
+                                            width: '260px',
+                                            height: '458px',
+                                            borderRadius: '25px',
+                                        }}
+                                    ></video>
+                                    <div className={cx('info-video')}>
+                                        <img
+                                            src={LogoCheck}
+                                            alt=""
+                                            style={{
+                                                width: '16px',
+                                                height: '16px',
+                                                marginTop: '11px',
+                                            }}
+                                        ></img>
+                                        <span className={cx('file-name')}>
+                                            {videoFile.name}
+                                        </span>
+                                        <PopChangeVideo></PopChangeVideo>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className={cx('display-2')}>
+                                <div className={cx('caption')}>
+                                    <div className={cx('display-4')}>
+                                        <span className={cx('title-caption')}>
+                                            Caption
+                                        </span>
+                                    </div>
+                                    <span className={cx('count-item')}>
+                                        {text?.length} / 2200
+                                    </span>
+                                    <span
+                                        ref={inputRef}
+                                        className={cx('input-caption')}
+                                        contentEditable={'true'}
+                                        onInput={handleChange}
+                                        key="input-caption"
+                                    >
+                                        {videoFile?.name}
+                                    </span>
+                                    <span
+                                        className={cx('display-input-caption')}
+                                    >
+                                        <img
+                                            src={AtTag}
+                                            alt=""
+                                            style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                cursor: 'pointer',
+                                                marginRight: '5px',
+                                            }}
+                                            onClick={handleAt}
+                                        ></img>
+                                        <img
+                                            src={hashTag}
+                                            alt=""
+                                            style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                cursor: 'pointer',
+                                            }}
+                                            onClick={handleHashTag}
+                                        ></img>
+                                    </span>
+                                </div>
+                                <div className={cx('cover')}>
+                                    <span className={cx('title-cover')}>
+                                        Cover
+                                    </span>
+                                    <div className={cx('input-cover')}>
+                                        {videoFile && (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                }}
+                                            >
+                                                {generateThumbnails(videoFile)}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className={cx('mode')}>
+                                    <span className={cx('title-mode')}>
+                                        Who can watch this video
+                                    </span>
+                                    <Select
+                                        className={cx('select-mode')}
+                                        options={mode_upload}
+                                        defaultValue={mode_upload[0]}
+                                        styles={customStyles}
+                                        onChange={handleSelect}
+                                    ></Select>
+                                </div>
+                                <div className={cx('allow')}>
+                                    <p className={cx('title-allow')}>
+                                        Allow user to:
+                                    </p>
+
+                                    <div className={cx('display-3')}>
+                                        <label className={cx('container')}>
+                                            <input
+                                                type={'checkbox'}
+                                                className={cx(
+                                                    'title-ck-comment',
+                                                )}
+                                                checked={isCheckedComment}
+                                                onChange={
+                                                    handleisCheckedComment
+                                                }
+                                            ></input>
+                                            <span className={cx('title-all')}>
+                                                Comment
+                                            </span>
+                                            <span
+                                                className={cx('checkmark')}
+                                            ></span>
+                                        </label>
+                                        <label className={cx('container')}>
+                                            <input
+                                                type={'checkbox'}
+                                                className={cx('title-ck-duet')}
+                                                checked={isCheckedDuet}
+                                                onChange={handleisCheckedDuet}
+                                            ></input>
+                                            <span className={cx('title-all')}>
+                                                Duet
+                                            </span>
+                                            <span
+                                                className={cx('checkmark')}
+                                            ></span>
+                                        </label>
+                                        <label className={cx('container')}>
+                                            <input
+                                                type={'checkbox'}
+                                                className={cx(
+                                                    'title-ck-stitch',
+                                                )}
+                                                checked={isCheckedStitch}
+                                                onChange={handleisCheckedStitch}
+                                                value={'stitch'}
+                                            ></input>
+                                            <span className={cx('title-all')}>
+                                                Stitch
+                                            </span>
+                                            <span
+                                                className={cx('checkmark')}
+                                            ></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className={cx('copyright')}>
+                                    <div className={cx('title-copyright')}>
+                                        <span
+                                            className={cx('title-copyright-1')}
+                                        >
+                                            <span
+                                                className={cx(
+                                                    'title-copyright-2',
+                                                )}
+                                            >
+                                                Run a copy check
+                                            </span>
+                                            <IOSTouch
+                                                onChange={handleTouch}
+                                            ></IOSTouch>
+                                        </span>
+                                    </div>
+                                    {touch === false ? (
+                                        <div
+                                            className={cx(
+                                                'descriptions-copyright',
+                                            )}
+                                        >
                                             <p
                                                 className={cx(
                                                     'descriptions-copyright-1',
                                                 )}
                                             >
-                                                Note: Results of copyright
-                                                checks aren't final. For
-                                                instance, future changes of the
-                                                copyright holder's authorization
-                                                to the sound may impact your
-                                                video may impact your video.{' '}
+                                                We'll check your video for
+                                                potential copyright
+                                                infringements on used sounds. If
+                                                infringements are found, you can
+                                                edit the video before posting.{' '}
                                                 <span
                                                     className={cx(
                                                         'descriptions-copyright-2',
                                                     )}
                                                 >
-                                                    <br></br>
                                                     <PopLearnMore></PopLearnMore>
                                                 </span>
                                             </p>
-                                        </>
+                                        </div>
+                                    ) : (
+                                        <p
+                                            className={cx(
+                                                'descriptions-copyright-3',
+                                            )}
+                                        >
+                                            {videoFile === null ? (
+                                                <>
+                                                    <ICircle></ICircle>{' '}
+                                                    'Copyright check will not
+                                                    begin until your video is
+                                                    uploaded.'
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <TickCheck
+                                                        width={'1.2rem'}
+                                                        height={'1.2rem'}
+                                                    ></TickCheck>{' '}
+                                                    No issues detected.
+                                                    <p
+                                                        className={cx(
+                                                            'descriptions-copyright-1',
+                                                        )}
+                                                    >
+                                                        Note: Results of
+                                                        copyright checks aren't
+                                                        final. For instance,
+                                                        future changes of the
+                                                        copyright holder's
+                                                        authorization to the
+                                                        sound may impact your
+                                                        video may impact your
+                                                        video.{' '}
+                                                        <span
+                                                            className={cx(
+                                                                'descriptions-copyright-2',
+                                                            )}
+                                                        >
+                                                            <br></br>
+                                                            <PopLearnMore></PopLearnMore>
+                                                        </span>
+                                                    </p>
+                                                </>
+                                            )}
+                                        </p>
                                     )}
-                                </p>
-                            )}
-                        </div>
-                        <div className={cx('btn-submit')}>
-                            <PopDiscard></PopDiscard>
-                            <Button
-                                primary
-                                className={cx('btn-submit-post')}
-                                disable={videoFile === null}
-                            >
-                                Post
-                            </Button>
+                                </div>
+                                <div className={cx('btn-submit')}>
+                                    <PopDiscard></PopDiscard>
+                                    <Button
+                                        primary
+                                        className={cx('btn-submit-post')}
+                                        disable={videoFile === null}
+                                        onClick={HandleUpload}
+                                    >
+                                        Post
+                                    </Button>
+                                    <PopPost open={openPop}></PopPost>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <Footer></Footer>
                 </div>
-            </div>
-            <Footer></Footer>
-        </div>
+            ) : (
+                <>
+                    <HeaderFull></HeaderFull>
+                    <h1 className={cx('title-non-login')}>
+                        You are not logged in, please login or register to be
+                        able to post any content on TikTok
+                    </h1>
+                    <Footer></Footer>
+                </>
+            )}
+        </>
     );
 }
 

@@ -1,0 +1,28 @@
+.wrapper {
+    width: 400px;
+    height: 256px;
+    background-color: white;
+    padding-top: 16px;
+}
+.title {
+    box-sizing: border-box;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0px 32px;
+    color: rgb(22, 24, 35);
+    flex: 0 0 auto;
+    order: 0;
+    -webkit-box-flex: 0;
+    word-break: break-word;
+}
+.btn-reload {
+    padding: 23px 89px;
+    margin-left: 32px;
+}
+.btn-me {
+    padding: 23px 124px;
+    margin-left: 32px;
+    margin-top: 10px;
+}

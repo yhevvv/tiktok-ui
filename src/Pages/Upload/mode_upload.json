@@ -1,14 +1,14 @@
 [
     {
-        "value": "Public",
+        "value": "public",
         "label": "Public"
     },
     {
-        "value": "Friends",
+        "value": "friends",
         "label": "Friends"
     },
     {
-        "value": "Private",
+        "value": "private",
         "label": "Private"
     }
 ]
