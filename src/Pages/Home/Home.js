@@ -34,7 +34,7 @@ function Home() {
 
     useEffect(() => {
         if (inView) {
-            setInitPage(initPage + 1);
+            setInitPage(initPage + 5);
         }
     }, [inView, initPage]);
 

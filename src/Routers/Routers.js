@@ -17,7 +17,6 @@ const PublicRouters = [
     { path: Config.routes.following, component: Following },
     { path: Config.routes.live, component: Live, layout: FullLayout },
     { path: Config.routes.search, component: Search, layout: null },
-    { path: Config.routes.upload, component: Upload, layout: null },
     {
         path: Config.routes.Profile,
         component: Profile,
@@ -37,6 +36,7 @@ const PublicRouters = [
 //private Routers
 const PrivateRouters = [
     { path: Config.routes.meProfile, component: meProfile, layout: FullLayout },
+    { path: Config.routes.upload, component: Upload, layout: null },
     { path: '*', component: NotFound, layout: null },
 ];
 

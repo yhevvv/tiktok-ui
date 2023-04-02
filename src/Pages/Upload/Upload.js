@@ -267,7 +267,7 @@ function Upload() {
 
     return (
         <>
-            {Cookies.get('dataUser') !== 'null' ? (
+            {Cookies.get('isToken') !== 'null' ? (
                 <div className={cx('wrapper-full')}>
                     <div className={cx('wrapper')}>
                         <HeaderFull></HeaderFull>
