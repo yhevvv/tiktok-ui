@@ -1,4 +1,4 @@
-.btn-primary{
+.btn-primary {
     padding: 8px 27px;
 }
 .btn-outline {
@@ -14,10 +14,29 @@
     border-radius: 4px;
     margin-left: 7px;
 }
-.btn-following{
+.btn-following {
     padding: 14px 65px;
 }
-
+.btn-editProfile {
+    padding: 14px 79px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    min-height: 36px;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: var(--name-font-family);
+    position: relative;
+    cursor: pointer;
+    padding: 0px 16px;
+    min-width: 208px;
+    text-align: center;
+}
+.btn-follow{
+    min-height: 28px !important;
+    min-width: 0px;
+    padding: 0px 19px;
+}
 .close {
     position: relative;
     left: 90%;

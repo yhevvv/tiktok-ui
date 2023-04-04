@@ -10,6 +10,9 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import GetApp from '~/Components/GetApp';
 import { useInView } from 'react-intersection-observer';
 import ScrollTopPage from '~/Components/ScrollTopPage';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
 
 function MeVideos() {
     const cx = classNames.bind(Style);
@@ -67,6 +70,36 @@ function MeVideos() {
         setShowButton(false);
     };
 
+    //api check following
+    const [checkFollowing, setCheckFollowing] = useState([]);
+    const [page, setPage] = useState(0);
+
+    useEffect(() => {
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            CheckFollowingService.CheckFollowing({
+                token: Cookies.get('isToken'),
+                page: page,
+            })
+                .then((data) => {
+                    setCheckFollowing((prev) => [...prev, ...data]);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        if (page < checkFollowing.length / 5) {
+            setPage(page + 1);
+        }
+    }, [checkFollowing.length, page]);
+
+    const checkFollowingID = [];
+    for (let i = 0; i < checkFollowing.length; i++) {
+        checkFollowingID.push(checkFollowing[i].id);
+    }
+
     return (
         <div
             className={cx('wrapper-all')}
@@ -74,51 +107,60 @@ function MeVideos() {
             onChange={() => {}}
         >
             {videoUser.map((data, index) => (
-                <div className={cx('wrapper')} key={index}>
-                    <video
-                        className={cx('video-item')}
-                        src={data.popular_video.file_url}
-                        key={data.popular_video.id}
-                        onMouseOver={handleMouseOver}
-                        onMouseOut={handleMouseOut}
-                        muted
-                    ></video>
-                    <div className={cx('profile-wrapper')}>
-                        <img
-                            src={
-                                data.avatar !==
-                                'https://files.fullstack.edu.vn/f8-tiktok/'
-                                    ? data.avatar
-                                    : images.NoImage
-                            }
-                            alt={''}
-                            className={cx('image')}
-                        ></img>
-                        <p className={cx('username')}>
-                            {data.first_name !== '' || data.last_name !== ''
-                                ? data.first_name + ' ' + data.last_name
-                                : 'undefined name'}
-                        </p>
-                        <span className={cx('nickname')}>
-                            {data.nickname}
-                            {data.tick === true && (
-                                <FontAwesomeIcon
-                                    icon={faCircleCheck}
-                                    style={{
-                                        color: '#20d5ec',
-                                        width: '12px',
-                                        height: '12px',
-                                        margin: '0 0 0 5px',
-                                    }}
-                                ></FontAwesomeIcon>
+                <Link to={`/@${data.nickname}`} key={index}>
+                    <div className={cx('wrapper')} key={index}>
+                        <video
+                            className={cx('video-item')}
+                            src={data.popular_video.file_url}
+                            key={data.popular_video.id}
+                            onMouseOver={handleMouseOver}
+                            onMouseOut={handleMouseOut}
+                            muted
+                        ></video>
+
+                        <div className={cx('profile-wrapper')}>
+                            <img
+                                src={
+                                    data.avatar !==
+                                    'https://files.fullstack.edu.vn/f8-tiktok/'
+                                        ? data.avatar
+                                        : images.NoImage
+                                }
+                                alt={''}
+                                className={cx('image')}
+                            ></img>
+                            <p className={cx('username')}>
+                                {data.first_name !== '' || data.last_name !== ''
+                                    ? data.first_name + ' ' + data.last_name
+                                    : 'undefined name'}
+                            </p>
+                            <span className={cx('nickname')}>
+                                {data.nickname}
+                                {data.tick === true && (
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        style={{
+                                            color: '#20d5ec',
+                                            width: '12px',
+                                            height: '12px',
+                                            margin: '0 0 0 5px',
+                                        }}
+                                    ></FontAwesomeIcon>
+                                )}
+                            </span>
+                            {checkFollowingID.includes(data.id) === false ? (
+                                <Button primary className={cx('btn-follow')}>
+                                    Follow
+                                </Button>
+                            ) : (
+                                <Button text className={cx('btn-following')}>
+                                    Following
+                                </Button>
                             )}
-                        </span>
-                        <Button primary className={cx('btn-follow')}>
-                            Follow
-                        </Button>
-                        <span ref={ref}></span>
+                            <span ref={ref}></span>
+                        </div>
                     </div>
-                </div>
+                </Link>
             ))}
             <GetApp></GetApp>
             {showButton && (

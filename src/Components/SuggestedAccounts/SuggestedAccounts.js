@@ -6,15 +6,11 @@ import AccountItem from './AccountItem';
 function SuggestedAccounts({ label, more, data = [], onClick }) {
     const cx = classNames.bind(Style);
 
-    const ReloadPage = () => {
-        window.location.reload();
-    };
-
     return (
         <div className={cx('wrapper')}>
             <p className={cx('label')}>{label}</p>
 
-            <div onClick={ReloadPage}>
+            <div>
                 {data.map((account) => (
                     <AccountItem key={account.id} data={account}></AccountItem>
                 ))}

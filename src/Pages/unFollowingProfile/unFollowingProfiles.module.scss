@@ -58,6 +58,20 @@
     padding: 0px;
     margin: 16px 0px 0px;
 }
+.btn-after-follow {
+    display: inline-flex;
+}
+.message {
+    padding: 12px 45px;
+}
+.unfollow {
+    margin-left: 10px;
+}
+.unfollow-btn {
+    min-width: 0;
+    min-height: 0;
+    padding: 9px 7px;
+}
 
 .btn-editProfile {
     border-width: 1px;

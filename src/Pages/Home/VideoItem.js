@@ -20,6 +20,10 @@ import { useInView } from 'react-intersection-observer';
 import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PropperWrapper } from '~/Components/Popper';
 import AccountPreview from './AccountPreview';
+import Cookies from 'js-cookie';
+import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
+import * as FollowingService from '~/Service/Following/FollowingService';
+import PopupSign from '~/Components/PopupSign';
 
 function VideoItem({ data }) {
     const cx = classNames.bind(Style);
@@ -49,6 +53,62 @@ function VideoItem({ data }) {
             </div>
         );
     };
+
+    //api following & logic signup
+    const [changeFollowing, setChangeFollowing] = useState(false);
+    const handleFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                await FollowingService.Following({
+                    token: token,
+                    id_nickname: data.user.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            setChangeFollowing(!changeFollowing);
+        }
+    };
+
+    //api unfollowing
+    const [changeUnFollowing, setChangeUnFollowing] = useState(false);
+    const handleUnFollowing = async () => {
+        setChangeUnFollowing(!changeUnFollowing);
+    };
+
+    //api check following
+    const [checkFollowing, setCheckFollowing] = useState([]);
+    const [page, setPage] = useState(0);
+
+    useEffect(() => {
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            CheckFollowingService.CheckFollowing({
+                token: Cookies.get('isToken'),
+                page: page,
+            })
+                .then((data) => {
+                    setCheckFollowing((prev) => [...prev, ...data]);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        if (page < checkFollowing.length / 5) {
+            setPage(page + 1);
+        }
+    }, [checkFollowing.length, page]);
+
+    const checkFollowingID = [];
+    for (let i = 0; i < checkFollowing.length; i++) {
+        checkFollowingID.push(checkFollowing[i].id);
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -99,10 +159,67 @@ function VideoItem({ data }) {
                     </div>
                 </Tippy>
             </div>
-            <div className={cx('btn')}>
-                <Button outline className={cx('btn-follow')}>
-                    Follow
-                </Button>
+            <div>
+                {checkFollowingID.includes(data.user.id) === false ? (
+                    <>
+                        {Cookies.get('isToken') !== undefined &&
+                        Cookies.get('isToken') !== 'null' ? (
+                            <div>
+                                {changeFollowing === false ? (
+                                    <div className={cx('btn')}>
+                                        <Button
+                                            outline
+                                            className={cx('btn-follow')}
+                                            onClick={handleFollowing}
+                                        >
+                                            Follow
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <div className={cx('btn')}>
+                                        <Button
+                                            text
+                                            className={cx('btn-follow')}
+                                        >
+                                            Following
+                                        </Button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className={cx('btn-unsign-follow')}>
+                                <PopupSign
+                                    className="btn-follow"
+                                    title="Follow"
+                                ></PopupSign>
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    <div>
+                        {changeUnFollowing === false ? (
+                            <div className={cx('btn')}>
+                                <Button
+                                    text
+                                    className={cx('btn-follow')}
+                                    onClick={handleUnFollowing}
+                                >
+                                    Following
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className={cx('btn')}>
+                                <Button
+                                    outline
+                                    className={cx('btn-follow')}
+                                    onClick={handleUnFollowing}
+                                >
+                                    Follow
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
 
             <span className={cx('description')}>

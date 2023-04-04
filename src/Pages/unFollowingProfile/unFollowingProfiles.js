@@ -4,7 +4,13 @@ import GetApp from '~/Components/GetApp';
 import Button from '~/Components/Button';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Share, Dot, Lock, UserIconLager } from '~/Components/Icons';
+import {
+    Share,
+    Dot,
+    Lock,
+    UserIconLager,
+    FriendCheck,
+} from '~/Components/Icons';
 import MenuShare from '~/Components/MenuShare';
 import MenuReport from '~/Components/MenuReport';
 import * as profileService from '~/Service/profileService';
@@ -13,6 +19,10 @@ import Cookies from 'js-cookie';
 import images from '~/assets/images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import * as FollowingService from '~/Service/Following/FollowingService';
+import PopupSign from '~/Components/PopupSign';
+import Tippy from '@tippyjs/react';
+import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
 
 function Profile() {
     const cx = classNames.bind(Style);
@@ -68,6 +78,62 @@ function Profile() {
             });
     }, [username]);
 
+    //api following & logic signup
+    const [changeFollowing, setChangeFollowing] = useState(false);
+    const handleFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                await FollowingService.Following({
+                    token: token,
+                    id_nickname: nickNameFriend.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            setChangeFollowing(!changeFollowing);
+        }
+    };
+
+    //api unfollowing
+    const [changeUnFollowing, setChangeUnFollowing] = useState(true);
+    const handleUnFollowing = async () => {
+        setChangeUnFollowing(!changeUnFollowing);
+    };
+
+    //api check following (get list following)
+    const [checkFollowing, setCheckFollowing] = useState([]);
+    const [page, setPage] = useState(0);
+
+    useEffect(() => {
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            CheckFollowingService.CheckFollowing({
+                token: Cookies.get('isToken'),
+                page: page,
+            })
+                .then((data) => {
+                    setCheckFollowing((prev) => [...prev, ...data]);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        if (page < checkFollowing.length / 5) {
+            setPage(page + 1);
+        }
+    }, [checkFollowing.length, page]);
+
+    const checkFollowingID = [];
+    for (let i = 0; i < checkFollowing.length; i++) {
+        checkFollowingID.push(checkFollowing[i].id);
+    }
+
     return (
         <>
             {nickNameFriend ? (
@@ -102,16 +168,130 @@ function Profile() {
                             <h3 className={cx('nickname')}>
                                 {nickNameFriend.nickname}
                             </h3>
-                            <div className={cx('outline-editProfile')}>
-                                <Button
-                                    primary
-                                    className={cx('btn-editProfile')}
-                                >
-                                    <strong className={cx('btn-text')}>
-                                        Follow
-                                    </strong>
-                                </Button>
-                            </div>
+                            {checkFollowingID.includes(nickNameFriend.id) ===
+                            false ? (
+                                <div className={cx('outline-editProfile')}>
+                                    {changeFollowing ? (
+                                        <div className={cx('btn-after-follow')}>
+                                            <Button
+                                                outline
+                                                className={cx('message')}
+                                            >
+                                                Messages
+                                            </Button>
+                                            <Tippy
+                                                delay={[0, 100]}
+                                                offset={[12, 8]}
+                                                content="Unfollow"
+                                                placement="bottom"
+                                            >
+                                                <div className={cx('unfollow')}>
+                                                    <Button
+                                                        text
+                                                        className={cx(
+                                                            'unfollow-btn',
+                                                        )}
+                                                        onClick={
+                                                            handleFollowing
+                                                        }
+                                                    >
+                                                        <FriendCheck></FriendCheck>
+                                                    </Button>
+                                                </div>
+                                            </Tippy>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            {Cookies.get('isToken') !==
+                                                undefined &&
+                                            Cookies.get('isToken') !==
+                                                'null' ? (
+                                                <Button
+                                                    primary
+                                                    className={cx(
+                                                        'btn-editProfile',
+                                                    )}
+                                                    onClick={handleFollowing}
+                                                >
+                                                    <strong
+                                                        className={cx(
+                                                            'btn-text',
+                                                        )}
+                                                    >
+                                                        Follow
+                                                    </strong>
+                                                </Button>
+                                            ) : (
+                                                <PopupSign
+                                                    className="btn-editProfile"
+                                                    title="Follow"
+                                                ></PopupSign>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className={cx('outline-editProfile')}>
+                                    {changeUnFollowing ? (
+                                        <div className={cx('btn-after-follow')}>
+                                            <Button
+                                                outline
+                                                className={cx('message')}
+                                            >
+                                                Messages
+                                            </Button>
+                                            <Tippy
+                                                delay={[0, 100]}
+                                                offset={[12, 8]}
+                                                content="Unfollow"
+                                                placement="bottom"
+                                            >
+                                                <div className={cx('unfollow')}>
+                                                    <Button
+                                                        text
+                                                        className={cx(
+                                                            'unfollow-btn',
+                                                        )}
+                                                        onClick={
+                                                            handleUnFollowing
+                                                        }
+                                                    >
+                                                        <FriendCheck></FriendCheck>
+                                                    </Button>
+                                                </div>
+                                            </Tippy>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            {Cookies.get('isToken') !==
+                                                undefined &&
+                                            Cookies.get('isToken') !==
+                                                'null' ? (
+                                                <Button
+                                                    primary
+                                                    className={cx(
+                                                        'btn-editProfile',
+                                                    )}
+                                                    onClick={handleUnFollowing}
+                                                >
+                                                    <strong
+                                                        className={cx(
+                                                            'btn-text',
+                                                        )}
+                                                    >
+                                                        Follow
+                                                    </strong>
+                                                </Button>
+                                            ) : (
+                                                <PopupSign
+                                                    className="btn-editProfile"
+                                                    title="Follow"
+                                                ></PopupSign>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            )}
                         </div>
                         <br></br>
                         <div className={cx('btn-share')}>

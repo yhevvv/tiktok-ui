@@ -33,7 +33,7 @@ function AccountItem({ data }) {
                 placement="bottom-start"
                 offset={[0, -10]}
             >
-                <Link to={`/@${data.nickname}`}>
+                <Link to={`/@${data.nickname}`} onClick={() => window.reload()}>
                     <div className={cx('account-item')}>
                         <Images
                             className={cx('avatar')}

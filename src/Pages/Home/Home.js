@@ -53,7 +53,6 @@ function Home() {
         setShowButton(false);
     };
 
-    console.clear();
 
     return (
         <div className={cx('wrapper-all')} onWheel={handleScroll}>
