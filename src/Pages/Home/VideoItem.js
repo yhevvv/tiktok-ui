@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import VideoPlayer from './VideoPlayer';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 import Tippy from '@tippyjs/react/headless';
@@ -24,6 +24,7 @@ import Cookies from 'js-cookie';
 import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
 import * as FollowingService from '~/Service/Following/FollowingService';
 import PopupSign from '~/Components/PopupSign';
+import * as unFollowingProfile from '~/Service/Following/UnFollowingService';
 
 function VideoItem({ data }) {
     const cx = classNames.bind(Style);
@@ -54,33 +55,7 @@ function VideoItem({ data }) {
         );
     };
 
-    //api following & logic signup
-    const [changeFollowing, setChangeFollowing] = useState(false);
-    const handleFollowing = async () => {
-        const token = Cookies.get('isToken');
-        if (
-            Cookies.get('isToken') !== undefined &&
-            Cookies.get('isToken') !== 'null'
-        ) {
-            try {
-                await FollowingService.Following({
-                    token: token,
-                    id_nickname: data.user.id,
-                });
-            } catch (error) {
-                console.log(error);
-            }
-            setChangeFollowing(!changeFollowing);
-        }
-    };
-
-    //api unfollowing
-    const [changeUnFollowing, setChangeUnFollowing] = useState(false);
-    const handleUnFollowing = async () => {
-        setChangeUnFollowing(!changeUnFollowing);
-    };
-
-    //api check following
+    //api check following (logic following)
     const [checkFollowing, setCheckFollowing] = useState([]);
     const [page, setPage] = useState(0);
 
@@ -109,6 +84,53 @@ function VideoItem({ data }) {
     for (let i = 0; i < checkFollowing.length; i++) {
         checkFollowingID.push(checkFollowing[i].id);
     }
+
+    const checkFollowingStart = checkFollowingID.includes(data.user.id);
+
+    const [changeFollowing, setChangeFollowing] = useState();
+
+    useLayoutEffect(() => {
+        setChangeFollowing(checkFollowingStart);
+    }, [checkFollowingStart]);
+
+    //api following & logic signup
+    const handleFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                await FollowingService.Following({
+                    token: token,
+                    id_nickname: data.user.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            setChangeFollowing(!changeFollowing);
+        }
+    };
+
+    //api unfollowing
+    //const [changeUnFollowing, setChangeUnFollowing] = useState(true);
+    const handleUnFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                unFollowingProfile.UnFollowing({
+                    token: token,
+                    nickname: data.user.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setChangeFollowing(!changeFollowing);
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -180,6 +202,7 @@ function VideoItem({ data }) {
                                         <Button
                                             text
                                             className={cx('btn-follow')}
+                                            onClick={handleUnFollowing}
                                         >
                                             Following
                                         </Button>
@@ -197,7 +220,7 @@ function VideoItem({ data }) {
                     </>
                 ) : (
                     <div>
-                        {changeUnFollowing === false ? (
+                        {changeFollowing ? (
                             <div className={cx('btn')}>
                                 <Button
                                     text
@@ -212,7 +235,7 @@ function VideoItem({ data }) {
                                 <Button
                                     outline
                                     className={cx('btn-follow')}
-                                    onClick={handleUnFollowing}
+                                    onClick={handleFollowing}
                                 >
                                     Follow
                                 </Button>

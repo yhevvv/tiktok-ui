@@ -2,7 +2,7 @@ import Style from './unFollowingProfiles.module.scss';
 import classNames from 'classnames/bind';
 import GetApp from '~/Components/GetApp';
 import Button from '~/Components/Button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     Share,
@@ -23,6 +23,7 @@ import * as FollowingService from '~/Service/Following/FollowingService';
 import PopupSign from '~/Components/PopupSign';
 import Tippy from '@tippyjs/react';
 import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
+import * as unFollowingProfile from '~/Service/Following/UnFollowingService';
 
 function Profile() {
     const cx = classNames.bind(Style);
@@ -78,33 +79,7 @@ function Profile() {
             });
     }, [username]);
 
-    //api following & logic signup
-    const [changeFollowing, setChangeFollowing] = useState(false);
-    const handleFollowing = async () => {
-        const token = Cookies.get('isToken');
-        if (
-            Cookies.get('isToken') !== undefined &&
-            Cookies.get('isToken') !== 'null'
-        ) {
-            try {
-                await FollowingService.Following({
-                    token: token,
-                    id_nickname: nickNameFriend.id,
-                });
-            } catch (error) {
-                console.log(error);
-            }
-            setChangeFollowing(!changeFollowing);
-        }
-    };
-
-    //api unfollowing
-    const [changeUnFollowing, setChangeUnFollowing] = useState(true);
-    const handleUnFollowing = async () => {
-        setChangeUnFollowing(!changeUnFollowing);
-    };
-
-    //api check following (get list following)
+    //api check following (logic following)
     const [checkFollowing, setCheckFollowing] = useState([]);
     const [page, setPage] = useState(0);
 
@@ -133,6 +108,52 @@ function Profile() {
     for (let i = 0; i < checkFollowing.length; i++) {
         checkFollowingID.push(checkFollowing[i].id);
     }
+
+    const checkFollowingStart = checkFollowingID.includes(nickNameFriend.id);
+
+    const [changeFollowing, setChangeFollowing] = useState();
+
+    useLayoutEffect(() => {
+        setChangeFollowing(checkFollowingStart);
+    }, [checkFollowingStart]);
+
+    //api following
+    const handleFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                await FollowingService.Following({
+                    token: token,
+                    id_nickname: nickNameFriend.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+            setChangeFollowing(!changeFollowing);
+        }
+    };
+
+    //api unfollowing
+    const handleUnFollowing = async () => {
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                unFollowingProfile.UnFollowing({
+                    token: token,
+                    nickname: nickNameFriend.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setChangeFollowing(!changeFollowing);
+    };
 
     return (
         <>
@@ -192,7 +213,7 @@ function Profile() {
                                                             'unfollow-btn',
                                                         )}
                                                         onClick={
-                                                            handleFollowing
+                                                            handleUnFollowing
                                                         }
                                                     >
                                                         <FriendCheck></FriendCheck>
@@ -232,7 +253,7 @@ function Profile() {
                                 </div>
                             ) : (
                                 <div className={cx('outline-editProfile')}>
-                                    {changeUnFollowing ? (
+                                    {changeFollowing ? (
                                         <div className={cx('btn-after-follow')}>
                                             <Button
                                                 outline
@@ -272,7 +293,7 @@ function Profile() {
                                                     className={cx(
                                                         'btn-editProfile',
                                                     )}
-                                                    onClick={handleUnFollowing}
+                                                    onClick={handleFollowing}
                                                 >
                                                     <strong
                                                         className={cx(

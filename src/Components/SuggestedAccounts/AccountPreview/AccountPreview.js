@@ -6,12 +6,13 @@ import Style from './AccountPreview.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, memo } from 'react';
 import Cookies from 'js-cookie';
 import * as CheckFollowingService from '~/Service/Following/CheckFollowingService';
 import PopupSign from '~/Components/PopupSign';
 import { Link } from 'react-router-dom';
 import * as FollowingService from '~/Service/Following/FollowingService';
+import * as unFollowingProfile from '~/Service/Following/UnFollowingService';
 
 function AccountPreview({ data }) {
     const cx = classNames.bind(Style);
@@ -41,8 +42,20 @@ function AccountPreview({ data }) {
         }
     }, [checkFollowing.length, page]);
 
+    const checkFollowingID = [];
+    for (let i = 0; i < checkFollowing.length; i++) {
+        checkFollowingID.push(checkFollowing[i].id);
+    }
+
+    const checkFollowingStart = checkFollowingID.includes(data.id);
+
+    const [changeFollowing, setChangeFollowing] = useState();
+
+    useLayoutEffect(() => {
+        setChangeFollowing(checkFollowingStart);
+    }, [checkFollowingStart]);
+
     //api following & logic signup
-    const [changeFollowing, setChangeFollowing] = useState(false);
     const handleFollowing = async () => {
         const token = Cookies.get('isToken');
         if (
@@ -52,7 +65,7 @@ function AccountPreview({ data }) {
             try {
                 await FollowingService.Following({
                     token: token,
-                    id_nickname: data.user.id,
+                    id_nickname: data.id,
                 });
             } catch (error) {
                 console.log(error);
@@ -62,15 +75,23 @@ function AccountPreview({ data }) {
     };
 
     //api unfollowing
-    const [changeUnFollowing, setChangeUnFollowing] = useState(false);
     const handleUnFollowing = async () => {
-        setChangeUnFollowing(!changeUnFollowing);
+        const token = Cookies.get('isToken');
+        if (
+            Cookies.get('isToken') !== undefined &&
+            Cookies.get('isToken') !== 'null'
+        ) {
+            try {
+                unFollowingProfile.UnFollowing({
+                    token: token,
+                    nickname: data.id,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setChangeFollowing(!changeFollowing);
     };
-
-    const checkFollowingID = [];
-    for (let i = 0; i < checkFollowing.length; i++) {
-        checkFollowingID.push(checkFollowing[i].id);
-    }
 
     return (
         <div className={cx('wrapper')}>
@@ -101,7 +122,7 @@ function AccountPreview({ data }) {
                                         <div className={cx('btn-follow')}>
                                             <Button
                                                 text
-                                                onClick={handleFollowing}
+                                                onClick={handleUnFollowing}
                                             >
                                                 Following
                                             </Button>
@@ -118,7 +139,7 @@ function AccountPreview({ data }) {
                     </>
                 ) : (
                     <>
-                        {changeUnFollowing === false ? (
+                        {changeFollowing ? (
                             <div className={cx('btn-follow')}>
                                 <Button text onClick={handleUnFollowing}>
                                     Following
@@ -126,7 +147,7 @@ function AccountPreview({ data }) {
                             </div>
                         ) : (
                             <div className={cx('btn-follow')}>
-                                <Button primary onClick={handleUnFollowing}>
+                                <Button primary onClick={handleFollowing}>
                                     Follow
                                 </Button>
                             </div>
@@ -171,4 +192,4 @@ AccountPreview.propTypes = {
     data: PropTypes.object.isRequired,
 };
 
-export default AccountPreview;
+export default memo(AccountPreview);
