@@ -37,6 +37,13 @@
     min-width: 0px;
     padding: 0px 19px;
 }
+.btn-interact {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+}
 .close {
     position: relative;
     left: 90%;

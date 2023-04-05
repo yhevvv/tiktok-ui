@@ -86,14 +86,18 @@ chuc nang follow/unfollowing tat ca cac trang:
     api tippy: ok
 
 like, comment, share trang home:
-    logic: 
-    api: 
-    test: 
+    logic: ok
+    api: ok
+    test: ok
 
-chuc nang coi video chi tiet, xoa video, sua video: not overview
-
-like, comment, share video chi tiet: not overview
-
+chuc nang coi video chi tiet, xoa video, sua video, like, comment, share video chi tiet: 
+    router:
+    giao dien all:
+    logic:
+    api video, chuyen tiep video:
+    api 404 neu ma khong tim thay video:
+    api con lai:
+    Link cho cac trang page (profile, unfollowingProfile, Home):
 chat: not overview
 
 nhung thu chua lam duoc:

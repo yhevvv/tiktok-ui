@@ -1,0 +1,31 @@
+.btn-interact {
+    padding-bottom: 40px;
+    padding-top: 40px;
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.06);
+    }
+}
+
+.icon-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    font-size: 15px;
+    border-radius: 50%;
+    transition: all 200ms ease-in-out 0s;
+    background-color: rgba(22, 24, 35, 0.06);
+    margin-top: 8px;
+    margin-bottom: 6px;
+    color: black;
+}
+.count-item {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 62px;
+    margin-left: -28px;
+    color: rgba(22, 24, 35, 0.75);
+    font-size: 12px;
+    text-align: center;
+}

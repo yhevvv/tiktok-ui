@@ -8,9 +8,6 @@ import { MusicNote } from '~/Components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
-    faCommentDots,
-    faHeart,
-    faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import VideoPlayer from './VideoPlayer';
@@ -25,6 +22,7 @@ import * as CheckFollowingService from '~/Service/Following/CheckFollowingServic
 import * as FollowingService from '~/Service/Following/FollowingService';
 import PopupSign from '~/Components/PopupSign';
 import * as unFollowingProfile from '~/Service/Following/UnFollowingService';
+import Interact from './Interact';
 
 function VideoItem({ data }) {
     const cx = classNames.bind(Style);
@@ -260,32 +258,7 @@ function VideoItem({ data }) {
                     volume={0.2}
                 ></VideoPlayer>
                 <div className={cx('interact')} ref={ref}>
-                    <Button noneBtn className={cx('btn-interact')}>
-                        <span className={cx('icon-item')}>
-                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                        </span>
-                        <strong className={cx('count-item')}>
-                            {data.likes_count}
-                        </strong>
-                    </Button>
-                    <Button noneBtn className={cx('btn-interact')}>
-                        <span className={cx('icon-item')}>
-                            <FontAwesomeIcon
-                                icon={faCommentDots}
-                            ></FontAwesomeIcon>
-                        </span>
-                        <strong className={cx('count-item')}>
-                            {data.comments_count}
-                        </strong>
-                    </Button>
-                    <Button noneBtn className={cx('btn-interact')}>
-                        <span className={cx('icon-item')}>
-                            <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
-                        </span>
-                        <strong className={cx('count-item')}>
-                            {data.shares_count}
-                        </strong>
-                    </Button>
+                    <Interact data={data}></Interact>
                 </div>
             </div>
             <hr className={cx('hr-item')}></hr>

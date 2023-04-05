@@ -105,6 +105,16 @@ function PopupSign({ title, className }) {
                     {title}
                 </Button>
             )}
+            {className === 'btn-interact' && (
+                <Button
+                    className={cx('btn-interact')}
+                    noneBtn
+                    onClick={togglePopup}
+                >
+                    {title}
+                </Button>
+            )}
+
             <Popup open={isOpen} position={'right bottom'} closeOnDocumentClick>
                 <div className={cx('popup')}>
                     {handleSwitch ? (
