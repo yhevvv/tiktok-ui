@@ -7,6 +7,7 @@ const routes = {
     upload: '/upload',
     search: '/search',
     live: '/live',
+    detailVideo: '/:nickname/video/:id',
 };
 
 if (JSON.parse(Cookies.get('dataUser') !== undefined)) {

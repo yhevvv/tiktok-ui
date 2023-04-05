@@ -7,7 +7,7 @@ import {
 import classNames from 'classnames/bind';
 import Style from './Interact.module.scss';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Button from '~/Components/Button';
 import * as likeService from '~/Service/Interact/likeService';

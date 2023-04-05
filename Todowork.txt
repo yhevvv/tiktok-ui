@@ -91,7 +91,7 @@ like, comment, share trang home:
     test: ok
 
 chuc nang coi video chi tiet, xoa video, sua video, like, comment, share video chi tiet: 
-    router:
+    router: ok
     giao dien all:
     logic:
     api video, chuyen tiep video:

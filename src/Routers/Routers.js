@@ -10,6 +10,7 @@ import Upload from '~/Pages/Upload';
 import Search from '~/Pages/Search';
 import Live from '~/Pages/Live';
 import NotFound from '~/Pages/404';
+import DetailVideo from '~/Pages/DetailVideo';
 
 //public Routers
 const PublicRouters = [
@@ -23,6 +24,7 @@ const PublicRouters = [
         layout: FullLayout,
         exact: true,
     },
+    { path: Config.routes.detailVideo, component: DetailVideo, layout: null },
     { path: '*', component: NotFound, layout: null },
 ];
 
