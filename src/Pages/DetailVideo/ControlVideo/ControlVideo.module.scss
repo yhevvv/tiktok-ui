@@ -1,0 +1,21 @@
+.btn-sound-display {
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    right: 35px;
+}
+.btn-sound {
+    border: none;
+    background: none rgba(84, 84, 84, 0.5);
+    outline: none;
+    padding: 0px;
+    display: flex;
+    transition: opacity 0.3s ease 0s;
+    cursor: pointer;
+    line-height: 0;
+    border-radius: 9999px;
+    min-width: 0px;
+    &:hover {
+        opacity: 0.7;
+    }
+}

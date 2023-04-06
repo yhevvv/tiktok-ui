@@ -7,7 +7,6 @@ import {
     Embed,
     EmotionDetail,
     FacebokIcon,
-    Flag,
     HeartNone,
     IconX,
     ScrollDown,
@@ -27,19 +26,25 @@ import {
 import Tippy from '@tippyjs/react';
 import MenuShareLite from '~/Components/MenuShareLite';
 import Attag from '~/assets/images/Logo/AtTag.svg';
+import PopUpReport from './PopUpReport';
+import ControlVideo from './ControlVideo';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
 
     //get href
     const currentHref = window.location.href;
+    //get back Href
+    const HrefBack = () => {
+        window.history.back();
+    };
 
     return (
         <body className={cx('wrapper')}>
             <div className={cx('video-item')}>
                 <div className={cx('item-interact-video')}>
                     {/* icon close */}
-                    <div className={cx('close-video')}>
+                    <div className={cx('close-video')} onClick={HrefBack}>
                         <IconX color={'white'}></IconX>
                     </div>
                     {/* logo */}
@@ -51,11 +56,7 @@ function DetailVideo() {
                         ></img>
                     </div>
                     {/* report */}
-                    <div className={cx('btn-report')}>
-                        <Button blackShadowBtn>
-                            <Flag></Flag>Report
-                        </Button>
-                    </div>
+                    <PopUpReport></PopUpReport>
                     {/* icon change video up-down */}
                     <div className={cx('change-video')}>
                         <div className={cx('change-video-up')}>
@@ -74,11 +75,7 @@ function DetailVideo() {
                         </div>
                     </div>
                     {/* timeline video and sound */}
-                    <div className={cx('btn-sound-display')}>
-                        <Button noneBtn className={cx('btn-sound')}>
-                            <Sound></Sound>
-                        </Button>
-                    </div>
+                    <ControlVideo></ControlVideo>
                 </div>
                 <video src={VideoEx} className={cx('video')}></video>
                 {/* map */}

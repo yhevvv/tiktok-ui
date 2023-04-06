@@ -93,7 +93,7 @@ like, comment, share trang home:
 chuc nang coi video chi tiet, xoa video, sua video, like, comment, share video chi tiet: 
     router: ok
     giao dien all: ok
-    logic:
+    logic: 
     api video, chuyen tiep video:
     api 404 neu ma khong tim thay video:
     api con lai:
