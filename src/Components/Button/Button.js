@@ -15,6 +15,7 @@ function Button({
     white = false,
     outline = false,
     noneBtn = false,
+    blackShadowBtn = false,
     onClick,
     small = false,
     Large = false,
@@ -59,6 +60,7 @@ function Button({
         text, //button style 7
         white, //button style 4
         rounded, //button style 6
+        blackShadowBtn, //button shadow
         small, //size small button
         Large, //size big button
         [className]: className,
@@ -85,6 +87,7 @@ Button.propTypes = {
     primary: PropTypes.bool,
     white: PropTypes.bool,
     outline: PropTypes.bool,
+    blackShadowBtn: PropTypes.bool,
     onClick: PropTypes.func,
     small: PropTypes.bool,
     Large: PropTypes.bool,

@@ -1,4 +1,4 @@
-export const Embed = ({ className, width = '2.6rem', height = '2.6rem' }) => (
+export const Embed = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -23,11 +23,7 @@ export const Embed = ({ className, width = '2.6rem', height = '2.6rem' }) => (
     </svg>
 );
 
-export const WhatsApp = ({
-    className,
-    width = '2.6rem',
-    height = '2.6rem',
-}) => (
+export const WhatsApp = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -51,7 +47,7 @@ export const WhatsApp = ({
     </svg>
 );
 
-export const Twitter = ({ className, width = '2.6rem', height = '2.6rem' }) => (
+export const Twitter = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -75,11 +71,7 @@ export const Twitter = ({ className, width = '2.6rem', height = '2.6rem' }) => (
     </svg>
 );
 
-export const CopyLink = ({
-    className,
-    width = '2.6rem',
-    height = '2.6rem',
-}) => (
+export const CopyLink = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -101,11 +93,7 @@ export const CopyLink = ({
     </svg>
 );
 
-export const Linkedln = ({
-    className,
-    width = '2.6rem',
-    height = '2.6rem',
-}) => (
+export const Linkedln = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -130,7 +118,7 @@ export const Linkedln = ({
     </svg>
 );
 
-export const Reddit = ({ className, width = '2.6rem', height = '2.6rem' }) => (
+export const Reddit = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -150,11 +138,7 @@ export const Reddit = ({ className, width = '2.6rem', height = '2.6rem' }) => (
     </svg>
 );
 
-export const Telegram = ({
-    className,
-    width = '2.6rem',
-    height = '2.6rem',
-}) => (
+export const Telegram = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -182,7 +166,7 @@ export const Telegram = ({
     </svg>
 );
 
-export const Email = ({ className, width = '2.6rem', height = '2.6rem' }) => (
+export const Email = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -206,7 +190,7 @@ export const Email = ({ className, width = '2.6rem', height = '2.6rem' }) => (
     </svg>
 );
 
-export const Line = ({ className, width = '2.6rem', height = '2.6rem' }) => (
+export const Line = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -244,11 +228,7 @@ export const Line = ({ className, width = '2.6rem', height = '2.6rem' }) => (
     </svg>
 );
 
-export const Pinterest = ({
-    className,
-    width = '2.6rem',
-    height = '2.6rem',
-}) => (
+export const Pinterest = ({ className, width, height }) => (
     <svg
         className={className}
         width={width}
@@ -260,6 +240,45 @@ export const Pinterest = ({
         <path
             d="M24.0173 3C12.4102 3 3 12.3947 3 23.9827C3 32.8766 8.53541 40.4753 16.3542 43.5321C16.1639 41.8742 16.0082 39.3183 16.4234 37.5049C16.8039 35.8643 18.8797 27.074 18.8797 27.074C18.8797 27.074 18.257 25.8133 18.257 23.9655C18.257 21.0469 19.9522 18.8709 22.0626 18.8709C23.8616 18.8709 24.7265 20.2179 24.7265 21.824C24.7265 23.6201 23.5848 26.3141 22.9794 28.8183C22.4777 30.9079 24.0345 32.6176 26.093 32.6176C29.8294 32.6176 32.7009 28.6801 32.7009 23.0156C32.7009 17.9901 29.0856 14.4844 23.9135 14.4844C17.9283 14.4844 14.4168 18.9572 14.4168 23.5855C14.4168 25.3816 15.1087 27.3158 15.9736 28.3692C16.1466 28.5765 16.1639 28.7664 16.112 28.9737C15.9563 29.6299 15.5931 31.0633 15.5239 31.3569C15.4374 31.7368 15.2125 31.8232 14.8146 31.6332C12.1853 30.4071 10.542 26.5905 10.542 23.4992C10.542 16.8849 15.3509 10.8059 24.4324 10.8059C31.7149 10.8059 37.3887 15.9868 37.3887 22.9293C37.3887 30.1653 32.822 35.9852 26.4909 35.9852C24.3632 35.9852 22.3566 34.8799 21.682 33.5674C21.682 33.5674 20.6268 37.574 20.3673 38.5584C19.9003 40.389 18.6202 42.6686 17.7553 44.0674C19.7273 44.6719 21.8031 45 23.9827 45C35.5897 45 44.9999 35.6053 44.9999 24.0173C45.0345 12.3947 35.6243 3 24.0173 3Z"
             fill="#E60019"
+        ></path>
+    </svg>
+);
+export const ShareTo = ({ className, width, height }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+            fill="#FE2C55"
+        ></path>
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M18.7913 7.1875C18.6796 6.99413 18.4733 6.875 18.25 6.875H5.75001C5.50258 6.875 5.27845 7.02097 5.17839 7.24727C5.07834 7.47356 5.1212 7.73758 5.28771 7.9206L8.55021 11.5065C8.72305 11.6965 8.9945 11.7614 9.23456 11.6702L13.7656 9.94799C13.8184 9.92795 13.8423 9.93624 13.8527 9.94039C13.871 9.94765 13.8971 9.96649 13.9177 10.0013C13.9382 10.0361 13.9421 10.0681 13.9396 10.0876C13.9382 10.0987 13.9339 10.1237 13.8909 10.1602L10.1707 13.3155C9.97902 13.4782 9.90339 13.7398 9.97878 13.9796L11.4038 18.5124C11.4781 18.749 11.6853 18.9192 11.9317 18.9463C12.1781 18.9734 12.4173 18.8522 12.5413 18.6375L18.7913 7.81251C18.9029 7.61913 18.9029 7.38088 18.7913 7.1875Z"
+            fill="white"
+        ></path>
+    </svg>
+);
+export const ShareBlack = ({ className, width, height }) => (
+    <svg
+        className={className}
+        width={width}
+        height={height}
+        viewBox="0 0 48 48"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M26.4588 3.90871C25.3403 2.86068 23.4902 3.64074 23.4902 5.16041V13.0502C20.4499 14.1752 11.3194 18.1407 6.6047 26.6176C-1.49677 42.1311 3.82522 43.478 5.77105 39.7411C13.2467 29.1857 20.8146 30.4298 23.4902 31.3209V38.2274C23.4902 39.7114 25.2658 40.5055 26.4023 39.5298L43.3681 24.9655C44.9268 23.6274 44.9791 21.2608 43.4811 19.8573L26.4588 3.90871Z"
         ></path>
     </svg>
 );

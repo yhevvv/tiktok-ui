@@ -3,18 +3,84 @@ import Style from './DetailVideo.module.scss';
 import VideoEx from '~/assets/Videos/ShortVideo/demo.mp4';
 import images from '~/assets/images';
 import Button from '~/Components/Button';
+import {
+    Embed,
+    EmotionDetail,
+    FacebokIcon,
+    Flag,
+    HeartNone,
+    IconX,
+    ScrollDown,
+    ScrollUp,
+    ShareBlack,
+    ShareTo,
+    Sound,
+    Twitter,
+    WhatsApp,
+} from '~/Components/Icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCircleCheck,
+    faCommentDots,
+    faHeart,
+} from '@fortawesome/free-solid-svg-icons';
+import Tippy from '@tippyjs/react';
+import MenuShareLite from '~/Components/MenuShareLite';
+import Attag from '~/assets/images/Logo/AtTag.svg';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
+
+    //get href
+    const currentHref = window.location.href;
+
     return (
         <body className={cx('wrapper')}>
             <div className={cx('video-item')}>
-                {/* icon close */}
-                {/* logo */}
-                {/* report */}
-                {/* icon change video up-down */}
-                {/* timeline video and sound */}
-                <video src={VideoEx} controls className={cx('video')}></video>
+                <div className={cx('item-interact-video')}>
+                    {/* icon close */}
+                    <div className={cx('close-video')}>
+                        <IconX color={'white'}></IconX>
+                    </div>
+                    {/* logo */}
+                    <div className={cx('image-logo-style')}>
+                        <img
+                            className={cx('image-logo')}
+                            src={images.logoInDetail}
+                            alt={images.NoImage}
+                        ></img>
+                    </div>
+                    {/* report */}
+                    <div className={cx('btn-report')}>
+                        <Button blackShadowBtn>
+                            <Flag></Flag>Report
+                        </Button>
+                    </div>
+                    {/* icon change video up-down */}
+                    <div className={cx('change-video')}>
+                        <div className={cx('change-video-up')}>
+                            <ScrollUp
+                                width={'26px'}
+                                height={'26px'}
+                                color={'white'}
+                            ></ScrollUp>
+                        </div>
+                        <div className={cx('change-video-down')}>
+                            <ScrollDown
+                                width={'26px'}
+                                height={'26px'}
+                                color={'white'}
+                            ></ScrollDown>
+                        </div>
+                    </div>
+                    {/* timeline video and sound */}
+                    <div className={cx('btn-sound-display')}>
+                        <Button noneBtn className={cx('btn-sound')}>
+                            <Sound></Sound>
+                        </Button>
+                    </div>
+                </div>
+                <video src={VideoEx} className={cx('video')}></video>
                 {/* map */}
             </div>
             <div className={cx('interact-item')}>
@@ -26,6 +92,14 @@ function DetailVideo() {
                     ></img>
                     <div className={cx('detail-me-profile')}>
                         <span className={cx('name-me-profile')}>YourName</span>
+                        <FontAwesomeIcon
+                            icon={faCircleCheck}
+                            style={{
+                                color: '#20d5ec',
+                                width: '14px',
+                                height: '14px',
+                            }}
+                        ></FontAwesomeIcon>
                         <br></br>
                         <span className={cx('nickname-me-profile')}>
                             NickName
@@ -53,20 +127,80 @@ function DetailVideo() {
                 <div className={cx('interact-profile-display')}>
                     <div className={cx('interact-profile')}>
                         <div className={cx('reaction')}>
-                            <Button noneBtn className={cx('reaction-heart')}>
-                                icon tim
-                            </Button>
+                            <span className={cx('reaction-heart')}>
+                                <FontAwesomeIcon
+                                    icon={faHeart}
+                                    style={{ width: '20px', height: '20px' }}
+                                ></FontAwesomeIcon>
+                            </span>
                             <span className={cx('count-number')}>1234</span>
-                            <Button noneBtn className={cx('reaction-comment')}>
-                                icon doc
-                            </Button>
+                            <span className={cx('reaction-comment')}>
+                                <FontAwesomeIcon
+                                    icon={faCommentDots}
+                                    style={{ width: '20px', height: '20px' }}
+                                ></FontAwesomeIcon>
+                            </span>
                             <span className={cx('count-number')}>1234</span>
                             <div className={cx('share')}>
-                                icon 1 icon 2 icon 3 icon 4
+                                <Tippy content={'Embed'}>
+                                    <div className={cx('icon-share')}>
+                                        <Embed
+                                            width={'24px'}
+                                            height={'24px'}
+                                        ></Embed>
+                                    </div>
+                                </Tippy>
+                                <Tippy content={'Send to friend'}>
+                                    <div className={cx('icon-share')}>
+                                        <ShareTo
+                                            width={'24px'}
+                                            height={'24px'}
+                                        ></ShareTo>
+                                    </div>
+                                </Tippy>
+                                <Tippy content={'Share to Facebook'}>
+                                    <div className={cx('icon-share')}>
+                                        <FacebokIcon
+                                            width={'24px'}
+                                            height={'24px'}
+                                        ></FacebokIcon>
+                                    </div>
+                                </Tippy>
+                                <Tippy content={'Share to WhatsApp'}>
+                                    <div className={cx('icon-share')}>
+                                        <WhatsApp
+                                            width={'24px'}
+                                            height={'24px'}
+                                        ></WhatsApp>
+                                    </div>
+                                </Tippy>
+                                <Tippy content={'Share to Twitter'}>
+                                    <div className={cx('icon-share')}>
+                                        <Twitter
+                                            width={'24px'}
+                                            height={'24px'}
+                                        ></Twitter>
+                                    </div>
+                                </Tippy>
+                                <MenuShareLite
+                                    icon={
+                                        <>
+                                            <div
+                                                className={cx('icon-share')}
+                                                style={{ marginTop: '3px' }}
+                                            >
+                                                <ShareBlack
+                                                    width={'16px'}
+                                                    height={'16px'}
+                                                ></ShareBlack>
+                                            </div>
+                                        </>
+                                    }
+                                ></MenuShareLite>
                             </div>
                         </div>
                         <div className={cx('href-share-item')}>
-                            <div className={cx('href')}>LinkHere</div>
+                            <div className={cx('href')}>{currentHref}</div>
                             <Button className={cx('btn-copy')} text>
                                 Copy Link
                             </Button>
@@ -85,9 +219,18 @@ function DetailVideo() {
                             ></img>
                             <div className={cx('user-item')}>
                                 <span className={cx('name-user')}>
-                                    Yourname ·{' '}
+                                    Yourname{' '}
                                 </span>
                                 <span className={cx('creator-user')}>
+                                    <FontAwesomeIcon
+                                        icon={faCircleCheck}
+                                        style={{
+                                            color: '#20d5ec',
+                                            width: '14px',
+                                            height: '14px',
+                                        }}
+                                    ></FontAwesomeIcon>{' '}
+                                    <span style={{ color: 'black' }}>·</span>{' '}
                                     Creator
                                 </span>
                                 <br></br>
@@ -109,13 +252,17 @@ function DetailVideo() {
                                 </div>
                             </div>
                             <div className={cx('commented-react-heart')}>
-                                Heart
-                                <p className={cx('number-react-heart')}>40</p>
+                                <HeartNone
+                                    width={'20px'}
+                                    height={'20px'}
+                                ></HeartNone>
+                                <span className={cx('number-react-heart')}>
+                                    40
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                
                 <div className={cx('comment-input-item-display')}>
                     <div className={cx('comment-input-item')}>
                         <input
@@ -123,12 +270,36 @@ function DetailVideo() {
                             placeholder={'Add comment...'}
                             className={cx('comment-input')}
                         ></input>
-                        {/* icon @ */}
-                        {/* icon emotion */}
-                        <Button
-                            primary
-                            className={cx('btn-submit-comment')}
-                        >Post</Button>
+                        <span className={cx('area-react')}>
+                            <img
+                                src={Attag}
+                                alt=""
+                                style={{
+                                    width: '24px',
+                                    height: '24px',
+                                    cursor: 'pointer',
+                                    marginRight: '10px',
+                                    marginTop: '-2px',
+                                }}
+                            ></img>
+                            <span style={{ cursor: 'pointer' }}>
+                                <EmotionDetail
+                                    width={'20px'}
+                                    height={'20px'}
+                                ></EmotionDetail>
+                            </span>
+                        </span>
+                        <span className={cx('btn-submit-comment')}>
+                            <button
+                                style={{
+                                    color: 'rgb(254, 44, 85)',
+                                    fontWeight: '700',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                Post
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>

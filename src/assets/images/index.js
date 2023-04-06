@@ -2,6 +2,8 @@ const images = {
     //logo
     logo: require('~/assets/images/Logo/logo.svg').default,
 
+    logoInDetail: require('~/assets/images/Logo/LogoInDetailVideo.png'),
+
     //avatar ex
     avatar1: require('~/assets/images/Avatar/trolldogface2.png'),
 

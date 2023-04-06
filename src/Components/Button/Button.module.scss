@@ -133,6 +133,20 @@
     cursor: pointer;
     flex-direction: column;
 }
+.blackShadowBtn {
+    font-family: var(--name-font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: rgba(84, 84, 84, 0.5);
+    &:hover {
+        background-color: rgba(37, 37, 37, 0.6);
+    }
+}
 
 //size small button
 .small {

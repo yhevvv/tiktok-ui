@@ -118,13 +118,13 @@ function Live() {
                             className={cx('btn-scroll-up')}
                             onClick={handleScrollUp}
                         >
-                            <ScrollUp></ScrollUp>
+                            <ScrollUp width={'20px'} height={'20px'}></ScrollUp>
                         </button>
                         <button
                             className={cx('btn-scroll-down')}
                             onClick={handleScrollDown}
                         >
-                            <ScrollDown></ScrollDown>
+                            <ScrollDown width={'20px'} height={'20px'}></ScrollDown>
                         </button>
                     </div>
                     <div className={cx('video-list')}>

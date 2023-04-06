@@ -337,11 +337,12 @@ export const MobilePhone = ({
         ></path>
     </svg>
 );
-export const IconX = ({ className, width = '2.55rem', height = '2.55rem' }) => (
+export const IconX = ({ className, width = '2.55rem', height = '2.55rem', color }) => (
     <svg
         className={className}
         width={width}
         height={height}
+        color ={color}
         viewBox="0 0 48 48"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"

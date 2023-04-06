@@ -1,7 +1,8 @@
 export const ScrollUp = ({
     className,
-    width = '2.0rem',
-    height = '2.0rem',
+    width,
+    height,
+    color,
 }) => (
     <svg
         fill="currentColor"
@@ -10,6 +11,7 @@ export const ScrollUp = ({
         width={width}
         height={height}
         className={className}
+        color={color}
     >
         <path
             fillRule="evenodd"
@@ -21,8 +23,9 @@ export const ScrollUp = ({
 
 export const ScrollDown = ({
     className,
-    width = '2.0rem',
-    height = '2.0rem',
+    width,
+    height,
+    color,
 }) => (
     <svg
         fill="currentColor"
@@ -31,6 +34,7 @@ export const ScrollDown = ({
         width={width}
         height={height}
         className={className}
+        color={color}
     >
         <path
             fillRule="evenodd"
