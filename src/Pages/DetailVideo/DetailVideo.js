@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import Style from './DetailVideo.module.scss';
-import VideoEx from '~/assets/Videos/ShortVideo/demo.mp4';
+
 import images from '~/assets/images';
 import Button from '~/Components/Button';
 import {
@@ -8,12 +8,8 @@ import {
     EmotionDetail,
     FacebokIcon,
     HeartNone,
-    IconX,
-    ScrollDown,
-    ScrollUp,
     ShareBlack,
     ShareTo,
-    Sound,
     Twitter,
     WhatsApp,
 } from '~/Components/Icons';
@@ -26,7 +22,6 @@ import {
 import Tippy from '@tippyjs/react';
 import MenuShareLite from '~/Components/MenuShareLite';
 import Attag from '~/assets/images/Logo/AtTag.svg';
-import PopUpReport from './PopUpReport';
 import ControlVideo from './ControlVideo';
 
 function DetailVideo() {
@@ -34,52 +29,12 @@ function DetailVideo() {
 
     //get href
     const currentHref = window.location.href;
-    //get back Href
-    const HrefBack = () => {
-        window.history.back();
-    };
 
     return (
         <body className={cx('wrapper')}>
-            <div className={cx('video-item')}>
-                <div className={cx('item-interact-video')}>
-                    {/* icon close */}
-                    <div className={cx('close-video')} onClick={HrefBack}>
-                        <IconX color={'white'}></IconX>
-                    </div>
-                    {/* logo */}
-                    <div className={cx('image-logo-style')}>
-                        <img
-                            className={cx('image-logo')}
-                            src={images.logoInDetail}
-                            alt={images.NoImage}
-                        ></img>
-                    </div>
-                    {/* report */}
-                    <PopUpReport></PopUpReport>
-                    {/* icon change video up-down */}
-                    <div className={cx('change-video')}>
-                        <div className={cx('change-video-up')}>
-                            <ScrollUp
-                                width={'26px'}
-                                height={'26px'}
-                                color={'white'}
-                            ></ScrollUp>
-                        </div>
-                        <div className={cx('change-video-down')}>
-                            <ScrollDown
-                                width={'26px'}
-                                height={'26px'}
-                                color={'white'}
-                            ></ScrollDown>
-                        </div>
-                    </div>
-                    {/* timeline video and sound */}
-                    <ControlVideo></ControlVideo>
-                </div>
-                <video src={VideoEx} className={cx('video')}></video>
-                {/* map */}
-            </div>
+            {/* controlVideo */}
+            <ControlVideo></ControlVideo>
+            {/* interact item */}
             <div className={cx('interact-item')}>
                 <div className={cx('me-profile')}>
                     <img
@@ -228,7 +183,14 @@ function DetailVideo() {
                                         }}
                                     ></FontAwesomeIcon>{' '}
                                     <span style={{ color: 'black' }}>·</span>{' '}
-                                    Creator
+                                    <span
+                                        style={{
+                                            color: ' rgb(254, 44, 85)',
+                                            fontWeight: '700',
+                                        }}
+                                    >
+                                        Creator
+                                    </span>
                                 </span>
                                 <br></br>
                                 <span className={cx('comment-user')}>
