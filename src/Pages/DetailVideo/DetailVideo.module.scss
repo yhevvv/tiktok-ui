@@ -64,14 +64,22 @@
 }
 .hastag-main {
     font-weight: 600;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 .title-music {
     margin-top: -6px;
+    color: rgba(22, 24, 35, 1);
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 .interact-profile-display {
     margin-top: 40px;
-}
-.interact-profile {
 }
 .reaction {
     display: flex;
@@ -83,18 +91,26 @@
     height: 32px;
 }
 .reaction-comment {
-    cursor: pointer;
     width: 32px;
     height: 32px;
 }
-.count-number {
+.count-heart,
+.count-comment {
     color: rgba(22, 24, 35, 0.75);
     font-size: 12px;
     line-height: 17px;
     text-align: center;
     margin-right: 35px;
     margin-top: 3px;
+    font-weight: 500;
 }
+.count-heart {
+    cursor: pointer;
+}
+.count-comment {
+    cursor: default;
+}
+
 .share {
     position: absolute;
     right: 30px;
@@ -127,7 +143,7 @@
     white-space: nowrap;
     background-color: rgba(22, 24, 35, 0.06);
     flex: 1 1 auto;
-    padding: 7px 0px 5px 12px;
+    padding: 7px 99px 5px 12px;
     background-color: rgba(22, 24, 35, 0.06);
     width: calc(100%);
     cursor: default;
@@ -162,6 +178,14 @@
 .commented-item {
     display: flex;
     flex-direction: row;
+    &:hover {
+        .dot-report {
+            position: absolute;
+            right: 40px;
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
 }
 .avatar-user-comment {
     width: 40px;
@@ -187,6 +211,9 @@
     font-size: 16px;
     line-height: 25px;
 }
+.dot-report {
+    opacity: 0;
+}
 .comment-user {
     white-space: pre-wrap; /* preserve whitespace and allow line breaks */
     word-wrap: break-word; /* allow long words to break */
@@ -200,7 +227,7 @@
 }
 .time-upload-after {
     margin-right: 30px;
-    cursor: default;
+    cursor: resize;
 }
 .reply-another-user {
     cursor: pointer;
@@ -261,4 +288,27 @@
     position: absolute;
     right: 0;
     top: 27px;
+}
+//tippy report
+.wrapper-tippy-report {
+    font-family: var(--default-font-family);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 8px 16px;
+    min-width: 200px;
+    min-height: 64px;
+    background-color: white;
+}
+.title-report {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 12px 0px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+        color: rgb(254, 44, 85);
+    }
 }

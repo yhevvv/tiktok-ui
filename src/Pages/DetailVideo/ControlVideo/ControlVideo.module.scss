@@ -1,30 +1,78 @@
+//wrapper
 .btn-sound-display {
     position: absolute;
     z-index: 1;
     bottom: 20px;
     right: 35px;
+    &:hover {
+        .wrapper-sound {
+            transition: opacity 0.5s ease 0s;
+            opacity: 1;
+        }
+    }
 }
+//sound
 .btn-sound {
     border: none;
     background: none rgba(84, 84, 84, 0.5);
     outline: none;
     padding: 0px;
     display: flex;
-    transition: opacity 0.3s ease 0s;
+    transition: opacity 0.5s ease 0s;
     cursor: pointer;
     line-height: 0;
     border-radius: 9999px;
     min-width: 0px;
+    z-index: 99;
     &:hover {
         opacity: 0.7;
     }
 }
+.wrapper-sound {
+    opacity: 0;
+    z-index: 99;
+    width: 28px;
+    height: 96px;
+    margin: 8px 6px;
+    display: block;
+    position: relative;
+    background: rgba(84, 84, 84, 0.5);
+    border-radius: 32px;
+}
+
+//change input range
+.sound-adjust {
+    transform: rotate(270deg);
+    margin-left: -26px;
+    margin-top: 46px;
+    width: 80px;
+    height: 5px;
+    background: rgba(84, 84, 84, 0.5);
+}
+
+.sound-adjust::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sound-adjust::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #000000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 //video left body
 .video-item {
     width: 71.67%;
     height: 100vh;
     &:hover {
-        //timeline
+        //timeline (after hover)
         .display-progress {
             opacity: 1;
             position: relative;
@@ -47,6 +95,7 @@
         .progress {
             opacity: 1;
             height: 100%;
+            height: 4px;
             background-color: rgb(255, 255, 255);
             transition: opacity 0.4s ease 0s;
             z-index: 99;
@@ -55,7 +104,7 @@
         .formmat-time {
             opacity: 1;
             position: relative;
-            margin-top: -14px;
+            margin-top: -18px;
             left: 104%;
             font-size: 14px;
             line-height: 24px;
@@ -163,10 +212,33 @@
     top: 42%;
     left: 35%;
 }
-//timeline
+//timeline (before hover)
 .formmat-time,
 .display-progress,
 .progress-bar,
 .progress {
     opacity: 0;
+}
+.time-slider {
+    width: 100%;
+    height: 4px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.time-slider-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.time-slider-track {
+    height: 4px;
+    background-color: transparent;
+    border-radius: 4px;
 }

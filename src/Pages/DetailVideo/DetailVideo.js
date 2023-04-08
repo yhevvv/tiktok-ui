@@ -8,18 +8,21 @@ import {
     EmotionDetail,
     FacebokIcon,
     HeartNone,
+    MusicNote,
     ShareBlack,
     ShareTo,
     Twitter,
     WhatsApp,
+    Flag,
 } from '~/Components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
     faCommentDots,
+    faEllipsis,
     faHeart,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react';
+import Tippy from '@tippyjs/react/headless';
 import MenuShareLite from '~/Components/MenuShareLite';
 import Attag from '~/assets/images/Logo/AtTag.svg';
 import ControlVideo from './ControlVideo';
@@ -29,6 +32,20 @@ function DetailVideo() {
 
     //get href
     const currentHref = window.location.href;
+    //copy href
+    function handleCopyClick() {
+        navigator.clipboard.writeText(currentHref);
+    }
+    //render tippy Report
+    const renderTippyReport = () => {
+        return (
+            <div className={cx('wrapper-tippy-report')}>
+                <span className={cx('title-report')}>
+                    <Flag></Flag> Report
+                </span>
+            </div>
+        );
+    };
 
     return (
         <body className={cx('wrapper')}>
@@ -68,12 +85,10 @@ function DetailVideo() {
                 <div className={cx('title-me-profile')}>
                     <p className={cx('title-main')}>
                         Title Title Title Title{' '}
-                        <span className={cx('hastag-main')}>
-                            #hastag #hastag #hastag #hastag
-                        </span>
+                        <span className={cx('hastag-main')}>#hastag</span>
                     </p>
                     <div className={cx('title-music')}>
-                        {/* icon */} music title
+                        <MusicNote></MusicNote> music title
                     </div>
                 </div>
                 <div className={cx('interact-profile-display')}>
@@ -85,14 +100,14 @@ function DetailVideo() {
                                     style={{ width: '20px', height: '20px' }}
                                 ></FontAwesomeIcon>
                             </span>
-                            <span className={cx('count-number')}>1234</span>
+                            <span className={cx('count-heart')}>1234</span>
                             <span className={cx('reaction-comment')}>
                                 <FontAwesomeIcon
                                     icon={faCommentDots}
                                     style={{ width: '20px', height: '20px' }}
                                 ></FontAwesomeIcon>
                             </span>
-                            <span className={cx('count-number')}>1234</span>
+                            <span className={cx('count-comment')}>1234</span>
                             <div className={cx('share')}>
                                 <Tippy content={'Embed'}>
                                     <div className={cx('icon-share')}>
@@ -153,7 +168,11 @@ function DetailVideo() {
                         </div>
                         <div className={cx('href-share-item')}>
                             <div className={cx('href')}>{currentHref}</div>
-                            <Button className={cx('btn-copy')} text>
+                            <Button
+                                className={cx('btn-copy')}
+                                text
+                                onClick={handleCopyClick}
+                            >
                                 Copy Link
                             </Button>
                         </div>
@@ -187,11 +206,28 @@ function DetailVideo() {
                                         style={{
                                             color: ' rgb(254, 44, 85)',
                                             fontWeight: '700',
+                                            cursor: 'default',
                                         }}
                                     >
                                         Creator
                                     </span>
                                 </span>
+                                <Tippy
+                                    render={renderTippyReport}
+                                    interactive
+                                    placement={'bottom-start'}
+                                    delay={[0, 200]}
+                                >
+                                    <span className={cx('dot-report')}>
+                                        <FontAwesomeIcon
+                                            icon={faEllipsis}
+                                            style={{
+                                                width: '20px',
+                                                height: '20px',
+                                            }}
+                                        ></FontAwesomeIcon>
+                                    </span>
+                                </Tippy>
                                 <br></br>
                                 <span className={cx('comment-user')}>
                                     comment

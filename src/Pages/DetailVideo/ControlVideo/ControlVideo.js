@@ -1,14 +1,21 @@
 import classNames from 'classnames/bind';
 import Style from './ControlVideo.module.scss';
 import Button from '~/Components/Button';
-import { Sound, IconX, ScrollDown, ScrollUp } from '~/Components/Icons';
+import {
+    Sound,
+    IconX,
+    ScrollDown,
+    ScrollUp,
+    SoundMute,
+} from '~/Components/Icons';
 import PopUpReport from '../PopUpReport';
 import VideoEx from '~/assets/Videos/ShortVideo/demo.mp4';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import images from '~/assets/images';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import Slider from 'react-slider';
 
 function ControlVideo() {
     const cx = classNames.bind(Style);
@@ -63,13 +70,43 @@ function ControlVideo() {
         const video = videoRef.current;
         setDuration(video.duration);
     };
-
+    //progress bar
+    const handleTimeChange = (value) => {
+        const video = videoRef.current;
+        video.currentTime = value;
+        setCurrentTime(value);
+    };
+    //formatTime
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     };
+    //sound adjust
+    const [volume, setVolume] = useState(0.2);
+    const [volumeSave, setVolumeSave] = useState(0.2);
+    const handleSoundChange = (event) => {
+        const volume = event.target.value;
+        videoRef.current.volume = volume;
+        setVolume(volume);
+        setVolumeSave(volume);
+    };
 
+    useEffect(() => {
+        videoRef.current.volume = volume;
+    }, [volume]);
+
+    //sound icon change logic
+    const [soundIcon, setSoundIcon] = useState(true);
+
+    const handleSoundIcon = () => {
+        setSoundIcon(!soundIcon);
+        if (soundIcon) {
+            setVolume(0);
+        } else {
+            setVolume(volumeSave);
+        }
+    };
     return (
         <>
             <div className={cx('video-item')}>
@@ -105,11 +142,30 @@ function ControlVideo() {
                             ></ScrollDown>
                         </div>
                     </div>
-                    {/* timeline video and sound */}
-                    <div className={cx('btn-timeline-display')}></div>
+                    {/*sound*/}
                     <div className={cx('btn-sound-display')}>
-                        <Button noneBtn className={cx('btn-sound')}>
-                            <Sound></Sound>
+                        <div className={cx('wrapper-sound')}>
+                            <input
+                                type={'range'}
+                                className={cx('sound-adjust')}
+                                style={{ accentColor: 'white' }}
+                                onChange={handleSoundChange}
+                                min={'0'}
+                                max={'1'}
+                                step={'0.1'}
+                                value={volume}
+                            ></input>
+                        </div>
+                        <Button
+                            noneBtn
+                            className={cx('btn-sound')}
+                            onClick={handleSoundIcon}
+                        >
+                            {soundIcon ? (
+                                <Sound></Sound>
+                            ) : (
+                                <SoundMute></SoundMute>
+                            )}
                         </Button>
                     </div>
                     {/* icon play */}
@@ -133,13 +189,22 @@ function ControlVideo() {
                         >
                             <div className={cx('progress')} />
                         </div>
+                        <Slider
+                            className={cx('time-slider')}
+                            thumbClassName={cx('time-slider-thumb')}
+                            trackClassName={cx('time-slider-track')}
+                            min={0}
+                            max={duration}
+                            value={currentTime}
+                            onChange={handleTimeChange}
+                        />
                         <div className={cx('formmat-time')}>
                             <span>{formatTime(currentTime)}</span>/
                             <span>{formatTime(duration)}</span>
                         </div>
                     </div>
                 </div>
-
+                {/* video */}
                 <span onClick={handlePlaying}>
                     <video
                         src={VideoEx}
