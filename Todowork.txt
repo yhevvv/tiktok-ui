@@ -92,12 +92,13 @@ like, comment, share trang home:
 
 chuc nang coi video chi tiet, xoa video, sua video, like, comment, share video chi tiet: 
     router: ok
-    giao dien all: ok
-    logic: 
+    giao dien all: ok 
+    logic: (con tippy @ va bieu tuong o phan comment)
     api video, chuyen tiep video:
     api 404 neu ma khong tim thay video:
     api con lai:
     Link cho cac trang page (profile, unfollowingProfile, Home):
+    tippy for user + me:
 chat: not overview
 
 nhung thu chua lam duoc:

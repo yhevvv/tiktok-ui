@@ -161,7 +161,7 @@ function ControlVideo() {
                             className={cx('btn-sound')}
                             onClick={handleSoundIcon}
                         >
-                            {soundIcon ? (
+                            {soundIcon && volume > 0 ? (
                                 <Sound></Sound>
                             ) : (
                                 <SoundMute></SoundMute>

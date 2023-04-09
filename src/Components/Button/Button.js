@@ -16,6 +16,7 @@ function Button({
     outline = false,
     noneBtn = false,
     blackShadowBtn = false,
+    noneBtnColorRed = false,
     onClick,
     small = false,
     Large = false,
@@ -57,6 +58,7 @@ function Button({
         primary, //button style 1
         outline, //button style 2
         noneBtn, //button style 3
+        noneBtnColorRed, //button style 3
         text, //button style 7
         white, //button style 4
         rounded, //button style 6
@@ -88,6 +90,7 @@ Button.propTypes = {
     white: PropTypes.bool,
     outline: PropTypes.bool,
     blackShadowBtn: PropTypes.bool,
+    noneBtnColorRed: PropTypes.bool,
     onClick: PropTypes.func,
     small: PropTypes.bool,
     Large: PropTypes.bool,

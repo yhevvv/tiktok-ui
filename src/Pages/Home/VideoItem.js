@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '~/Components/Button';
 import { MusicNote } from '~/Components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleCheck,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import VideoPlayer from './VideoPlayer';
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';

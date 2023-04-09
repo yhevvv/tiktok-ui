@@ -26,6 +26,7 @@ import Tippy from '@tippyjs/react/headless';
 import MenuShareLite from '~/Components/MenuShareLite';
 import Attag from '~/assets/images/Logo/AtTag.svg';
 import ControlVideo from './ControlVideo';
+import { useState } from 'react';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
@@ -45,6 +46,17 @@ function DetailVideo() {
                 </span>
             </div>
         );
+    };
+    //count charater in comment
+    const [text, setText] = useState('');
+    const handleChangeText = (event) => {
+        const textCharater = event.target.innerText;
+        if (textCharater <= 150) {
+            setText(textCharater);
+        } else {
+            event.target.textContent = textCharater.substring(0, 150);
+            setText(textCharater.substring(0, 150));
+        }
     };
 
     return (
@@ -260,11 +272,47 @@ function DetailVideo() {
                 </div>
                 <div className={cx('comment-input-item-display')}>
                     <div className={cx('comment-input-item')}>
-                        <input
+                        <div
                             type={'text'}
                             placeholder={'Add comment...'}
                             className={cx('comment-input')}
-                        ></input>
+                        >
+                            <div
+                                contentEditable={true}
+                                className={cx('span-comment')}
+                                onFocus={(event) => {
+                                    const comment = event.target;
+
+                                    if (
+                                        comment.innerText === 'Add comment...'
+                                    ) {
+                                        comment.innerText = '';
+                                    }
+                                }}
+                                onBlur={(event) => {
+                                    const comment = event.target;
+
+                                    if (comment.innerText === '') {
+                                        comment.innerText = 'Add comment...';
+                                    }
+                                }}
+                                onInput={handleChangeText}
+                            >
+                                Add comment...
+                            </div>
+                        </div>
+                        {text.length >= 150 ? (
+                            <span
+                                className={cx('count-charater')}
+                                style={{ color: 'rgba(255, 76, 58, 0.92)' }}
+                            >
+                                {text?.length}/150
+                            </span>
+                        ) : (
+                            <span className={cx('count-charater')}>
+                                {text?.length}/150
+                            </span>
+                        )}
                         <span className={cx('area-react')}>
                             <img
                                 src={Attag}
@@ -285,15 +333,9 @@ function DetailVideo() {
                             </span>
                         </span>
                         <span className={cx('btn-submit-comment')}>
-                            <button
-                                style={{
-                                    color: 'rgb(254, 44, 85)',
-                                    fontWeight: '700',
-                                    cursor: 'pointer',
-                                }}
-                            >
+                            <Button noneBtnColorRed disable={text.length === 0}>
                                 Post
-                            </button>
+                            </Button>
                         </span>
                     </div>
                 </div>
