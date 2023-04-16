@@ -17,7 +17,7 @@ import images from '~/assets/images';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'react-slider';
 
-function ControlVideo() {
+function ControlVideo({ data, handleClickNext, handleClickBack }) {
     const cx = classNames.bind(Style);
     const videoRef = useRef(null);
     const progressBarClassname = cx('progress-bar');
@@ -127,14 +127,20 @@ function ControlVideo() {
                     <PopUpReport></PopUpReport>
                     {/* icon change video up-down */}
                     <div className={cx('change-video')}>
-                        <div className={cx('change-video-up')}>
+                        <div
+                            className={cx('change-video-up')}
+                            onClick={handleClickBack}
+                        >
                             <ScrollUp
                                 width={'26px'}
                                 height={'26px'}
                                 color={'white'}
                             ></ScrollUp>
                         </div>
-                        <div className={cx('change-video-down')}>
+                        <div
+                            className={cx('change-video-down')}
+                            onClick={handleClickNext}
+                        >
                             <ScrollDown
                                 width={'26px'}
                                 height={'26px'}
@@ -207,7 +213,7 @@ function ControlVideo() {
                 {/* video */}
                 <span onClick={handlePlaying}>
                     <video
-                        src={VideoEx}
+                        src={data?.file_url || VideoEx}
                         className={cx('video')}
                         ref={videoRef}
                         onTimeUpdate={handleProgress}

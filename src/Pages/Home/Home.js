@@ -7,14 +7,12 @@ import { useEffect, useState, memo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import GetApp from '~/Components/GetApp';
 import ScrollTopPage from '~/Components/ScrollTopPage';
+import Cookies from 'js-cookie';
 
 function Home() {
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
     const TYPE = 'for-you';
     const cx = classNames.bind(Style);
-    const INIT_PAGE = getRandomInt(20);
+    const INIT_PAGE = 7;
 
     const [initPage, setInitPage] = useState(INIT_PAGE);
     const [videos, setGetVideos] = useState([]);
@@ -31,6 +29,8 @@ function Home() {
     const { ref, inView } = useInView({
         threshold: 0,
     });
+
+    Cookies.set('initpage', INIT_PAGE);
 
     useEffect(() => {
         if (inView) {
@@ -49,10 +49,14 @@ function Home() {
         }
     };
 
+    //top page
     const handleClickTop = () => {
         setShowButton(false);
     };
 
+    const handleIndexVideo = (index) => {
+        Cookies.set('IndexVideo', index);
+    };
 
     return (
         <div className={cx('wrapper-all')} onWheel={handleScroll}>
@@ -62,8 +66,10 @@ function Home() {
                     <ScrollTopPage></ScrollTopPage>
                 </div>
             )}
-            {videos.map((data) => (
-                <VideoItem key={data.id} data={data}></VideoItem>
+            {videos.map((data, index) => (
+                <div onClick={() => handleIndexVideo(index)}>
+                    <VideoItem key={index} data={data}></VideoItem>
+                </div>
             ))}
             <span ref={ref}></span>
         </div>

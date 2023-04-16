@@ -5,7 +5,7 @@ export const home = async (type, page) => {
         const res = await Request.get(`videos`, {
             params: {
                 type,
-                page
+                page,
             },
         }); //api
         return res.data;

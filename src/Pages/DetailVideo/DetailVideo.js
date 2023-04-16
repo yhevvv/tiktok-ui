@@ -5,28 +5,29 @@ import images from '~/assets/images';
 import Button from '~/Components/Button';
 import {
     Embed,
-    EmotionDetail,
     FacebokIcon,
-    HeartNone,
     MusicNote,
     ShareBlack,
     ShareTo,
     Twitter,
     WhatsApp,
-    Flag,
 } from '~/Components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
     faCommentDots,
-    faEllipsis,
-    faHeart,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
 import MenuShareLite from '~/Components/MenuShareLite';
-import Attag from '~/assets/images/Logo/AtTag.svg';
 import ControlVideo from './ControlVideo';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import * as homeService2 from '~/Service/homeService2';
+import { useNavigate } from 'react-router-dom';
+import FollowingBtn from './FollowingBtn';
+import HandleLike from './HandleLike';
+import ListComment from './ListComment';
+import YourComment from './YourComment';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
@@ -37,89 +38,121 @@ function DetailVideo() {
     function handleCopyClick() {
         navigator.clipboard.writeText(currentHref);
     }
-    //render tippy Report
-    const renderTippyReport = () => {
-        return (
-            <div className={cx('wrapper-tippy-report')}>
-                <span className={cx('title-report')}>
-                    <Flag></Flag> Report
-                </span>
-            </div>
+
+    //api detail video from Home
+    const INIT_PAGE = Cookies.get('initpage');
+    const TYPE = 'for-you';
+    const [videos, setGetVideos] = useState([]);
+    useEffect(() => {
+        homeService2
+            .home(TYPE, INIT_PAGE)
+            .then((data) => {
+                setGetVideos((prevUsers) => [...prevUsers, ...data]);
+            })
+            .catch((error) => console.log(error));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    //log
+
+    //change video
+
+    const navigate = useNavigate();
+
+    const [change, setChange] = useState(Cookies.get('IndexVideo'));
+    const handleClickNext = () => {
+        setChange(change + 1);
+        navigate(
+            `/@${videos[change + 1]?.user?.nickname}/video/${
+                videos[change + 1]?.id
+            }`,
         );
     };
-    //count charater in comment
-    const [text, setText] = useState('');
-    const handleChangeText = (event) => {
-        const textCharater = event.target.innerText;
-        if (textCharater <= 150) {
-            setText(textCharater);
-        } else {
-            event.target.textContent = textCharater.substring(0, 150);
-            setText(textCharater.substring(0, 150));
+    const handleClickBack = () => {
+        if (change > 0) {
+            setChange(change - 1);
+            navigate(
+                `/@${videos[change - 1]?.user?.nickname}/video/${
+                    videos[change - 1]?.id
+                }`,
+            );
         }
     };
 
     return (
         <body className={cx('wrapper')}>
             {/* controlVideo */}
-            <ControlVideo></ControlVideo>
+            <ControlVideo
+                data={videos[change] || 'null'}
+                handleClickNext={handleClickNext}
+                handleClickBack={handleClickBack}
+            ></ControlVideo>
             {/* interact item */}
             <div className={cx('interact-item')}>
                 <div className={cx('me-profile')}>
                     <img
                         className={cx('avatar-me-profile')}
-                        src={images.avatar1}
+                        src={videos[change]?.user?.avatar}
                         alt={images.NoImage}
                     ></img>
                     <div className={cx('detail-me-profile')}>
-                        <span className={cx('name-me-profile')}>YourName</span>
-                        <FontAwesomeIcon
-                            icon={faCircleCheck}
-                            style={{
-                                color: '#20d5ec',
-                                width: '14px',
-                                height: '14px',
-                            }}
-                        ></FontAwesomeIcon>
+                        <span className={cx('name-me-profile')}>
+                            {videos[change]?.user?.first_name === '' ||
+                            videos[change]?.user?.last_name === ''
+                                ? 'undefined'
+                                : videos[change]?.user?.first_name +
+                                  ' ' +
+                                  videos[change]?.user?.last_name}
+                        </span>
+                        {videos[change]?.user?.tick && (
+                            <FontAwesomeIcon
+                                icon={faCircleCheck}
+                                style={{
+                                    color: '#20d5ec',
+                                    width: '14px',
+                                    height: '14px',
+                                }}
+                            ></FontAwesomeIcon>
+                        )}
                         <br></br>
                         <span className={cx('nickname-me-profile')}>
-                            NickName
+                            {videos[change]?.user?.nickname}
                         </span>
                         <span className={cx('time-me-profile')}>
                             {' '}
-                            · LastTimeUpload
+                            · {videos[change]?.published_at}
                         </span>
                     </div>
-                    <Button outline className={cx('btn-Follow')}>
-                        Follow
-                    </Button>
+                    <FollowingBtn
+                        data={videos[change] || 'null'}
+                    ></FollowingBtn>
                 </div>
                 <div className={cx('title-me-profile')}>
                     <p className={cx('title-main')}>
-                        Title Title Title Title{' '}
-                        <span className={cx('hastag-main')}>#hastag</span>
+                        {videos[change]?.description}{' '}
+                        <span className={cx('hastag-main')}>#Vietnam</span>
                     </p>
                     <div className={cx('title-music')}>
-                        <MusicNote></MusicNote> music title
+                        <MusicNote></MusicNote> {videos[change]?.music}
                     </div>
                 </div>
                 <div className={cx('interact-profile-display')}>
                     <div className={cx('interact-profile')}>
                         <div className={cx('reaction')}>
-                            <span className={cx('reaction-heart')}>
-                                <FontAwesomeIcon
-                                    icon={faHeart}
-                                    style={{ width: '20px', height: '20px' }}
-                                ></FontAwesomeIcon>
-                            </span>
-                            <span className={cx('count-heart')}>1234</span>
+                            {/* like react */}
+                            <HandleLike data={videos[change]}></HandleLike>
                             <span className={cx('reaction-comment')}>
                                 <FontAwesomeIcon
                                     icon={faCommentDots}
-                                    style={{ width: '20px', height: '20px' }}
+                                    style={{
+                                        width: '20px',
+                                        height: '20px',
+                                    }}
                                 ></FontAwesomeIcon>
                             </span>
-                            <span className={cx('count-comment')}>1234</span>
+                            <span className={cx('count-comment')}>
+                                {videos[change]?.comments_count}
+                            </span>
                             <div className={cx('share')}>
                                 <Tippy content={'Embed'}>
                                     <div className={cx('icon-share')}>
@@ -190,155 +223,8 @@ function DetailVideo() {
                         </div>
                     </div>
                 </div>
-                <div className={cx('commented-item-display')}>
-                    {/* using map */}
-                    <div className={cx('commented-item-display2')}>
-                        {/* button hide report */}
-                        <div className={cx('commented-item')}>
-                            <img
-                                className={cx('avatar-user-comment')}
-                                src={images.avatar2}
-                                alt={images.NoImage}
-                            ></img>
-                            <div className={cx('user-item')}>
-                                <span className={cx('name-user')}>
-                                    Yourname{' '}
-                                </span>
-                                <span className={cx('creator-user')}>
-                                    <FontAwesomeIcon
-                                        icon={faCircleCheck}
-                                        style={{
-                                            color: '#20d5ec',
-                                            width: '14px',
-                                            height: '14px',
-                                        }}
-                                    ></FontAwesomeIcon>{' '}
-                                    <span style={{ color: 'black' }}>·</span>{' '}
-                                    <span
-                                        style={{
-                                            color: ' rgb(254, 44, 85)',
-                                            fontWeight: '700',
-                                            cursor: 'default',
-                                        }}
-                                    >
-                                        Creator
-                                    </span>
-                                </span>
-                                <Tippy
-                                    render={renderTippyReport}
-                                    interactive
-                                    placement={'bottom-start'}
-                                    delay={[0, 200]}
-                                >
-                                    <span className={cx('dot-report')}>
-                                        <FontAwesomeIcon
-                                            icon={faEllipsis}
-                                            style={{
-                                                width: '20px',
-                                                height: '20px',
-                                            }}
-                                        ></FontAwesomeIcon>
-                                    </span>
-                                </Tippy>
-                                <br></br>
-                                <span className={cx('comment-user')}>
-                                    comment
-                                    14239487892349802374907230984790237489
-                                </span>
-                                <br></br>
-                                <div className={cx('reply-item-user')}>
-                                    <span className={cx('time-upload-after')}>
-                                        23h ago
-                                    </span>
-                                    <span className={cx('reply-another-user')}>
-                                        Reply
-                                    </span>
-                                    <div className={cx('view-more-replies')}>
-                                        View more replies (27)
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={cx('commented-react-heart')}>
-                                <HeartNone
-                                    width={'20px'}
-                                    height={'20px'}
-                                ></HeartNone>
-                                <span className={cx('number-react-heart')}>
-                                    40
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={cx('comment-input-item-display')}>
-                    <div className={cx('comment-input-item')}>
-                        <div
-                            type={'text'}
-                            placeholder={'Add comment...'}
-                            className={cx('comment-input')}
-                        >
-                            <div
-                                contentEditable={true}
-                                className={cx('span-comment')}
-                                onFocus={(event) => {
-                                    const comment = event.target;
-
-                                    if (
-                                        comment.innerText === 'Add comment...'
-                                    ) {
-                                        comment.innerText = '';
-                                    }
-                                }}
-                                onBlur={(event) => {
-                                    const comment = event.target;
-
-                                    if (comment.innerText === '') {
-                                        comment.innerText = 'Add comment...';
-                                    }
-                                }}
-                                onInput={handleChangeText}
-                            >
-                                Add comment...
-                            </div>
-                        </div>
-                        {text.length >= 150 ? (
-                            <span
-                                className={cx('count-charater')}
-                                style={{ color: 'rgba(255, 76, 58, 0.92)' }}
-                            >
-                                {text?.length}/150
-                            </span>
-                        ) : (
-                            <span className={cx('count-charater')}>
-                                {text?.length}/150
-                            </span>
-                        )}
-                        <span className={cx('area-react')}>
-                            <img
-                                src={Attag}
-                                alt=""
-                                style={{
-                                    width: '24px',
-                                    height: '24px',
-                                    cursor: 'pointer',
-                                    marginRight: '10px',
-                                    marginTop: '-2px',
-                                }}
-                            ></img>
-                            <span style={{ cursor: 'pointer' }}>
-                                <EmotionDetail
-                                    width={'20px'}
-                                    height={'20px'}
-                                ></EmotionDetail>
-                            </span>
-                        </span>
-                        <span className={cx('btn-submit-comment')}>
-                            <Button noneBtnColorRed disable={text.length === 0}>
-                                Post
-                            </Button>
-                        </span>
-                    </div>
-                </div>
+                <ListComment data={videos[change]}></ListComment>
+                <YourComment data={videos[change]}></YourComment>
             </div>
         </body>
     );
