@@ -90,39 +90,42 @@ function DetailVideo() {
             {/* interact item */}
             <div className={cx('interact-item')}>
                 <div className={cx('me-profile')}>
-                    <img
-                        className={cx('avatar-me-profile')}
-                        src={videos[change]?.user?.avatar}
-                        alt={images.NoImage}
-                    ></img>
-                    <div className={cx('detail-me-profile')}>
-                        <span className={cx('name-me-profile')}>
-                            {videos[change]?.user?.first_name === '' ||
-                            videos[change]?.user?.last_name === ''
-                                ? 'undefined'
-                                : videos[change]?.user?.first_name +
-                                  ' ' +
-                                  videos[change]?.user?.last_name}
-                        </span>
-                        {videos[change]?.user?.tick && (
-                            <FontAwesomeIcon
-                                icon={faCircleCheck}
-                                style={{
-                                    color: '#20d5ec',
-                                    width: '14px',
-                                    height: '14px',
-                                }}
-                            ></FontAwesomeIcon>
-                        )}
-                        <br></br>
-                        <span className={cx('nickname-me-profile')}>
-                            {videos[change]?.user?.nickname}
-                        </span>
-                        <span className={cx('time-me-profile')}>
-                            {' '}
-                            · {videos[change]?.published_at}
-                        </span>
-                    </div>
+                    {/* tao mot accountItem moi */}
+                    <>
+                        <img
+                            className={cx('avatar-me-profile')}
+                            src={videos[change]?.user?.avatar}
+                            alt={images.NoImage}
+                        ></img>
+                        <div className={cx('detail-me-profile')}>
+                            <span className={cx('name-me-profile')}>
+                                {videos[change]?.user?.first_name === '' ||
+                                videos[change]?.user?.last_name === ''
+                                    ? 'undefined'
+                                    : videos[change]?.user?.first_name +
+                                      ' ' +
+                                      videos[change]?.user?.last_name}
+                            </span>
+                            {videos[change]?.user?.tick && (
+                                <FontAwesomeIcon
+                                    icon={faCircleCheck}
+                                    style={{
+                                        color: '#20d5ec',
+                                        width: '14px',
+                                        height: '14px',
+                                    }}
+                                ></FontAwesomeIcon>
+                            )}
+                            <br></br>
+                            <span className={cx('nickname-me-profile')}>
+                                {videos[change]?.user?.nickname}
+                            </span>
+                            <span className={cx('time-me-profile')}>
+                                {' '}
+                                · {videos[change]?.published_at}
+                            </span>
+                        </div>
+                    </>
                     <FollowingBtn
                         data={videos[change] || 'null'}
                     ></FollowingBtn>
@@ -223,7 +226,9 @@ function DetailVideo() {
                         </div>
                     </div>
                 </div>
-                <ListComment data={videos[change]}></ListComment>
+                <div className={cx('commented-item-display')}>
+                    <ListComment data={videos[change]}></ListComment>
+                </div>
                 <YourComment data={videos[change]}></YourComment>
             </div>
         </body>

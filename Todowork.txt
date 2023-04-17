@@ -99,12 +99,12 @@ chuc nang coi video chi tiet, xoa video, sua video, like, comment, share video c
     like: ok
     comment list: ok
     my comment: ok
-    delete my comment: 
-    tha tim comment:
-    huy tha tim comment:
-    Link cho cac trang page (profile, unfollowingProfile, Home): 
-    tippy for user + me: 
-    loi cuon trang comment:
+    delete my comment: ok
+    tha tim comment: ok
+    huy tha tim comment: ok
+    tippy for user + me: tao mot accountItem moi
+    Link cho cac trang page (profile, unfollowingProfile): 
+    loi cuon trang comment: ok
 chat: not overview
 
 nhung thu chua lam duoc:
