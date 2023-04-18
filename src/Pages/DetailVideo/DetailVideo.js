@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import Style from './DetailVideo.module.scss';
 
-import images from '~/assets/images';
 import Button from '~/Components/Button';
 import {
     Embed,
@@ -13,10 +12,7 @@ import {
     WhatsApp,
 } from '~/Components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleCheck,
-    faCommentDots,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import MenuShareLite from '~/Components/MenuShareLite';
 import ControlVideo from './ControlVideo';
@@ -28,6 +24,8 @@ import FollowingBtn from './FollowingBtn';
 import HandleLike from './HandleLike';
 import ListComment from './ListComment';
 import YourComment from './YourComment';
+import PreviewProfile from './PreviewProfile';
+import * as getVideoUser from '~/Service/Video/getVideoUser';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
@@ -39,24 +37,50 @@ function DetailVideo() {
         navigator.clipboard.writeText(currentHref);
     }
 
+    const DataUser = JSON.parse(Cookies.get('dataUser'));
+
     //api detail video from Home
     const INIT_PAGE = Cookies.get('initpage');
     const TYPE = 'for-you';
     const [videos, setGetVideos] = useState([]);
     useEffect(() => {
-        homeService2
-            .home(TYPE, INIT_PAGE)
-            .then((data) => {
-                setGetVideos((prevUsers) => [...prevUsers, ...data]);
-            })
-            .catch((error) => console.log(error));
+        if (
+            Number(Cookies.get('idCheck')) !== Number(DataUser.data.id) &&
+            Number(Cookies.get('idCheck')) !==
+                Number(Cookies.get('idCheckFriend'))
+        ) {
+            homeService2
+                .home(TYPE, INIT_PAGE)
+                .then((data) => {
+                    setGetVideos((prevUsers) => [...prevUsers, ...data]);
+                })
+                .catch((error) => console.log(error));
+        } else if (
+            Number(Cookies.get('idCheck')) === Number(DataUser.data.id) ||
+            Number(Cookies.get('idCheck')) !==
+                Number(Cookies.get('idCheckFriend'))
+        ) {
+            getVideoUser
+                .VideoUser({ id: DataUser.data.id })
+                .then((data) => {
+                    setGetVideos((prevUsers) => [...prevUsers, ...data]);
+                })
+                .catch((error) => console.log(error));
+        } else if (
+            Number(Cookies.get('idCheck')) ===
+            Number(Cookies.get('idCheckFriend'))
+        ) {
+            getVideoUser
+                .VideoUser({ id: Cookies.get('idCheckFriend') })
+                .then((data) => {
+                    setGetVideos((prevUsers) => [...prevUsers, ...data]);
+                })
+                .catch((error) => console.log(error));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    //log
-
     //change video
-
     const navigate = useNavigate();
 
     const [change, setChange] = useState(Cookies.get('IndexVideo'));
@@ -82,6 +106,7 @@ function DetailVideo() {
     return (
         <body className={cx('wrapper')}>
             {/* controlVideo */}
+
             <ControlVideo
                 data={videos[change] || 'null'}
                 handleClickNext={handleClickNext}
@@ -90,42 +115,7 @@ function DetailVideo() {
             {/* interact item */}
             <div className={cx('interact-item')}>
                 <div className={cx('me-profile')}>
-                    {/* tao mot accountItem moi */}
-                    <>
-                        <img
-                            className={cx('avatar-me-profile')}
-                            src={videos[change]?.user?.avatar}
-                            alt={images.NoImage}
-                        ></img>
-                        <div className={cx('detail-me-profile')}>
-                            <span className={cx('name-me-profile')}>
-                                {videos[change]?.user?.first_name === '' ||
-                                videos[change]?.user?.last_name === ''
-                                    ? 'undefined'
-                                    : videos[change]?.user?.first_name +
-                                      ' ' +
-                                      videos[change]?.user?.last_name}
-                            </span>
-                            {videos[change]?.user?.tick && (
-                                <FontAwesomeIcon
-                                    icon={faCircleCheck}
-                                    style={{
-                                        color: '#20d5ec',
-                                        width: '14px',
-                                        height: '14px',
-                                    }}
-                                ></FontAwesomeIcon>
-                            )}
-                            <br></br>
-                            <span className={cx('nickname-me-profile')}>
-                                {videos[change]?.user?.nickname}
-                            </span>
-                            <span className={cx('time-me-profile')}>
-                                {' '}
-                                · {videos[change]?.published_at}
-                            </span>
-                        </div>
-                    </>
+                    <PreviewProfile data={videos[change]}></PreviewProfile>
                     <FollowingBtn
                         data={videos[change] || 'null'}
                     ></FollowingBtn>

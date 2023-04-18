@@ -47,7 +47,7 @@ function AccountPreview({ data }) {
         checkFollowingID.push(checkFollowing[i].id);
     }
 
-    const checkFollowingStart = checkFollowingID.includes(data.id);
+    const checkFollowingStart = checkFollowingID.includes(data?.id);
 
     const [changeFollowing, setChangeFollowing] = useState();
 
@@ -65,7 +65,7 @@ function AccountPreview({ data }) {
             try {
                 await FollowingService.Following({
                     token: token,
-                    id_nickname: data.id,
+                    id_nickname: data?.id,
                 });
             } catch (error) {
                 console.log(error);
@@ -84,7 +84,7 @@ function AccountPreview({ data }) {
             try {
                 unFollowingProfile.UnFollowing({
                     token: token,
-                    nickname: data.id,
+                    nickname: data?.id,
                 });
             } catch (error) {
                 console.log(error);
@@ -103,7 +103,7 @@ function AccountPreview({ data }) {
                         alt={images.NoImage}
                     ></Images>
                 </Link>
-                {checkFollowingID.includes(data.id) === false ? (
+                {checkFollowingID.includes(data?.id) === false ? (
                     <>
                         {Cookies.get('isToken') !== undefined &&
                         Cookies.get('isToken') !== 'null' ? (

@@ -94,7 +94,10 @@ function YourComment({ data }) {
                         <Button
                             noneBtnColorRed
                             disable={text?.length === 0}
-                            onClick={handleSubmit}
+                            onClick={() => {
+                                window.location.reload();
+                                handleSubmit();
+                            }}
                         >
                             Post
                         </Button>

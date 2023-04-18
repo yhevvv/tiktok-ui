@@ -155,6 +155,9 @@ function Profile() {
         setChangeFollowing(!changeFollowing);
     };
 
+    Cookies.set('idCheck', nickNameFriend?.id);
+    Cookies.set('idCheckFriend', nickNameFriend?.id);
+
     return (
         <>
             {nickNameFriend ? (

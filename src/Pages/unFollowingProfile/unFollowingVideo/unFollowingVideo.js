@@ -3,7 +3,8 @@ import Style from './unFollowingVideos.module.scss';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
-import * as ProfileService from '~/Service/profileService'
+import * as ProfileService from '~/Service/profileService';
+import { Link } from 'react-router-dom';
 
 function MeVideos({ nickname }) {
     const cx = classNames.bind(Style);
@@ -39,25 +40,26 @@ function MeVideos({ nickname }) {
         <div className={cx('wrapper-all')}>
             {userVideo !== undefined &&
                 userVideo.map((data, index) => (
-                    <div className={cx('wrapper')} key={index}>
-                        <video
-                            className={cx('video-item')}
-                            src={data.file_url}
-                            key={data.id}
-                            onMouseOver={handleMouseOver}
-                            onMouseOut={handleMouseOut}
-                            muted
-                        ></video>
-                        <span
-                            className={cx('description')}
-                            onMouseOver={handleMouseOver}
-                            onMouseOut={handleMouseOut}
-                            key={index}
-
-                        >
-                            {data.description}
-                        </span>
-                    </div>
+                    <Link to={`/@${nickname}/video/${data.id}`}>
+                        <div className={cx('wrapper')} key={index}>
+                            <video
+                                className={cx('video-item')}
+                                src={data.file_url}
+                                key={data.id}
+                                onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
+                                muted
+                            ></video>
+                            <span
+                                className={cx('description')}
+                                onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
+                                key={index}
+                            >
+                                {data.description}
+                            </span>
+                        </div>
+                    </Link>
                 ))}
         </div>
     );

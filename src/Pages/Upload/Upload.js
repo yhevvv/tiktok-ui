@@ -173,7 +173,6 @@ function Upload() {
     };
 
     console.clear();
-    //console.log(text);
 
     //timeline image cut from video upload
     const [duration, setDuration] = useState(null);

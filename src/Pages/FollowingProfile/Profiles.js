@@ -52,7 +52,7 @@ function Profile() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
-                <img className={cx('avatar')} src={images.avatar1} alt=""></img>
+                <img className={cx('avatar')} src={images.NoImage} alt=""></img>
                 <div className={cx('title-container')}>
                     <h1 className={cx('name')}>meProfile Page - Name</h1>
                     <h3 className={cx('nickname')}>Nickname</h3>

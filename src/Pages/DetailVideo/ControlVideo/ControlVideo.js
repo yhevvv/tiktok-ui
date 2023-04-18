@@ -16,16 +16,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import images from '~/assets/images';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'react-slider';
+import { Link } from 'react-router-dom';
 
 function ControlVideo({ data, handleClickNext, handleClickBack }) {
     const cx = classNames.bind(Style);
     const videoRef = useRef(null);
     const progressBarClassname = cx('progress-bar');
-
-    //get back Href
-    const HrefBack = () => {
-        window.history.back();
-    };
 
     //play and pause
     const [isPlaying, setIsPlaying] = useState(false);
@@ -112,9 +108,11 @@ function ControlVideo({ data, handleClickNext, handleClickBack }) {
             <div className={cx('video-item')}>
                 <div className={cx('item-interact-video')}>
                     {/* icon close */}
-                    <div className={cx('close-video')} onClick={HrefBack}>
-                        <IconX color={'white'}></IconX>
-                    </div>
+                    <Link to={'/'}>
+                        <div className={cx('close-video')}>
+                            <IconX color={'white'}></IconX>
+                        </div>
+                    </Link>
                     {/* logo */}
                     <div className={cx('image-logo-style')}>
                         <img

@@ -61,6 +61,8 @@ function Profile() {
         }
     }, []);
 
+    Cookies.set('idCheck', profileUser?.id);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('profile-item')}>
@@ -147,7 +149,7 @@ function Profile() {
                     animate={{ x: isHovering }}
                 ></motion.div>
                 <div style={{ display: 'none' }}>
-                    <MeVideos></MeVideos>{' '}
+                    <MeVideos></MeVideos>
                 </div>
                 {/* code hoi ngu xiu nhung luoi qua */}
                 {isSwitch ? (

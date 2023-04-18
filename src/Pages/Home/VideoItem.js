@@ -128,6 +128,8 @@ function VideoItem({ data }) {
         setChangeFollowing(!changeFollowing);
     };
 
+    Cookies.set('idCheck', data?.user?.id);
+
     return (
         <div className={cx('wrapper')}>
             <div>
