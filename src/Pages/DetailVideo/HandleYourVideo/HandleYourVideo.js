@@ -91,7 +91,7 @@ function HandleYourVideo({ data }) {
                 stitch: !stitch ? 'stitch' : null,
             })
             .catch((error) => console.log(error));
-        // setOpenPrivacy(!openPrivacy);
+        setOpenPrivacy(!openPrivacy);
     };
     //API delete
     const HanldeDelete = () => {
