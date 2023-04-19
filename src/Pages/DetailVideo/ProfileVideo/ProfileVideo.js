@@ -6,6 +6,8 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { memo } from 'react';
 
 function ProfileVideo({ data }) {
+    console.log(data);
+
     const cx = classNames.bind(Style);
     return (
         <>
@@ -16,7 +18,7 @@ function ProfileVideo({ data }) {
             ></img>
             <div className={cx('detail-me-profile')}>
                 <span className={cx('name-me-profile')}>
-                    {data?.user?.first_name === '' ||
+                    {data?.user?.first_name === '' &&
                     data?.user?.last_name === ''
                         ? 'undefined'
                         : data?.user?.first_name + ' ' + data?.user?.last_name}

@@ -26,6 +26,7 @@ import ListComment from './ListComment';
 import YourComment from './YourComment';
 import PreviewProfile from './PreviewProfile';
 import * as getVideoUser from '~/Service/Video/getVideoUser';
+import HandleYourVideo from './HandleYourVideo';
 
 function DetailVideo() {
     const cx = classNames.bind(Style);
@@ -116,9 +117,16 @@ function DetailVideo() {
             <div className={cx('interact-item')}>
                 <div className={cx('me-profile')}>
                     <PreviewProfile data={videos[change]}></PreviewProfile>
-                    <FollowingBtn
-                        data={videos[change] || 'null'}
-                    ></FollowingBtn>
+                    {Number(Cookies.get('idCheck')) ===
+                    Number(DataUser.data.id) ? (
+                        <HandleYourVideo
+                            data={videos[change]}
+                        ></HandleYourVideo>
+                    ) : (
+                        <FollowingBtn
+                            data={videos[change] || 'null'}
+                        ></FollowingBtn>
+                    )}
                 </div>
                 <div className={cx('title-me-profile')}>
                     <p className={cx('title-main')}>

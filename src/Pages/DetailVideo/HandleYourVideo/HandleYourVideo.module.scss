@@ -1,0 +1,137 @@
+.wrapper {
+    cursor: pointer;
+}
+
+.option {
+    position: absolute;
+    right: 30px;
+}
+//tippy
+.wrapper-tippy-report {
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    list-style: none;
+    margin: 0px;
+    padding: 8px 16px;
+    white-space: nowrap;
+    min-width: 200px;
+    background-color: white;
+}
+.title-privacy {
+    position: relative;
+    padding: 13px;
+    &:hover {
+        color: rgb(254, 44, 85);
+    }
+}
+.title-delete {
+    position: relative;
+    padding: 13px;
+    &:hover {
+        color: rgb(254, 44, 85);
+    }
+}
+//delete popup
+.wrapper-popup-delete {
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+.title-popup-delete {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    padding: 36px 32px;
+    margin: 0;
+    text-align: center;
+    width: 332px;
+}
+.popup-delete,
+.popup-delete-cancel {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    background: none;
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    line-height: 48px;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    cursor: pointer;
+    color: rgba(22, 24, 35, 0.75);
+}
+//update popup
+.wrapper-popup-update {
+    background-color: white;
+    padding: 32px 32px 0px 32px;
+    width: 332px;
+}
+.title-popup-update {
+    font-size: 24px;
+    line-height: 28px;
+    margin-top: 4px;
+    text-align: center;
+}
+.title2-popup-update {
+    font-family: var(--default-font-family);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 24px;
+}
+.comments-popup-update {
+    display: flex;
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-right: 12px;
+    flex: 1 1 auto;
+    margin-top: 22px;
+}
+.iosTouch {
+    position: absolute;
+    right: 61px;
+}
+.duet-popup-update {
+    display: flex;
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-right: 12px;
+    flex: 1 1 auto;
+}
+
+.stitch-popup-update {
+    display: flex;
+    color: rgb(22, 24, 35);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    margin-right: 12px;
+    flex: 1 1 auto;
+}
+
+.submit-popup-update {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    border-image: initial;
+    background: none;
+    outline: none;
+    padding: 0px;
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+    line-height: 48px;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+    cursor: pointer;
+    color: rgb(22, 24, 35);
+    text-align: center;
+}

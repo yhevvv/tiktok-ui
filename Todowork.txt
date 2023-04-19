@@ -6,3 +6,4 @@ nhung thu chua lam duoc:
 5. Bug Random render 2 time in home
 6. chat page
 7. giao dien mobile
+8: logic edit video
